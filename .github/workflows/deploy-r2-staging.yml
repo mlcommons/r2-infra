@@ -49,6 +49,7 @@ jobs:
         echo ""
         
         STAGING_BUCKET="mlcommons-r2-infra-staging"
+        STAGING_SUBDOMAIN="r2-infra-staging"
         deployed_count=0
         
         for folder in */; do
@@ -64,7 +65,7 @@ jobs:
               echo "  └── Processing and uploading index.html..."
               # Create a temporary file with staging URLs
               temp_file=$(mktemp)
-              sed 's|https://r2-infra\.mlcommons-storage\.org/central|https://r2-infra-staging.mlcommons-storage.org/central|g' "${folder}index.html" > "$temp_file"
+              sed 's|https://r2-infra\.mlcommons-storage\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central|g' "${folder}index.html" > "$temp_file"
               
               # Upload the modified file
               rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$folder_name/index.html -v
@@ -84,22 +85,23 @@ jobs:
         
         echo "🎉 Staging deployment complete! Deployed $deployed_count folder(s) to $STAGING_BUCKET."
         echo ""
+        
         echo "🔗 Staging URLs:"
-        echo "  📋 Main staging bucket: https://${STAGING_BUCKET}.mlcommons-storage.org"
+        echo "  📋 Main staging bucket: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org"
         echo ""
         echo "📄 Index pages:"
         for folder in */; do
           if [ -f "${folder}.bucket" ]; then
             folder_name=${folder%/}
             if [ "$folder" != "central/" ]; then
-              echo "  🔗 ${folder_name}: https://${STAGING_BUCKET}.mlcommons-storage.org/${folder_name}/index.html"
+              echo "  🔗 ${folder_name}: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/${folder_name}/index.html"
             fi
           fi
         done
         echo ""
         echo "📦 Central resources:"
         if [ -f "central/.bucket" ]; then
-          echo "  🔗 Shared CSS: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared.css"
-          echo "  🔗 Shared JS: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared.js"
-          echo "  🔗 Shared content: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared-content.html"
+          echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.css"
+          echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.js"
+          echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared-content.html"
         fi 
