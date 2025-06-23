@@ -1,0 +1,56 @@
+name: Deploy to Cloudflare R2 Buckets
+
+on:
+  push:
+    branches: [ main,dev ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: r2-deploy
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Load secret
+      id: op-load-secret
+      uses: 1password/load-secrets-action@v2
+      with:
+        export-env: false
+      env:
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+        R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+        R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+
+    - name: Install Rclone
+      run: |
+        sudo -v ; curl https://rclone.org/install.sh | sudo bash
+        rclone version
+        
+    - name: Setup Rclone Config
+      run: |
+        rclone config create r2-deploy s3 \
+          provider=Cloudflare \
+          access_key_id=${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }} \
+          secret_access_key=${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }} \
+          endpoint=${{ steps.op-load-secret.outputs.R2_ENDPOINT }} \
+          no_check_bucket=true
+        rclone listremotes
+        
+    - name: Deploy Central Resources
+      run: |
+        echo "Deploying central resources..."
+        # TODO: Add rclone commands to deploy central/* to central bucket
+        
+    - name: Deploy Llama2 Bucket
+      run: |
+        echo "Deploying Llama2 index..."
+        # TODO: Add rclone commands to deploy llama2/index.html
+        
+    - name: Deploy Llama3-1 Bucket  
+      run: |
+        echo "Deploying Llama3-1 index..."
+        # TODO: Add rclone commands to deploy llama3-1/index.html 
