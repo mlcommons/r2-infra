@@ -40,17 +40,30 @@ jobs:
           no_check_bucket=true
         rclone listremotes
         
-    - name: Deploy Central Resources
+    - name: Deploy All Buckets
       run: |
-        echo "Deploying central resources..."
-        # TODO: Add rclone commands to deploy central/* to central bucket
+        echo "🔍 Discovering buckets to deploy..."
         
-    - name: Deploy Llama2 Bucket
-      run: |
-        echo "Deploying Llama2 index..."
-        # TODO: Add rclone commands to deploy llama2/index.html
+        for folder in */; do
+          if [ -f "${folder}.bucket" ]; then
+            BUCKET_NAME=$(cat "${folder}.bucket")
+            folder_name=${folder%/}  # Remove trailing slash for cleaner output
+            
+            echo "📦 Deploying ${folder_name} to bucket: $BUCKET_NAME"
+            
+            if [ "$folder" = "central/" ]; then
+              echo "  └── Uploading all central resources..."
+              rclone copy "$folder" r2-deploy:$BUCKET_NAME/central --exclude "*.bucket" -v
+            else
+              echo "  └── Uploading index.html..."
+              rclone copy "${folder}index.html" r2-deploy:$BUCKET_NAME -v
+            fi
+            echo "  ✅ ${folder_name} deployment complete"
+            echo ""
+          else
+            folder_name=${folder%/}
+            echo "⏭️  Skipping ${folder_name} (no .bucket file found)"
+          fi
+        done
         
-    - name: Deploy Llama3-1 Bucket  
-      run: |
-        echo "Deploying Llama3-1 index..."
-        # TODO: Add rclone commands to deploy llama3-1/index.html 
+        echo "🎉 All bucket deployments complete!" 
