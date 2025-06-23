@@ -46,7 +46,7 @@ jobs:
         
         for folder in */; do
           if [ -f "${folder}.bucket" ]; then
-            BUCKET_NAME=$(cat "${folder}.bucket")
+            BUCKET_NAME=$(cat "${folder}.bucket" | tr -d ' \t\n\r')
             folder_name=${folder%/}  # Remove trailing slash for cleaner output
             
             echo "📦 Deploying ${folder_name} to bucket: $BUCKET_NAME"
