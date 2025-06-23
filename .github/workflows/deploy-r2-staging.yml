@@ -1,0 +1,105 @@
+name: Deploy to Staging R2 Buckets
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened ]
+  push:
+    branches: [ dev ]
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: r2-deploy
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Load secret
+      id: op-load-secret
+      uses: 1password/load-secrets-action@v2
+      with:
+        export-env: false
+      env:
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+        R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+        R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+
+    - name: Install Rclone
+      run: |
+        sudo -v ; curl https://rclone.org/install.sh | sudo bash
+        rclone version
+        
+    - name: Setup Rclone Config
+      run: |
+        rclone config create r2-deploy s3 \
+          provider=Cloudflare \
+          access_key_id=${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }} \
+          secret_access_key=${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }} \
+          endpoint=${{ steps.op-load-secret.outputs.R2_ENDPOINT }} \
+          no_check_bucket=true
+        rclone listremotes
+        
+    - name: Deploy All Directories to Staging
+      run: |
+        echo "🚀 Deploying all directories to staging bucket..."
+        echo "📋 PR #${{ github.event.number }}: ${{ github.event.pull_request.title }}"
+        echo ""
+        
+        STAGING_BUCKET="mlcommons-r2-infra-staging"
+        deployed_count=0
+        
+        for folder in */; do
+          if [ -f "${folder}.bucket" ]; then
+            folder_name=${folder%/}  # Remove trailing slash for cleaner output
+            
+            echo "📦 Deploying ${folder_name} to staging bucket: $STAGING_BUCKET/${folder_name}"
+            
+            if [ "$folder" = "central/" ]; then
+              echo "  └── Uploading all central resources..."
+              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$folder_name --exclude "*.bucket" -v
+            else
+              echo "  └── Processing and uploading index.html..."
+              # Create a temporary file with staging URLs
+              temp_file=$(mktemp)
+              sed 's|https://r2-infra\.mlcommons-storage\.org/central|https://r2-infra-staging.mlcommons-storage.org/central|g' "${folder}index.html" > "$temp_file"
+              
+              # Upload the modified file
+              rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$folder_name/index.html -v
+              
+              # Clean up
+              rm "$temp_file"
+            fi
+            
+            echo "  ✅ ${folder_name} staging deployment complete"
+            echo ""
+            deployed_count=$((deployed_count + 1))
+          else
+            folder_name=${folder%/}
+            echo "⏭️  Skipping ${folder_name} (no .bucket file found)"
+          fi
+        done
+        
+        echo "🎉 Staging deployment complete! Deployed $deployed_count folder(s) to $STAGING_BUCKET."
+        echo ""
+        echo "🔗 Staging URLs:"
+        echo "  📋 Main staging bucket: https://${STAGING_BUCKET}.mlcommons-storage.org"
+        echo ""
+        echo "📄 Index pages:"
+        for folder in */; do
+          if [ -f "${folder}.bucket" ]; then
+            folder_name=${folder%/}
+            if [ "$folder" != "central/" ]; then
+              echo "  🔗 ${folder_name}: https://${STAGING_BUCKET}.mlcommons-storage.org/${folder_name}/index.html"
+            fi
+          fi
+        done
+        echo ""
+        echo "📦 Central resources:"
+        if [ -f "central/.bucket" ]; then
+          echo "  🔗 Shared CSS: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared.css"
+          echo "  🔗 Shared JS: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared.js"
+          echo "  🔗 Shared content: https://${STAGING_BUCKET}.mlcommons-storage.org/central/shared-content.html"
+        fi 
