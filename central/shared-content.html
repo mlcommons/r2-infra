@@ -1,0 +1,68 @@
+<!-- Shared content for Cloudflare R2 bucket index pages -->
+<div class="header-strip">
+    <a href="https://mlcommons.org" target="_blank" rel="noopener noreferrer">
+        <img src="https://assets.mlcommons-storage.org/logos/mlcommons/mlc_logo_white_green.png" alt="MLCommons" class="mlc-logo">
+    </a>
+</div>
+
+<div id="shared-explanation">
+    <h2>MLCommons R2 Downloader</h2>
+    
+    <div class="alert alert-info">
+        <strong>Quick Start:</strong> Copy one of the commands below to download the indicated dataset. The downloader works on Linux, macOS, and Windows (WSL/Cygwin).
+    </div>
+
+    <h3>What it Does</h3>
+    <p>The MLCommons R2 Downloader is a bash script that downloads datasets from R2 buckets and verifies their integrity. In the case of buckets protected by Cloudflare Access, it automatically handles authentication. Depending on the need for authentication, it will:</p>
+    <ul>
+        <li>Open a browser window to a Cloudflare Access page for authentication on first run</li>
+        <li>Automatically re-authenticate when authentication sessions approach or reach expiration</li>
+        <li>Download files with wget and verify files with MD5 hashsums pulled from the R2 bucket</li>
+    </ul>
+
+    <h3>Platform Support</h3>
+    <ul>
+        <li><strong>Linux & macOS:</strong> Works natively with built-in bash</li>
+        <li><strong>Windows with WSL:</strong> Use Windows Subsystem for Linux (recommended)</li>
+        <li><strong>Windows with Cygwin:</strong> For users who don't have WSL and want a lightweight bash environment, you can use our cygwin+wget installer utility.</li>
+    </ul>
+
+    <details>
+        <summary><strong>Windows Cygwin Setup</strong> (click to expand)</summary>
+        <p>If you're on Windows and don't have WSL, you can use our cygwin+wget installer:</p>
+        <ol>
+            <li><strong>Download:</strong> Get the installer from GitHub <a href="https://github.com/mlcommons/r2-downloader/blob/main/cygwin-wget-installer.bat">here</a>.</li>
+            <li><strong>Install:</strong> Double-click the downloaded file to run it. The installer is PowerShell wrapped in batch, which allows it to run natively on Windows. It will automatically install Cygwin and <code>wget</code></li>
+            <li><strong>Navigate:</strong> When the installer finishes, it should launch the Cygwin terminal. To navigate to your Windows folders, use:
+                <ul>
+                    <li><code>cd /cygdrive/c/Users/YourUsername/Downloads</code> (for Downloads folder)</li>
+                    <li><code>cd /cygdrive/&lt;drive-letter&gt;/path/to/your/desired/folder</code> (for any other location)</li>
+                </ul>
+            </li>
+            <li><strong>Run the downloader:</strong> Once you're in your desired directory, run one of the download commands below.</li>
+        </ol>
+    </details>
+
+    <h3>Requirements</h3>
+    <p>If authentication is required, the script automatically installs <code>cloudflared</code> but you may need to install other dependencies (the script will tell you if dependencies are missing).</p>
+    <ul>
+        <li><code>cloudflared</code> - Will be auto-installed if missing and needed</li>
+        <li><code>wget</code> - For downloading files</li>
+        <li><code>md5sum/gmd5sum</code> - For hash verification</li>
+    </ul>
+
+    <h3>More Information</h3>
+    <p>For more information about the MLC R2 Downloader, please see the <a href="https://github.com/mlcommons/r2-downloader/blob/main/README.md">README</a> on GitHub.</p>
+    <p>You can also run the script with the help flag to see all the options and usage syntax:</p>
+    <div class="code-block">
+        <code>bash &lt;(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -h</code>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>Security Note:</strong> We encourage you to review the source code of the downloader script before running it on your system. You can view it in the public GitHub repository <a href="https://github.com/mlcommons/r2-downloader/blob/main/mlc-r2-downloader.sh">here</a>.
+    </div>
+
+    <div class="alert alert-info">
+        <strong>Need Help?</strong> If you encounter any issues, please open an issue in the MLCommons R2 Downloader  <a href="https://github.com/mlcommons/r2-downloader/issues">GitHub repository</a>.
+    </div>
+</div> 

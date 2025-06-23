@@ -1,0 +1,378 @@
+/* Import Instrument Sans font */
+@import url(https://fonts.bunny.net/css?family=instrument-sans:400);
+
+/* MLCommons R2 bucket index pages - Official Brand Colors */
+:root {
+    --primary-color: #343C52;
+    --secondary-color: #535869;
+    --accent-color: #355B65;
+    --bg-color: #ffffff;
+    --text-color: #343C52;
+    --border-color: #EBEEF4;
+    --code-bg: #F7F8FA;
+    --success-color: #62826C;
+    --warning-color: #E8B460;
+    --light-gray: #F7F8FA;
+    --hover-color: #173D47;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    padding-top: 4rem; /* Space for fixed header */
+}
+
+/* Header strip with logo */
+.header-strip {
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 0.75rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-strip a {
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.header-strip a:hover {
+    opacity: 0.9;
+}
+
+.mlc-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* Main content container with proper spacing */
+.page-content {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: left;
+    letter-spacing: -0.025em;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin: 3rem 0 1.5rem 0;
+    font-size: 1.875rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+h3 {
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+h4 {
+    color: var(--secondary-color);
+    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.dataset-title {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+    line-height: 1.7;
+}
+
+ul, ol {
+    margin: 1rem 0 1.5rem 0;
+    padding-left: 1.5rem;
+    color: var(--secondary-color);
+}
+
+ul li, ol li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Nested lists with less margin */
+ul ul, ol ul, ul ol, ol ol {
+    margin: 0.5rem 0;
+}
+
+code {
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 0.875em;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.dataset-description {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.code-block {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem;
+    padding-right: 5rem; /* Make room for copy button */
+    margin: 1.5rem 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 0.875rem;
+    overflow-x: auto;
+    position: relative;
+    line-height: 1.5;
+}
+
+.code-block code {
+    background: none;
+    padding: 0;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.copy-btn:hover {
+    background: var(--hover-color);
+}
+
+.dataset-section {
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+.command-section {
+    margin: 1.5rem 0;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    border: 1px solid;
+    font-weight: 500;
+}
+
+.alert-info {
+    background-color: #BED3FB;
+    border-color: #4E6BA1;
+    color: #37548A;
+}
+
+.alert-warning {
+    background-color: #F7CB84;
+    border-color: #E8B460;
+    color: #343C52;
+}
+
+/* Collapsible details styling */
+details {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--light-gray);
+}
+
+summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+summary:hover {
+    background-color: rgba(53, 91, 101, 0.05);
+}
+
+/* Hide default browser markers for all browsers */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::-moz-list-bullet {
+    list-style-type: none;
+}
+
+summary::marker {
+    display: none;
+}
+
+summary {
+    list-style: none;
+}
+
+summary::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 0.5rem;
+    transition: transform 0.2s ease;
+    color: var(--accent-color);
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details[open] summary {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+details > *:not(summary) {
+    padding: 1rem 2rem 1.5rem 2rem;
+    margin: 0;
+}
+
+/* Ensure proper spacing for content inside details */
+details p {
+    margin: 0 0 0.25rem 0; /* Much tighter spacing */
+    padding-left: 0.80rem; /* Reduced padding to align with list item text */
+}
+
+details ol, details ul {
+    margin: 0; /* Remove all margins for minimal spacing */
+    padding-left: 2rem; /* Match the container padding for alignment */
+}
+
+details li {
+    margin-bottom: 0.5rem;
+}
+
+/* Nested lists inside details need extra spacing */
+details ul ul, details ol ul, details ul ol, details ol ol {
+    margin: 0.25rem 0 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 3rem; /* Reduced space for smaller mobile header */
+    }
+    
+    .header-strip {
+        padding: 0.5rem 1rem;
+    }
+    
+    .mlc-logo {
+        height: 32px;
+    }
+    
+    .page-content {
+        padding: 0 1rem 1rem 1rem;
+    }
+    
+    .container {
+        padding: 1.5rem;
+        border: none;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .dataset-section {
+        padding: 1rem;
+    }
+    
+    .code-block {
+        padding: 1rem;
+        padding-right: 5rem; /* Make room for copy button on mobile */
+    }
+    
+    .copy-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Mobile adjustments for collapsible sections */
+    details > *:not(summary) {
+        padding: 0.75rem 1.25rem 1rem 1.25rem;
+    }
+    
+    details ol, details ul {
+        padding-left: 1.25rem; /* Match mobile container padding for alignment */
+    }
+    
+    details p {
+        padding-left: 0.25rem; /* Reduced mobile padding to align with list text */
+    }
+    
+    summary {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+} 
