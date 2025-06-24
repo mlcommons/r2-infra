@@ -3,6 +3,10 @@ name: Deploy to Cloudflare R2 Buckets
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.github/CODEOWNERS'
+      - '.github/workflows/cla.yml'
   workflow_dispatch:
 
 jobs:
