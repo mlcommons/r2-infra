@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare R2 Buckets
+name: Deploy to Production R2 Buckets
 
 on:
   push:

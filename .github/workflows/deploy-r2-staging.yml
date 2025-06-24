@@ -1,4 +1,4 @@
-name: Deploy to Staging R2 Buckets
+name: Deploy to Staging R2 Bucket
 
 on:
   pull_request:
