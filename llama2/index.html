@@ -6,14 +6,14 @@
     <title>MLCommons Llama 2 Download</title>
     
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://r2-access.mlcommons-storage.org/central/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://r2-access.mlcommons-storage.org/central/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://r2-access.mlcommons-storage.org/central/favicon/favicon-16x16.png">
-    <link rel="manifest" href="https://r2-access.mlcommons-storage.org/central/favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://r2-infra.mlcommons-storage.org/central/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://r2-infra.mlcommons-storage.org/central/favicon/site.webmanifest">
     
     <!-- Load shared CSS and JS from central bucket -->
-    <link rel="stylesheet" href="https://r2-access.mlcommons-storage.org/central/shared.css">
-    <script src="https://r2-access.mlcommons-storage.org/central/shared.js"></script>
+    <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
+    <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
 </head>
 <body>
     <!-- Header will be loaded from shared content -->
@@ -87,7 +87,7 @@
 
     <script>
         // Load shared content from central bucket
-        fetch('https://r2-access.mlcommons-storage.org/central/shared-content.html')
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
             .then(response => response.text())
             .then(html => {
                 // Extract header and content separately
