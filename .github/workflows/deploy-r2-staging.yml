@@ -1,0 +1,174 @@
+name: Deploy to Staging R2 Bucket
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened ]
+    paths-ignore:
+      - '**.md'
+      - '.github/CODEOWNERS'
+      - '.github/workflows/cla.yml'
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: r2-deploy
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Load secret
+      id: op-load-secret
+      uses: 1password/load-secrets-action@v2
+      with:
+        export-env: false
+      env:
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+        R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+        R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+
+    - name: Install Rclone
+      run: |
+        sudo -v ; curl https://rclone.org/install.sh | sudo bash
+        rclone version
+        
+    - name: Setup Rclone Config
+      run: |
+        rclone config create r2-deploy s3 \
+          provider=Cloudflare \
+          access_key_id=${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }} \
+          secret_access_key=${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }} \
+          endpoint=${{ steps.op-load-secret.outputs.R2_ENDPOINT }} \
+          no_check_bucket=true
+        rclone listremotes
+        
+    - name: Deploy All Directories to Staging
+      run: |
+        echo "🚀 Deploying all directories to staging bucket..."
+        echo "📋 PR #${{ github.event.number }}: ${{ github.event.pull_request.title }}"
+        echo ""
+        
+        STAGING_BUCKET="mlcommons-r2-infra-staging"
+        STAGING_SUBDOMAIN="r2-infra-staging"
+        deployed_count=0
+        
+        for folder in */; do
+          if [ -f "${folder}.bucket" ]; then
+            folder_name=${folder%/}  # Remove trailing slash for cleaner output
+            
+            echo "📦 Deploying ${folder_name} to staging bucket: $STAGING_BUCKET/${folder_name}"
+            
+            if [ "$folder" = "central/" ]; then
+              echo "  └── Uploading all central resources..."
+              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$folder_name --exclude "*.bucket" -v
+            else
+              echo "  └── Processing and uploading index.html..."
+              # Create a temporary file with staging URLs
+              temp_file=$(mktemp)
+              sed "s|https://r2-infra\.mlcommons-storage\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central|g" "${folder}index.html" > "$temp_file"
+              
+              # Upload the modified file
+              rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$folder_name/index.html -v
+              
+              # Clean up
+              rm "$temp_file"
+            fi
+            
+            echo "  ✅ ${folder_name} staging deployment complete"
+            echo ""
+            deployed_count=$((deployed_count + 1))
+          else
+            folder_name=${folder%/}
+            echo "⏭️  Skipping ${folder_name} (no .bucket file found)"
+          fi
+        done
+        
+        echo "🎉 Staging deployment complete! Deployed $deployed_count folder(s) to $STAGING_BUCKET."
+        echo ""
+        
+        echo "🔗 Staging URLs:"
+        echo "  📋 Main staging bucket: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org"
+        echo ""
+        echo "📄 Index pages:"
+        for folder in */; do
+          if [ -f "${folder}.bucket" ]; then
+            folder_name=${folder%/}
+            if [ "$folder" != "central/" ]; then
+              echo "  🔗 ${folder_name}: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/${folder_name}/index.html"
+            fi
+          fi
+        done
+        echo ""
+        echo "📦 Central resources:"
+        if [ -f "central/.bucket" ]; then
+          echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.css"
+          echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.js"
+          echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared-content.html"
+        fi 
+        
+    - name: Comment PR with Staging URLs
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const stagingSubdomain = 'r2-infra-staging';
+          
+          // Build the comment body
+          let comment = `## 🚀 Staging Deployment Complete\n\n`;
+          comment += `Your changes have been deployed to the staging environment and are ready for review!\n\n`;
+          comment += `### 📄 Dataset Index Pages\n\n`;
+          
+          // Get list of folders with .bucket files
+          const fs = require('fs');
+          const folders = fs.readdirSync('.', { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name)
+            .filter(folder => {
+              try {
+                return fs.existsSync(`${folder}/.bucket`);
+              } catch {
+                return false;
+              }
+            });
+          
+          // Add index page URLs (excluding central)
+          folders.forEach(folder => {
+            if (folder !== 'central') {
+              comment += `- **${folder}**: https://${stagingSubdomain}.mlcommons-storage.org/${folder}/index.html\n`;
+            }
+          });
+          
+          comment += `\n---\n`;
+          comment += `*🤖 This comment was automatically generated by the staging deployment workflow.*`;
+          
+          // Check if we already have a comment from this workflow
+          const comments = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          
+          const botComment = comments.data.find(comment => 
+            comment.user.type === 'Bot' && 
+            comment.body.includes('🚀 Staging Deployment Complete')
+          );
+          
+          if (botComment) {
+            // Update existing comment
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: comment
+            });
+          } else {
+            // Create new comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+          } 
