@@ -23,15 +23,25 @@
         <div class="container">
             <h1>MLCommons Cognata Dataset Download</h1>
             
+            <!-- Quick Start will be loaded here from shared content -->
+            <div id="quick-start-placeholder"></div>
+            
             <div class="alert alert-info">
                 <strong>Licensing Notice:</strong> Cognata datasets are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://cognata.com/mlcommons-license" target="_blank">this license</a> from Cognata.
             </div>
-            
-            <!-- Shared content will be loaded here -->
-            <div id="shared-content-placeholder"></div>
         
         <h2>Available Datasets</h2>
-
+        
+        <div class="dataset-section">
+            <h3 class="dataset-title">Cognata Dataset</h3>
+            <p class="dataset-description">Cognata synthetic driving dataset for autonomous vehicle benchmarks</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-dataset.uri</code>
+                </div>
+            </div>
+            
             <div class="alert alert-warning">
                 <strong>Storage Requirements:</strong> This download requires approximately 276GB of free disk space.
             </div>
@@ -39,9 +49,9 @@
         
         <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
         
-        <div class="alert alert-info">
-            <strong>Need Help?</strong> If you encounter any issues, check the troubleshooting section above or contact your system administrator.
-        </div>
+        <!-- Shared content will be loaded here -->
+        <div id="shared-content-placeholder"></div>
+        
         </div>
     </div>
 
@@ -50,15 +60,20 @@
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
             .then(response => response.text())
             .then(html => {
-                // Extract header and content separately
+                // Extract header, quick start, and main content separately
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = html;
                 
                 const headerStrip = tempDiv.querySelector('.header-strip');
+                const quickStartSection = tempDiv.querySelector('#quick-start-section');
                 const sharedExplanation = tempDiv.querySelector('#shared-explanation');
                 
                 if (headerStrip) {
                     document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
+                }
+                
+                if (quickStartSection) {
+                    document.getElementById('quick-start-placeholder').innerHTML = quickStartSection.innerHTML;
                 }
                 
                 if (sharedExplanation) {
