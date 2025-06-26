@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLCommons Cognata Dataset Download</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://r2-infra.mlcommons-storage.org/central/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://r2-infra.mlcommons-storage.org/central/favicon/site.webmanifest">
+    
+    <!-- Load shared CSS and JS from central bucket -->
+    <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
+    <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
+</head>
+<body>
+    <!-- Header will be loaded from shared content -->
+    <div id="header-placeholder"></div>
+    
+    <div class="page-content">
+        <div class="container">
+            <h1>MLCommons MLPerf Inference Benchmark Data Download</h1>
+            
+            <!-- Shared content will be loaded here -->
+            <div id="shared-content-placeholder"></div>
+        
+        <h2>Available Downloads</h2>
+
+        <h3>Whisper Benchmark</h3>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">Whisper Model</h3>
+            <p class="dataset-description">Whisper large-v3 model for the Whisper benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/whisper-model.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 25GB of free disk space.
+            </div>
+        </div>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">Whisper Dataset</h3>
+            <p class="dataset-description">LibriSpeech dataset for the Whisper benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/whisper-dataset.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 4.6GB of free disk space.
+            </div>
+        </div>
+        
+        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
+        
+        <div class="alert alert-info">
+            <strong>Need Help?</strong> If you encounter any issues, check the troubleshooting section above or contact your system administrator.
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Load shared content from central bucket
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
+            .then(response => response.text())
+            .then(html => {
+                // Extract header and content separately
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                const headerStrip = tempDiv.querySelector('.header-strip');
+                const sharedExplanation = tempDiv.querySelector('#shared-explanation');
+                
+                if (headerStrip) {
+                    document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
+                }
+                
+                if (sharedExplanation) {
+                    document.getElementById('shared-content-placeholder').innerHTML = sharedExplanation.outerHTML;
+                }
+                
+                initializeCopyButtons();
+            })
+            .catch(err => {
+                console.error('Failed to load shared content:', err);
+            });
+    </script>
+</body>
+</html>
