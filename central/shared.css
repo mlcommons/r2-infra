@@ -149,7 +149,7 @@ code {
 
 .dataset-description {
     color: var(--secondary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     font-size: 1.125rem;
     line-height: 1.6;
 }
@@ -200,11 +200,11 @@ code {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .command-section {
-    margin: 1.5rem 0;
+    margin: 0.75rem 0;
 }
 
 .alert {
