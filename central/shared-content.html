@@ -7,14 +7,33 @@
 
 <!-- Quick Start section - loaded separately at the top of pages -->
 <div id="quick-start-section">
-    <strong>Quick Start:</strong> Copy one of the commands below to download the indicated dataset. The downloader works on Linux, macOS, and Windows (WSL/Cygwin). For more information about the MLC R2 Downloader, please see the <a href="https://github.com/mlcommons/r2-downloader/blob/main/README.md">README</a> on GitHub.
+    <br>
+    <p><strong>Quick Start:</strong> Copy one of the commands below to download the indicated dataset. The downloader works on Linux, macOS, and Windows (WSL/Cygwin).</p>
+    
+    <p>For more information about the MLC R2 Downloader, please see the <a href="https://github.com/mlcommons/r2-downloader/blob/main/README.md">README</a> on GitHub.</p>
+
+    <details>
+        <summary><strong>Windows Cygwin Setup</strong> (click to expand)</summary>
+        <p>If you're on Windows and don't have WSL, you can use our cygwin+wget installer to setup a suitable bash environment:</p>
+        <ol>
+            <li><strong>Download:</strong> Get the installer from GitHub <a href="https://github.com/mlcommons/r2-downloader/blob/main/cygwin-wget-installer.bat">here</a>.</li>
+            <li><strong>Install:</strong> Double-click the downloaded file to run it. The installer is PowerShell wrapped in batch, which allows it to run natively on Windows. It will automatically install Cygwin and <code>wget</code></li>
+            <li><strong>Navigate:</strong> When the installer finishes, it should launch the Cygwin terminal. To navigate to your Windows folders, use:
+                <ul>
+                    <li><code>cd /cygdrive/c/Users/YourUsername/Downloads</code> (for Downloads folder)</li>
+                    <li><code>cd /cygdrive/&lt;drive-letter&gt;/path/to/your/desired/folder</code> (for any other location)</li>
+                </ul>
+            </li>
+            <li><strong>Run the downloader:</strong> Once you're in your desired directory, run one of the download commands below.</li>
+        </ol>
+    </details>
 
     <div class="alert alert-warning">
         <strong>Security Note:</strong> We encourage you to review the source code of the downloader script before running it on your system. You can view it in the public GitHub repository <a href="https://github.com/mlcommons/r2-downloader/blob/main/mlc-r2-downloader.sh">here</a>.
     </div>
 
     <div class="alert alert-info">
-        <strong>Need Help?</strong> If you encounter any issues, please open an issue in the MLCommons R2 Downloader  <a href="https://github.com/mlcommons/r2-downloader/issues">GitHub repository</a>.
+        <strong>Need Help?</strong> If you encounter any issues, please open an issue in the  <a href="https://github.com/mlcommons/r2-downloader/issues">GitHub repository</a>.
     </div>
 </div>
 

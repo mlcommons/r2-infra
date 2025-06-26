@@ -292,7 +292,7 @@ details > *:not(summary) {
 
 /* Ensure proper spacing for content inside details */
 details p {
-    margin: 0 0 0.25rem 0; /* Much tighter spacing */
+    margin: 0 0 0.125rem 0; /* Much tighter spacing between p and ol */
     padding-left: 0.80rem; /* Reduced padding to align with list item text */
 }
 
