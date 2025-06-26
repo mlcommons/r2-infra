@@ -59,9 +59,6 @@
                 <strong>Storage Requirements:</strong> This download requires approximately 4.6GB of free disk space.
             </div>
         </div>
-        
-            <!-- Shared content will be loaded here -->
-            <div id="shared-content-placeholder"></div>
 
         </div>
     </div>
@@ -77,7 +74,6 @@
                 
                 const headerStrip = tempDiv.querySelector('.header-strip');
                 const quickStartSection = tempDiv.querySelector('#quick-start-section');
-                const sharedExplanation = tempDiv.querySelector('#shared-explanation');
                 
                 if (headerStrip) {
                     document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
@@ -85,10 +81,6 @@
                 
                 if (quickStartSection) {
                     document.getElementById('quick-start-placeholder').innerHTML = quickStartSection.innerHTML;
-                }
-                
-                if (sharedExplanation) {
-                    document.getElementById('shared-content-placeholder').innerHTML = sharedExplanation.outerHTML;
                 }
                 
                 initializeCopyButtons();

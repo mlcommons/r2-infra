@@ -79,8 +79,7 @@
         
         <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
         
-        <!-- Shared content will be loaded here -->
-        <div id="shared-content-placeholder"></div>
+        <!-- Shared content removed -->
         
         </div>
     </div>
@@ -96,7 +95,6 @@
                 
                 const headerStrip = tempDiv.querySelector('.header-strip');
                 const quickStartSection = tempDiv.querySelector('#quick-start-section');
-                const sharedExplanation = tempDiv.querySelector('#shared-explanation');
                 
                 if (headerStrip) {
                     document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
@@ -104,10 +102,6 @@
                 
                 if (quickStartSection) {
                     document.getElementById('quick-start-placeholder').innerHTML = quickStartSection.innerHTML;
-                }
-                
-                if (sharedExplanation) {
-                    document.getElementById('shared-content-placeholder').innerHTML = sharedExplanation.outerHTML;
                 }
                 
                 initializeCopyButtons();
