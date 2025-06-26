@@ -304,7 +304,7 @@ details ol, details ul {
 
 /* Specific rule for lists that immediately follow paragraphs in details */
 details p + ol, details p + ul {
-    margin-top: 0.125rem; /* Very tight spacing between p and list */
+    margin-top: 0.125rem !important; /* Very tight spacing between p and list */
 }
 
 details li {
