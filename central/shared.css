@@ -385,5 +385,5 @@ details ul ul, details ol ul, details ul ol, details ol ol {
    shared Quick-Start block does not push content (avoids CLS) */
 #quick-start-placeholder {
     visibility: hidden;
-    min-height: 430px;           
+    min-height: 400px;           
 } 
