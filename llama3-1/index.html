@@ -24,7 +24,8 @@
             const header = tmp.querySelector('.header-strip');
             const quick  = tmp.querySelector('#quick-start-section');
             header && (document.getElementById('header-placeholder').innerHTML = header.outerHTML);
-            quick  && (document.getElementById('quick-start-placeholder').innerHTML = quick.innerHTML);
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
             if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
           })
           .catch(err => console.error('Failed to load shared content:', err));
@@ -43,8 +44,10 @@
                 <strong>Licensing Notice:</strong> Llama 3.1 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://llama3-1.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf" target="_blank">this side letter</a> from Meta.
             </div>
 
-            <!-- Quick Start will be loaded here from shared content -->
-            <div id="quick-start-placeholder"></div>
+            <!-- Quick-Start skeleton -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+            </div>
         
         <h2>Inference Models</h2>
         

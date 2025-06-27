@@ -24,7 +24,8 @@
             const head=t.querySelector('.header-strip');
             const quick=t.querySelector('#quick-start-section');
             head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
-            quick && (document.getElementById('quick-start-placeholder').innerHTML=quick.innerHTML);
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
             if(typeof initializeCopyButtons==='function') initializeCopyButtons();
           }).catch(err=>console.error('Failed to load shared content:',err));
       });
@@ -38,8 +39,10 @@
         <div class="container">
             <h1>MLPerf Inference Benchmark Data Download</h1>
             
-            <!-- Quick Start will be loaded here from shared content -->
-            <div id="quick-start-placeholder"></div>
+            <!-- Quick-Start skeleton -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+            </div>
         
         <h2>Available Downloads</h2>
 

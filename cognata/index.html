@@ -24,7 +24,8 @@
             const head=t.querySelector('.header-strip');
             const quick=t.querySelector('#quick-start-section');
             head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
-            quick && (document.getElementById('quick-start-placeholder').innerHTML=quick.innerHTML);
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
             if(typeof initializeCopyButtons==='function') initializeCopyButtons();
           }).catch(err=>console.error('Failed to load shared content:',err));
       });
@@ -42,8 +43,10 @@
                 <strong>Licensing Notice:</strong> Cognata datasets are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://cognata.com/mlcommons-license" target="_blank">this license</a> from Cognata.
             </div>
 
-            <!-- Quick Start will be loaded here from shared content -->
-            <div id="quick-start-placeholder"></div>
+            <!-- Quick-Start skeleton -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+            </div>
         
         <h2>Available Datasets</h2>
         
