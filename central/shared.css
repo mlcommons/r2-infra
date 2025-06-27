@@ -70,7 +70,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     background: white;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 0;
     box-shadow: none;
     border: 1px solid var(--border-color);
@@ -78,7 +78,7 @@ body {
 
 h1 {
     color: var(--primary-color);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 2.5rem;
     font-weight: 600;
     text-align: left;
@@ -87,7 +87,7 @@ h1 {
 
 h2 {
     color: var(--primary-color);
-    margin: 3rem 0 1.5rem 0;
+    margin: 1.5rem 0 1.5rem 0;
     font-size: 1.875rem;
     font-weight: 600;
     border-bottom: 1px solid var(--border-color);
@@ -96,7 +96,7 @@ h2 {
 
 h3 {
     color: var(--secondary-color);
-    margin: 2rem 0 1rem 0;
+    margin: 1.5rem 0 1rem 0;
     font-size: 1.25rem;
     font-weight: 600;
 }
@@ -110,7 +110,7 @@ h4 {
 
 .dataset-title {
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -149,7 +149,7 @@ code {
 
 .dataset-description {
     color: var(--secondary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     font-size: 1.125rem;
     line-height: 1.6;
 }
@@ -204,12 +204,12 @@ code {
 }
 
 .command-section {
-    margin: 1.5rem 0;
+    margin: 0.75rem 0;
 }
 
 .alert {
     padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 0.5rem 0;
     border-radius: 6px;
     border: 1px solid;
     font-weight: 500;
@@ -238,7 +238,8 @@ details {
 summary {
     padding: 1rem 1.5rem;
     cursor: pointer;
-    font-size: 1.125rem;
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--secondary-color);
     background-color: transparent;
     border: none;
@@ -286,13 +287,13 @@ details[open] summary {
 }
 
 details > *:not(summary) {
-    padding: 1rem 2rem 1.5rem 2rem;
+    padding: 0.5rem 2rem 0.75rem 2rem;
     margin: 0;
 }
 
 /* Ensure proper spacing for content inside details */
 details p {
-    margin: 0 0 0.25rem 0; /* Much tighter spacing */
+    margin: 0 0 0.125rem 0; /* Much tighter spacing between p and ol */
     padding-left: 0.80rem; /* Reduced padding to align with list item text */
 }
 
@@ -301,6 +302,7 @@ details ol, details ul {
     padding-left: 2rem; /* Match the container padding for alignment */
 }
 
+/* Specific rule for lists that immediately follow paragraphs in details */
 details li {
     margin-bottom: 0.5rem;
 }
