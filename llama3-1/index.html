@@ -14,6 +14,22 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
+    <!-- Load shared header & quick-start early to avoid layout shift -->
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div'); tmp.innerHTML = html;
+            const header = tmp.querySelector('.header-strip');
+            const quick  = tmp.querySelector('#quick-start-section');
+            header && (document.getElementById('header-placeholder').innerHTML = header.outerHTML);
+            quick  && (document.getElementById('quick-start-placeholder').innerHTML = quick.innerHTML);
+            if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
+          })
+          .catch(err => console.error('Failed to load shared content:', err));
+      });
+    </script>
 </head>
 <body>
     <!-- Header will be loaded from shared content -->
@@ -94,32 +110,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Load shared content from central bucket
-        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract header, quick start, and main content separately
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                
-                const headerStrip = tempDiv.querySelector('.header-strip');
-                const quickStartSection = tempDiv.querySelector('#quick-start-section');
-                
-                if (headerStrip) {
-                    document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
-                }
-                
-                if (quickStartSection) {
-                    document.getElementById('quick-start-placeholder').innerHTML = quickStartSection.innerHTML;
-                }
-                
-                initializeCopyButtons();
-            })
-            .catch(err => {
-                console.error('Failed to load shared content:', err);
-            });
-    </script>
 </body>
 </html> 
