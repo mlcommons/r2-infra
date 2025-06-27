@@ -14,6 +14,22 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
+    <!-- Early load shared header & quick-start -->
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
+          .then(r=>r.text())
+          .then(html=>{
+            const t=document.createElement('div'); t.innerHTML=html;
+            const head=t.querySelector('.header-strip');
+            const quick=t.querySelector('#quick-start-section');
+            head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
+            if(typeof initializeCopyButtons==='function') initializeCopyButtons();
+          }).catch(err=>console.error('Failed to load shared content:',err));
+      });
+    </script>
 </head>
 <body>
     <!-- Header will be loaded from shared content -->
@@ -27,8 +43,10 @@
                 <strong>Licensing Notice:</strong> Cognata datasets are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://cognata.com/mlcommons-license" target="_blank">this license</a> from Cognata.
             </div>
 
-            <!-- Quick Start will be loaded here from shared content -->
-            <div id="quick-start-placeholder"></div>
+            <!-- Quick-Start skeleton -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+            </div>
         
         <h2>Available Datasets</h2>
         
@@ -53,32 +71,5 @@
         
         </div>
     </div>
-
-    <script>
-        // Load shared content from central bucket
-        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract header, quick start, and main content separately
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                
-                const headerStrip = tempDiv.querySelector('.header-strip');
-                const quickStartSection = tempDiv.querySelector('#quick-start-section');
-                
-                if (headerStrip) {
-                    document.getElementById('header-placeholder').innerHTML = headerStrip.outerHTML;
-                }
-                
-                if (quickStartSection) {
-                    document.getElementById('quick-start-placeholder').innerHTML = quickStartSection.innerHTML;
-                }
-                
-                initializeCopyButtons();
-            })
-            .catch(err => {
-                console.error('Failed to load shared content:', err);
-            });
-    </script>
 </body>
 </html>

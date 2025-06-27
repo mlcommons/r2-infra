@@ -379,4 +379,11 @@ details ul ul, details ol ul, details ul ol, details ol ol {
         padding: 0.75rem 1rem;
         font-size: 1rem;
     }
+}
+
+/* Reserve vertical space for the quick-start skeleton so that loading the full
+   shared Quick-Start block does not push content (avoids CLS) */
+#quick-start-placeholder {
+    visibility: hidden;
+    min-height: 399px;           
 } 
