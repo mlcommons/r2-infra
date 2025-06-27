@@ -50,6 +50,7 @@ jobs:
         echo "📋 PR #${{ github.event.number }}: ${{ github.event.pull_request.title }}"
         echo ""
         
+        PR_NUM="${{ github.event.number }}"
         STAGING_BUCKET="mlcommons-r2-infra-staging"
         STAGING_SUBDOMAIN="r2-infra-staging"
         deployed_count=0
@@ -58,19 +59,19 @@ jobs:
           if [ -f "${folder}.bucket" ]; then
             folder_name=${folder%/}  # Remove trailing slash for cleaner output
             
-            echo "📦 Deploying ${folder_name} to staging bucket: $STAGING_BUCKET/${folder_name}"
+            echo "📦 Deploying ${folder_name} to staging bucket path: $STAGING_BUCKET/$PR_NUM/${folder_name}"
             
             if [ "$folder" = "central/" ]; then
               echo "  └── Uploading all central resources..."
-              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$folder_name --exclude "*.bucket" -v
+              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name --exclude "*.bucket" -v
             else
               echo "  └── Processing and uploading index.html..."
               # Create a temporary file with staging URLs
               temp_file=$(mktemp)
-              sed "s|https://r2-infra\.mlcommons-storage\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central|g" "${folder}index.html" > "$temp_file"
+              sed "s|https://r2-infra\\.mlcommons-storage\\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central|g" "${folder}index.html" > "$temp_file"
               
               # Upload the modified file
-              rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$folder_name/index.html -v
+              rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name/index.html -v
               
               # Clean up
               rm "$temp_file"
@@ -89,23 +90,23 @@ jobs:
         echo ""
         
         echo "🔗 Staging URLs:"
-        echo "  📋 Main staging bucket: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org"
+        echo "  📋 Main staging bucket root: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/"
         echo ""
         echo "📄 Index pages:"
         for folder in */; do
           if [ -f "${folder}.bucket" ]; then
             folder_name=${folder%/}
             if [ "$folder" != "central/" ]; then
-              echo "  🔗 ${folder_name}: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/${folder_name}/index.html"
+              echo "  🔗 ${folder_name}: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/${folder_name}/index.html"
             fi
           fi
         done
         echo ""
         echo "📦 Central resources:"
         if [ -f "central/.bucket" ]; then
-          echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.css"
-          echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared.js"
-          echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/central/shared-content.html"
+          echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.css"
+          echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.js"
+          echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared-content.html"
         fi 
         
     - name: Comment PR with Staging URLs
@@ -114,6 +115,7 @@ jobs:
       with:
         script: |
           const stagingSubdomain = 'r2-infra-staging';
+          const prNumber = context.issue.number;
           
           // Build the comment body
           let comment = `## 🚀 Staging Deployment Complete\n\n`;
@@ -136,7 +138,7 @@ jobs:
           // Add index page URLs (excluding central)
           folders.forEach(folder => {
             if (folder !== 'central') {
-              comment += `- **${folder}**: https://${stagingSubdomain}.mlcommons-storage.org/${folder}/index.html\n`;
+              comment += `- **${folder}**: https://${stagingSubdomain}.mlcommons-storage.org/${prNumber}/${folder}/index.html\n`;
             }
           });
           

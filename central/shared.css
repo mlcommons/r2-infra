@@ -37,12 +37,14 @@ body {
 .header-strip {
     background-color: var(--primary-color);
     width: 100%;
-    padding: 0.75rem 2rem;
+    padding: 0.65rem 2rem; /* equal vertical padding */
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* vertically center logo */
 }
 
 .header-strip a {
