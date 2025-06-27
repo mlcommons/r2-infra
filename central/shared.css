@@ -384,6 +384,6 @@ details ul ul, details ol ul, details ul ol, details ol ol {
 /* Reserve vertical space for the quick-start skeleton so that loading the full
    shared Quick-Start block does not push content (avoids CLS) */
 #quick-start-placeholder {
-    visibility: hidden;          /* keep skeleton invisible but occupying space */
-    min-height: 240px;           /* matches ~height of the loaded block */
+    visibility: hidden;
+    min-height: 380px;           
 } 
