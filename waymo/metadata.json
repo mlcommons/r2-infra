@@ -1,0 +1,18 @@
+{
+    "bucket": "mlcommons-waymo",
+    "domain": "waymo.mlcommons-storage.org",
+    "datasets": [
+      {
+        "name": "dataset-model",
+        "subpath": "data/waymo_preprocessed_dataset/"
+      },
+      {
+        "name": "dataset",
+        "subpath": "data/waymo_preprocessed_dataset_2/kitti_format/"
+      },
+      {
+        "name": "model",
+        "subpath": "data/waymo_preprocessed_dataset_2/model/"
+      }
+    ]
+  } 
