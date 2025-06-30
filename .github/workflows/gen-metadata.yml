@@ -1,0 +1,91 @@
+name: Generate and Commit Dataset Metadata
+
+on:
+  push:
+    branches: [ dev-uri-files ]
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened ]
+    paths:
+      - 'cognata/metadata.json'
+
+jobs:
+  generate-metadata:
+    runs-on: ubuntu-latest
+    environment: r2-deploy
+    permissions:
+      contents: write   # allow pushing back to the PR branch
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Load R2 secrets from 1Password
+        id: op-load-secret
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: false
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+          R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+          R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+
+      - name: Install rclone
+        run: |
+          sudo -v ; curl https://rclone.org/install.sh | sudo bash
+          rclone version
+
+      - name: Configure temporary rclone remote
+        run: |
+          rclone config create r2-meta s3 \
+            provider=Cloudflare \
+            access_key_id="${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }}" \
+            secret_access_key="${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }}" \
+            endpoint="${{ steps.op-load-secret.outputs.R2_ENDPOINT }}" \
+            no_check_bucket=true --non-interactive
+          rclone listremotes
+
+      - name: Generate metadata files for Cognata dataset
+        run: |
+          set -euo pipefail
+          DATASET_FILE="cognata/metadata.json"
+          META_DIR="cognata/metadata"
+          mkdir -p "$META_DIR"
+
+          ROOT_BUCKET=$(jq -r '.bucket' "$DATASET_FILE")
+          ROOT_DOMAIN=$(jq -r '.domain' "$DATASET_FILE")
+
+          mapfile -t DATASETS < <(jq -c '.datasets[]' "$DATASET_FILE")
+          for dataset in "${DATASETS[@]}"; do
+            name=$(echo "$dataset" | jq -r '.name')
+            subpath=$(echo "$dataset" | jq -r '.subpath')
+
+            # Build variables
+            bucket_path="$ROOT_BUCKET/$subpath"
+            uri="https://${ROOT_DOMAIN}/${subpath}"
+
+            echo "Generating .uri for $name => $uri"
+            echo "$uri" > "$META_DIR/${name}.uri"
+
+            echo "Generating .md5 for $name from $bucket_path"
+            if ! rclone md5sum "r2-meta:${bucket_path}" > "$META_DIR/${name}.md5"; then
+              echo "::error::Failed to generate MD5 list for ${name}. Aborting."
+              exit 1
+            fi
+          done
+
+      - name: Commit and push metadata files
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add cognata/metadata/*.uri || true
+          git add cognata/metadata/*.md5 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No metadata changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: auto-generate Cognata metadata files" || true
+          git push origin HEAD:${{ github.head_ref }} 
