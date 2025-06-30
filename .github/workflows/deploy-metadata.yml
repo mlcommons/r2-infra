@@ -6,6 +6,7 @@ on:
     paths:
       - '*/metadata/*.uri'
       - '*/metadata/*.md5'
+      - '.github/workflows/deploy-metadata.yml'
   workflow_dispatch:
 
 jobs:

@@ -6,6 +6,7 @@ on:
     types: [ opened, synchronize, reopened ]
     paths:
       - '*/metadata.json'
+      - '.github/workflows/gen-metadata.yml'
 
 jobs:
   generate-metadata:
@@ -91,8 +92,8 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add */metadata/*.uri || true
-          git add */metadata/*.md5 2>/dev/null || true
+          git add */metadata/*
+          git diff --cached --name-status
           if git diff --cached --quiet; then
             echo "No metadata changes to commit."
             exit 0

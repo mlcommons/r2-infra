@@ -8,6 +8,7 @@ on:
       - '*/index.html'
       - '*/metadata.json'
       - 'central/*'
+      - '.github/workflows/deploy-r2-staging.yml'
 
 jobs:
   deploy-staging:
