@@ -4,10 +4,10 @@ on:
   pull_request:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
-    paths-ignore:
-      - '**.md'
-      - '.github/CODEOWNERS'
-      - '.github/workflows/cla.yml'
+    paths:
+      - '*/index.html'
+      - '*/metadata.json'
+      - 'central/*'
 
 jobs:
   deploy-staging:
