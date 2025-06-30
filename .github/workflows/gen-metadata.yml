@@ -57,8 +57,8 @@ jobs:
             # Skip central resources folder if present
             [[ "$json" == "central/metadata.json" ]] && continue
 
-            folder="${json%/metadata.json}"
-            META_DIR="${folder}metadata"
+            folder="$(dirname "$json")"  # e.g., 'waymo'
+            META_DIR="${folder}/metadata"
             mkdir -p "$META_DIR"
 
             ROOT_BUCKET=$(jq -r '.bucket' "$json")
