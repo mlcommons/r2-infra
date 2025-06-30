@@ -72,8 +72,8 @@ jobs:
             echo "Generating .uri for $name => $uri"
             echo "$uri" > "$META_DIR/${name}.uri"
 
-            echo "Generating .md5 for $name from $bucket_path"
-            if ! rclone md5sum "r2-meta:${bucket_path}" > "$META_DIR/${name}.md5"; then
+            echo "Generating .md5 for $name from $bucket_path (sorted for stability)"
+            if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
               echo "::error::Failed to generate MD5 list for ${name}. Aborting."
               exit 1
             fi
