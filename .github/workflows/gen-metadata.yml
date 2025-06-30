@@ -90,7 +90,7 @@ jobs:
             echo "No metadata changes to commit."
             exit 0
           fi
-          git commit -m "auto-generate Cognata metadata files" || true
+          git commit -m "Auto-generate metadata files" || true
 
           # Push back to the PR branch
           git push origin HEAD:"${GITHUB_HEAD_REF}" 
@@ -108,7 +108,7 @@ jobs:
 
             let body = '## ✅ Metadata files generated\n\n';
             if (files.length) {
-              body += '### Files changed vs `main`\n';
+              body += '### 🔄 Files changed vs `main`\n';
               files.forEach(f => body += `- \`${f}\`\n`);
             } else {
               body += 'No metadata file changes compared to main.';
