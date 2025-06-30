@@ -13,6 +13,7 @@ jobs:
     environment: r2-deploy
     permissions:
       contents: write   # allow pushing back to the PR branch
+      issues: write     # allow workflow to post/update PR comments
 
     steps:
       - name: Checkout repository
