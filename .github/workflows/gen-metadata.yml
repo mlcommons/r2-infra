@@ -48,44 +48,51 @@ jobs:
             no_check_bucket=true --non-interactive
           rclone listremotes
 
-      - name: Generate metadata files for Cognata dataset
+      - name: Generate metadata files for all datasets
         run: |
           set -euo pipefail
-          DATASET_FILE="cognata/metadata.json"
-          META_DIR="cognata/metadata"
-          mkdir -p "$META_DIR"
 
-          ROOT_BUCKET=$(jq -r '.bucket' "$DATASET_FILE")
-          ROOT_DOMAIN=$(jq -r '.domain' "$DATASET_FILE")
+          for json in */metadata.json; do
+            # Skip central resources folder if present
+            [[ "$json" == "central/metadata.json" ]] && continue
 
-          mapfile -t DATASETS < <(jq -c '.datasets[]' "$DATASET_FILE")
-          for dataset in "${DATASETS[@]}"; do
-            name=$(echo "$dataset" | jq -r '.name')
-            subpath=$(echo "$dataset" | jq -r '.subpath')
+            folder="${json%/metadata.json}"
+            META_DIR="${folder}metadata"
+            mkdir -p "$META_DIR"
 
-            # Trim possible trailing slash from subpath for URI and bucket path
-            clean_subpath="${subpath%/}"
+            ROOT_BUCKET=$(jq -r '.bucket' "$json")
+            ROOT_DOMAIN=$(jq -r '.domain' "$json")
 
-            # Build variables
-            bucket_path="$ROOT_BUCKET/$clean_subpath"
-            uri="https://${ROOT_DOMAIN}/${clean_subpath}"
+            echo "📂 Processing $folder (bucket: $ROOT_BUCKET)"
 
-            echo "Generating .uri for $name => $uri"
-            echo "$uri" > "$META_DIR/${name}.uri"
+            mapfile -t DATASETS < <(jq -c '.datasets[]' "$json")
+            for dataset in "${DATASETS[@]}"; do
+              name=$(echo "$dataset" | jq -r '.name')
+              subpath=$(echo "$dataset" | jq -r '.subpath')
 
-            echo "Generating .md5 for $name from $bucket_path (sorted for stability)"
-            if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
-              echo "::error::Failed to generate MD5 list for ${name}. Aborting."
-              exit 1
-            fi
+              # Trim possible trailing slash from subpath for URI and bucket path
+              clean_subpath="${subpath%/}"
+
+              bucket_path="$ROOT_BUCKET/$clean_subpath"
+              uri="https://${ROOT_DOMAIN}/${clean_subpath}"
+
+              echo "  • Generating .uri for $name => $uri"
+              echo "$uri" > "$META_DIR/${name}.uri"
+
+              echo "    Generating .md5 for $name from $bucket_path (sorted)"
+              if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
+                echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
+                exit 1
+              fi
+            done
           done
 
       - name: Commit and push metadata files
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add cognata/metadata/*.uri || true
-          git add cognata/metadata/*.md5 2>/dev/null || true
+          git add */metadata/*.uri || true
+          git add */metadata/*.md5 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No metadata changes to commit."
             exit 0
@@ -103,7 +110,7 @@ jobs:
             const { execSync } = require('child_process');
             // Fetch main for comparison
             execSync('git fetch --depth=1 origin main');
-            const diff = execSync('git diff --name-only origin/main HEAD -- */metadata/*.uri */metadata/*.md5').toString().trim();
+            const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
             const files = diff ? diff.split('\n') : [];
 
             let body = '## ✅ Metadata files generated\n\n';
