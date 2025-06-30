@@ -63,9 +63,12 @@ jobs:
             name=$(echo "$dataset" | jq -r '.name')
             subpath=$(echo "$dataset" | jq -r '.subpath')
 
+            # Trim possible trailing slash from subpath for URI and bucket path
+            clean_subpath="${subpath%/}"
+
             # Build variables
-            bucket_path="$ROOT_BUCKET/$subpath"
-            uri="https://${ROOT_DOMAIN}/${subpath}"
+            bucket_path="$ROOT_BUCKET/$clean_subpath"
+            uri="https://${ROOT_DOMAIN}/${clean_subpath}"
 
             echo "Generating .uri for $name => $uri"
             echo "$uri" > "$META_DIR/${name}.uri"
@@ -88,4 +91,7 @@ jobs:
             exit 0
           fi
           git commit -m "chore: auto-generate Cognata metadata files" || true
-          git push origin HEAD:${{ github.head_ref }} 
+
+          # Determine target branch: GITHUB_HEAD_REF is set on PRs, otherwise use GITHUB_REF_NAME (push events)
+          TARGET_BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git push origin HEAD:"$TARGET_BRANCH" 
