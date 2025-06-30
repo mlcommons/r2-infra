@@ -8,11 +8,11 @@
       },
       {
         "name": "dataset",
-        "subpath": "data/waymo_preprocessed_dataset_2/kitti_format/"
+        "subpath": "data/waymo_preprocessed_dataset/kitti_format/"
       },
       {
         "name": "model",
-        "subpath": "data/waymo_preprocessed_dataset_2/model/"
+        "subpath": "data/waymo_preprocessed_dataset/model/"
       }
     ]
   } 
