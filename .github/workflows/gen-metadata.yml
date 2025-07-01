@@ -216,7 +216,7 @@ jobs:
               issue_number: context.issue.number,
             });
 
-            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('✅ Metadata files generated'));
+            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('Metadata files generated'));
 
             if (existing) {
               await github.rest.issues.updateComment({

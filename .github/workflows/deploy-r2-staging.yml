@@ -183,7 +183,7 @@ jobs:
           
           const botComment = comments.data.find(comment => 
             comment.user.type === 'Bot' && 
-            comment.body.includes('🚀 Staging Deployment Complete')
+            comment.body.includes('Web staging deployment')
           );
           
           if (botComment) {
