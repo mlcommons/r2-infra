@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLPerf Training Benchmark Data Download</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://r2-infra.mlcommons-storage.org/central/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://r2-infra.mlcommons-storage.org/central/favicon/site.webmanifest">
+    
+    <!-- Load shared CSS and JS from central bucket -->
+    <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
+    <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
+    <!-- Early load shared header & quick-start -->
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
+          .then(r=>r.text())
+          .then(html=>{
+            const t=document.createElement('div'); t.innerHTML=html;
+            const head=t.querySelector('.header-strip');
+            const quick=t.querySelector('#quick-start-section');
+            head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
+            if(typeof initializeCopyButtons==='function') initializeCopyButtons();
+          }).catch(err=>console.error('Failed to load shared content:',err));
+      });
+    </script>
+</head>
+<body>
+    <!-- Header will be loaded from shared content -->
+    <div id="header-placeholder"></div>
+    
+    <div class="page-content">
+        <div class="container">
+            <h1>MLPerf Training Benchmark Data Download</h1>
+            
+            <!-- Quick-Start skeleton -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+            </div>
+        
+        <h2>Available Downloads</h2>
+
+        <h3>FLUX.1 Benchmark</h3>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">CC12M dataset</h3>
+            <p class="dataset-description">Conceptual 12M dataset for the FLUX.1 benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-disk.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 103GB of free disk space.
+            </div>
+        </div>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">CC12M preprocessed dataset</h3>
+            <p class="dataset-description">Conceptual 12M preprocessed dataset for the FLUX.1 benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-preprocessed.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 2.4TB of free disk space.
+            </div>
+        </div>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">COCO dataset</h3>
+            <p class="dataset-description">Common Objects in Context dataset for the FLUX.1 benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 3.6GB of free disk space.
+            </div>
+        </div>
+
+        <div class="dataset-section">
+            <h3 class="dataset-title">COCO preprocessed dataset</h3>
+            <p class="dataset-description">Common Objects in Context preprocessed dataset for the FLUX.1 benchmark</p>
+            
+            <div class="command-section">
+                <div class="code-block">
+                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco-preprocessed.uri</code>
+                </div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Storage Requirements:</strong> This download requires approximately 65GB of free disk space.
+            </div>
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>
