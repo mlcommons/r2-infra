@@ -1,4 +1,4 @@
-name: Generate and Commit Dataset Metadata
+name: Generate, commit, and stage metadata files
 
 on:
   pull_request:
@@ -114,6 +114,8 @@ jobs:
 
           echo "🔄 Uploading staging metadata files (.uri and .md5) to R2 buckets..."
 
+          PR_NUM="${{ github.event.number }}"
+
           for json in */metadata.json; do
             # Skip central resources folder if present
             [[ "$json" == "central/metadata.json" ]] && continue
@@ -130,16 +132,16 @@ jobs:
               bucket_path="$ROOT_BUCKET/$clean_subpath"
               META_DIR="${folder}/metadata"
 
-              echo "📤 ${folder}/${name}: copying to r2-meta:${bucket_path}/metadata/staging-${name}.{uri,md5}"
+              echo "📤 ${folder}/${name}: copying to r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.{uri,md5}"
 
-              # Ensure bucket metadata directory exists (ignore if already there)
-              rclone mkdir "r2-meta:${bucket_path}/metadata" || true
+              # Ensure bucket-level metadata directory exists (ignore errors if it already exists)
+              rclone mkdir "r2-meta:${ROOT_BUCKET}/metadata" || true
 
-              # Upload URI and MD5 files with staging- prefix
-              rclone copyto "${META_DIR}/${name}.uri" "r2-meta:${bucket_path}/metadata/staging-${name}.uri" \
+              # Upload URI and MD5 files with staging-<PR>- prefix into bucket-level metadata dir
+              rclone copyto "${META_DIR}/${name}.uri" "r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.uri" \
                 --header-upload "Content-Type: text/plain; charset=utf-8" -v
 
-              rclone copyto "${META_DIR}/${name}.md5" "r2-meta:${bucket_path}/metadata/staging-${name}.md5" \
+              rclone copyto "${META_DIR}/${name}.md5" "r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.md5" \
                 --header-upload "Content-Type: text/plain; charset=utf-8" -v
             done
           done
