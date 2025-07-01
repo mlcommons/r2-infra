@@ -99,7 +99,8 @@ jobs:
               files=$(echo "$size_json" | jq -r '.count // 0')
               bytes=$(echo "$size_json" | jq -r '.bytes // 0')
               if command -v numfmt >/dev/null; then
-                hr=$(numfmt --to=iec-i --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
+                # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
+                hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
               else
                 hr="${bytes}B"
               fi
