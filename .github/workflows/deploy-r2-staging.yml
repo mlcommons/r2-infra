@@ -12,6 +12,7 @@ on:
 
 jobs:
   deploy-staging:
+    if: github.actor != 'mlc-r2-infra[bot]'
     runs-on: ubuntu-latest
     environment: r2-deploy
     permissions:
@@ -63,6 +64,12 @@ jobs:
         for folder in */; do
           if [ -f "${folder}.bucket" ]; then
             folder_name=${folder%/}  # Remove trailing slash for cleaner output
+            
+            # Skip if no index.html for non-central folders
+            if [ "$folder" != "central/" ] && [ ! -f "${folder}index.html" ]; then
+              echo "⏭️  Skipping ${folder_name} (no index.html found)"
+              continue
+            fi
             
             echo "📦 Deploying ${folder_name} to staging bucket path: $STAGING_BUCKET/$PR_NUM/${folder_name}"
             
@@ -134,7 +141,7 @@ jobs:
             .map(dirent => dirent.name)
             .filter(folder => {
               try {
-                return fs.existsSync(`${folder}/.bucket`);
+                return fs.existsSync(`${folder}/.bucket`) && fs.existsSync(`${folder}/index.html`);
               } catch {
                 return false;
               }
