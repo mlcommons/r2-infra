@@ -157,12 +157,16 @@ jobs:
           // Append list of changed web-related files vs main
           const { execSync } = require('child_process');
           execSync('git fetch --depth=1 origin main');
-          const diff = execSync('git diff --name-only origin/main HEAD -- "*/index.html" "central/*"').toString().trim();
-          if (diff) {
-            comment += `\n\n### 🔄 Files changed vs \`main\`\n`;
-            diff.split('\n').forEach(f => {
+          const diffRaw = execSync('git diff --name-only origin/main HEAD -- "*/index.html" "central/*"').toString().trim();
+          const changedFiles = diffRaw ? diffRaw.split('\n') : [];
+          
+          comment += `\n\n### 🔄 Files changed vs \`main\`\n`;
+          if (changedFiles.length) {
+            changedFiles.forEach(f => {
               comment += `- \`${f}\`\n`;
             });
+          } else {
+            comment += 'No web file changes compared to main.';
           }
           
           comment += `\n---\n`;
