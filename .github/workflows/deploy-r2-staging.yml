@@ -1,4 +1,4 @@
-name: Deploy to Staging R2 Bucket
+name: Deploy web files to staging R2 bucket
 
 on:
   pull_request:

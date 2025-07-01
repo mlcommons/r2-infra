@@ -1,4 +1,4 @@
-name: Deploy Dataset Metadata to R2 Buckets
+name: Deploy dataset metadata to R2 buckets
 
 on:
   push:
