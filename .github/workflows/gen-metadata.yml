@@ -147,7 +147,7 @@ jobs:
 
             let body = '## ✅ Metadata files generated\n\n';
             if (files.length) {
-              body += '### 🔄 Files changed vs `main`\n';
+              body += '### 🔄 Metadata files changed vs `main`\n';
               files.forEach(f => body += `- \`${f}\`\n`);
             } else {
               body += 'No metadata file changes compared to main.';

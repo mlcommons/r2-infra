@@ -147,7 +147,7 @@ jobs:
             });
           
           // Append list of changed web-related files vs main
-          comment += `### 🔄 Files changed vs \`main\`\n`;
+          comment += `### 🔄 Web files changed vs \`main\`\n`;
           const { execSync } = require('child_process');
           execSync('git fetch --depth=1 origin main');
           const diffRaw = execSync('git diff --name-only origin/main HEAD -- "*/index.html" "central/*"').toString().trim();
