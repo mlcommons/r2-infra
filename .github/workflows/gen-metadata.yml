@@ -34,8 +34,8 @@ jobs:
           R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
           R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
           R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
-          APP_PRIVATE_KEY: "op://x4h33jlflygxmifnxfrizew4oa/fadmdpewk7jiinahvp5hzzewnm/private key"
-          APP_ID: "op://x4h33jlflygxmifnxfrizew4oa/fadmdpewk7jiinahvp5hzzewnm/App ID"
+          APP_PRIVATE_KEY: "op://mqgmk3badhri6yvwi3qknilwz4/fadmdpewk7jiinahvp5hzzewnm/private key"
+          APP_ID: "op://mqgmk3badhri6yvwi3qknilwz4/fadmdpewk7jiinahvp5hzzewnm/App ID"
 
       - name: Install rclone
         run: |
