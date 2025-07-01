@@ -130,7 +130,7 @@ jobs:
           const prNumber = context.issue.number;
           
           // Build the comment body
-          let comment = `## 🚀 Staging Deployment Complete\n\n`;
+          let comment = `## 🚀 Web staging deployment complete\n\n`;
           comment += `Your changes have been deployed to the staging environment and are ready for review!\n\n`;
           
           // Get list of folders with .bucket files
@@ -162,7 +162,7 @@ jobs:
           }
           
           // Now append dataset index pages section
-          comment += `\n\n### 📄 Dataset Index Pages\n\n`;
+          comment += `\n\n### 📄 Dataset index pages\n\n`;
           
           // Add index page URLs (excluding central)
           folders.forEach(folder => {

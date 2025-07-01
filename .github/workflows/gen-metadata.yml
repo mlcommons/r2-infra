@@ -108,6 +108,44 @@ jobs:
             done
           done
 
+      - name: Upload staging metadata files to R2 buckets
+        run: |
+          set -euo pipefail
+
+          echo "🔄 Uploading staging metadata files (.uri and .md5) to R2 buckets..."
+
+          for json in */metadata.json; do
+            # Skip central resources folder if present
+            [[ "$json" == "central/metadata.json" ]] && continue
+
+            folder="$(dirname "$json")"
+            ROOT_BUCKET=$(jq -r '.bucket' "$json")
+
+            mapfile -t DATASETS < <(jq -c '.datasets[]' "$json")
+            for dataset in "${DATASETS[@]}"; do
+              name=$(echo "$dataset" | jq -r '.name')
+              subpath=$(echo "$dataset" | jq -r '.subpath')
+              clean_subpath="${subpath%/}"
+
+              bucket_path="$ROOT_BUCKET/$clean_subpath"
+              META_DIR="${folder}/metadata"
+
+              echo "📤 ${folder}/${name}: copying to r2-meta:${bucket_path}/metadata/staging-${name}.{uri,md5}"
+
+              # Ensure bucket metadata directory exists (ignore if already there)
+              rclone mkdir "r2-meta:${bucket_path}/metadata" || true
+
+              # Upload URI and MD5 files with staging- prefix
+              rclone copyto "${META_DIR}/${name}.uri" "r2-meta:${bucket_path}/metadata/staging-${name}.uri" \
+                --header-upload "Content-Type: text/plain; charset=utf-8" -v
+
+              rclone copyto "${META_DIR}/${name}.md5" "r2-meta:${bucket_path}/metadata/staging-${name}.md5" \
+                --header-upload "Content-Type: text/plain; charset=utf-8" -v
+            done
+          done
+
+          echo "✅ Staging metadata upload complete."
+
       - name: Generate GitHub App token
         id: app-token
         uses: actions/create-github-app-token@v2
@@ -145,7 +183,7 @@ jobs:
             const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
             const files = diff ? diff.split('\n') : [];
 
-            let body = '## ✅ Metadata files generated\n\n';
+            let body = '## 📝 Metadata files generated and staged\n\n';
             if (files.length) {
               body += '### 🔄 Metadata files changed vs `main`\n';
               files.forEach(f => body += `- \`${f}\`\n`);
