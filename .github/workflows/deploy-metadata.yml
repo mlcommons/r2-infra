@@ -11,6 +11,7 @@ on:
 
 jobs:
   deploy-metadata:
+    if: github.actor != 'mlc-r2-infra[bot]'
     runs-on: ubuntu-latest
     environment: r2-deploy
 
