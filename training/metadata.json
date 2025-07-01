@@ -1,0 +1,30 @@
+{
+    "bucket": "mlcommons-training-wg-public",
+    "domain": "training.mlcommons-storage.org",
+    "datasets": [
+      {
+        "name": "flux-1-cc12m-disk",
+        "subpath": "flux_1/datasets/cc12m_disk/"
+      },
+      {
+        "name": "flux-1-cc12m-preprocessed",
+        "subpath": "flux_1/datasets/cc12m_preprocessed/"
+      },
+      {
+        "name": "flux-1-coco",
+        "subpath": "flux_1/datasets/coco/"
+      },
+      {
+        "name": "flux-1-coco-preprocessed",
+        "subpath": "flux_1/datasets/coco_preprocessed/"
+      },
+      {
+        "name": "flux-1-coco-preprocessed-100k",
+        "subpath": "flux_1/datasets/coco_preprocessed_100k/"
+      },
+      {
+        "name": "flux-1-val2014-30k",
+        "subpath": "flux_1/datasets/val2014_30k.tsv"
+      }
+    ]
+  } 
