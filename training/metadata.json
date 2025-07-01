@@ -19,10 +19,6 @@
         "subpath": "flux_1/datasets/coco_preprocessed/"
       },
       {
-        "name": "flux-1-coco-preprocessed-100k",
-        "subpath": "flux_1/datasets/coco_preprocessed_100k/"
-      },
-      {
         "name": "flux-1-val2014-30k",
         "subpath": "flux_1/datasets/val2014_30k.tsv"
       }
