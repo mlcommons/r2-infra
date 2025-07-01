@@ -1,5 +1,6 @@
 0ce5dc9c44360296f4ad6a69a45d6345  kitti_format/training/cam_sync_label_0.tar.gz
 16e549b2e717ebc120af4fb556c6fee1  kitti_format/training/cam_sync_label_3.tar.gz
+1c6100ed2779830cf9c568dd9b0e8827  kitti_format/metadata/staging-dataset.md5
 2196db5218e800c2bfbb819e6018823a  kitti_format/training/image_4.tar.gz
 2c35d792124430e765a7347ef81dacdb  kitti_format/training/cam_sync_label_all.tar.gz
 2cb0d17abc457575f69e3ce6607cc507  kitti_format/training/label_1.tar.gz
@@ -8,6 +9,7 @@
 36448ef9a0428289e03acbf39598e7f6  kitti_format/testing/image_0.tar.gz
 3cd2e5ce93b0328d6216d679504ff59f  kitti_format/training/image_2.tar.gz
 405fbe483d350a139c0ef753985bfa33  model/pp_ep36.pth
+42d62f143a6193f408ca3a1a561ee76a  kitti_format/metadata/staging-dataset.uri
 456b37aaf120809f24f35bd4d05c621b  kitti_format/training/cam_sync_label_4.tar.gz
 493bdb1852750a0fc9eb27fb113d0a92  model/deeplabv3+.onnx
 4b500f371adc71b440e87e78b19bff0e  kitti_format/training/image_1.tar.gz
