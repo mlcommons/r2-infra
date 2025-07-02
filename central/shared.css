@@ -163,7 +163,7 @@ code {
     border-radius: 6px;
     padding: 1.5rem;
     padding-right: 5rem; /* Make room for copy button */
-    margin: 1.5rem 0;
+    margin: 1rem 0 0.75rem 0;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     font-size: 0.875rem;
     overflow-x: auto;
