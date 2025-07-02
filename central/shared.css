@@ -12,9 +12,11 @@
     --border-color: #EBEEF4;
     --dataset-bg: #355B65;
     --code-bg: #1F363C;
+    --arrow-color: #355B65;
     --success-color: #62826C;
     --warning-color: #F7CB84;
     --light-gray: #F7F8FA;
+    --light-gray-code: #EBEEF4;
     --hover-color: #B3CEBA;
 }
 
@@ -142,12 +144,12 @@ ul ul, ol ul, ul ol, ol ol {
 }
 
 code {
-    background-color: var(--code-bg);
+    background-color: var(--light-gray-code);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     font-size: 0.875em;
-    color: var(--primary-color);
+    color: var(--text-color);
     border: 1px solid var(--border-color);
 }
 
@@ -279,7 +281,7 @@ summary::before {
     display: inline-block;
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
-    color: var(--primary-color);
+    color: var(--arrow-color);
 }
 
 details[open] summary::before {
