@@ -157,7 +157,8 @@ code {
 }
 
 .code-block {
-    background-color: var(--code-bg);
+    /* Use solid white so the block stands out against the surrounding light-gray dataset container */
+    background-color: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 1.5rem;
