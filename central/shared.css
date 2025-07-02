@@ -159,8 +159,9 @@ code {
 }
 
 .code-block {
-    /* Use solid white so the block stands out against the surrounding light-gray dataset container */
     background-color: var(--code-bg);
+    border: 1px solid var(--code-bg);
+    border-radius: 6px;
     padding: 1.5rem;
     padding-right: 5rem; /* Make room for copy button */
     margin: 1rem 0 0.75rem 0;
