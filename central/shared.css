@@ -389,4 +389,11 @@ details ul ul, details ol ul, details ul ol, details ol ol {
 #quick-start-placeholder {
     visibility: hidden;
     min-height: 399px;           
+}
+
+/* Use light text inside dataset cards */
+.dataset-section,
+.dataset-section .dataset-title,
+.dataset-section .dataset-description {
+    color: var(--text-color-light);
 } 
