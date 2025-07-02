@@ -8,12 +8,13 @@
     --accent-color: #CCEBD4;
     --bg-color: #ffffff;
     --text-color: #0F1321;
+    --text-color-light: #FBFBFC;
     --border-color: #EBEEF4;
-    --code-bg: #F7F8FA;
+    --code-bg: #FFFFFF;
     --success-color: #62826C;
     --warning-color: #E8B460;
     --light-gray: #F7F8FA;
-    --hover-color: #B2D1BA;
+    --hover-color: #B3CEBA;
 }
 
 * {
@@ -199,11 +200,12 @@ code {
 }
 
 .dataset-section {
-    background: var(--light-gray);
+    background: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
     margin: 2rem 0;
+    color: var(--text-color-light);
 }
 
 .command-section {
