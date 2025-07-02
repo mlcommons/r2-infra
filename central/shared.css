@@ -5,15 +5,15 @@
 :root {
     --primary-color: #343C52;
     --secondary-color: #535869;
-    --accent-color: #355B65;
+    --accent-color: #CCEBD4;
     --bg-color: #ffffff;
-    --text-color: #343C52;
+    --text-color: #0F1321;
     --border-color: #EBEEF4;
     --code-bg: #F7F8FA;
     --success-color: #62826C;
     --warning-color: #E8B460;
     --light-gray: #F7F8FA;
-    --hover-color: #173D47;
+    --hover-color: #B2D1BA;
 }
 
 * {
