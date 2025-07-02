@@ -1,4 +1,4 @@
-name: Generate and Commit Dataset Metadata
+name: Generate, commit, and stage metadata files
 
 on:
   pull_request:
@@ -6,9 +6,16 @@ on:
     types: [ opened, synchronize, reopened ]
     paths:
       - '*/metadata.json'
+      - '.github/workflows/gen-metadata.yml'
+
+# Prevent overlapping runs on the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   generate-metadata:
+    if: github.actor != 'mlc-r2-infra[bot]'
     runs-on: ubuntu-latest
     environment: r2-deploy
     permissions:
@@ -21,6 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          persist-credentials: false
 
       - name: Load R2 secrets from 1Password
         id: op-load-secret
@@ -32,6 +40,8 @@ jobs:
           R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
           R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
           R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+          APP_PRIVATE_KEY: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/private key"
+          APP_ID: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/App ID"
 
       - name: Install rclone
         run: |
@@ -48,73 +58,162 @@ jobs:
             no_check_bucket=true --non-interactive
           rclone listremotes
 
-      - name: Generate metadata files for Cognata dataset
+      - name: Generate metadata files for all datasets
         run: |
           set -euo pipefail
-          DATASET_FILE="cognata/metadata.json"
-          META_DIR="cognata/metadata"
-          mkdir -p "$META_DIR"
 
-          ROOT_BUCKET=$(jq -r '.bucket' "$DATASET_FILE")
-          ROOT_DOMAIN=$(jq -r '.domain' "$DATASET_FILE")
+          # File that will store per-dataset size info for later use in the PR comment
+          SIZE_FILE="$GITHUB_WORKSPACE/size_report.txt"
+          echo "folder,dataset,files,bytes,hr" > "$SIZE_FILE"
 
-          mapfile -t DATASETS < <(jq -c '.datasets[]' "$DATASET_FILE")
-          for dataset in "${DATASETS[@]}"; do
-            name=$(echo "$dataset" | jq -r '.name')
-            subpath=$(echo "$dataset" | jq -r '.subpath')
+          for json in */metadata.json; do
+            # Skip central resources folder if present
+            [[ "$json" == "central/metadata.json" ]] && continue
 
-            # Trim possible trailing slash from subpath for URI and bucket path
-            clean_subpath="${subpath%/}"
+            folder="$(dirname "$json")"  # e.g., 'waymo'
+            META_DIR="${folder}/metadata"
+            mkdir -p "$META_DIR"
 
-            # Build variables
-            bucket_path="$ROOT_BUCKET/$clean_subpath"
-            uri="https://${ROOT_DOMAIN}/${clean_subpath}"
+            ROOT_BUCKET=$(jq -r '.bucket' "$json")
+            ROOT_DOMAIN=$(jq -r '.domain' "$json")
 
-            echo "Generating .uri for $name => $uri"
-            echo "$uri" > "$META_DIR/${name}.uri"
+            echo "📂 Processing $folder (bucket: $ROOT_BUCKET)"
 
-            echo "Generating .md5 for $name from $bucket_path (sorted for stability)"
-            if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
-              echo "::error::Failed to generate MD5 list for ${name}. Aborting."
-              exit 1
-            fi
+            mapfile -t DATASETS < <(jq -c '.datasets[]' "$json")
+            for dataset in "${DATASETS[@]}"; do
+              name=$(echo "$dataset" | jq -r '.name')
+              subpath=$(echo "$dataset" | jq -r '.subpath')
+
+              # Trim possible trailing slash from subpath for URI and bucket path
+              clean_subpath="${subpath%/}"
+
+              bucket_path="$ROOT_BUCKET/$clean_subpath"
+              uri="https://${ROOT_DOMAIN}/${clean_subpath}"
+
+              echo "  • Generating .uri for $name => $uri"
+              echo "$uri" > "$META_DIR/${name}.uri"
+
+              echo "    Generating .md5 for $name from $bucket_path (sorted)"
+              if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
+                echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
+                exit 1
+              fi
+
+              # Collect dataset size information for PR comment
+              size_json=$(rclone size --json "r2-meta:${bucket_path}" || echo '{}')
+              files=$(echo "$size_json" | jq -r '.count // 0')
+              bytes=$(echo "$size_json" | jq -r '.bytes // 0')
+              if command -v numfmt >/dev/null; then
+                # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
+                hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
+              else
+                hr="${bytes}B"
+              fi
+              echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
+            done
           done
+
+      - name: Upload staging metadata files to R2 buckets
+        run: |
+          set -euo pipefail
+
+          echo "🔄 Uploading staging metadata files (.uri and .md5) to R2 buckets..."
+
+          PR_NUM="${{ github.event.number }}"
+
+          for json in */metadata.json; do
+            # Skip central resources folder if present
+            [[ "$json" == "central/metadata.json" ]] && continue
+
+            folder="$(dirname "$json")"
+            ROOT_BUCKET=$(jq -r '.bucket' "$json")
+
+            mapfile -t DATASETS < <(jq -c '.datasets[]' "$json")
+            for dataset in "${DATASETS[@]}"; do
+              name=$(echo "$dataset" | jq -r '.name')
+              subpath=$(echo "$dataset" | jq -r '.subpath')
+              clean_subpath="${subpath%/}"
+
+              bucket_path="$ROOT_BUCKET/$clean_subpath"
+              META_DIR="${folder}/metadata"
+
+              echo "📤 ${folder}/${name}: copying to r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.{uri,md5}"
+
+              # Ensure bucket-level metadata directory exists (ignore errors if it already exists)
+              rclone mkdir "r2-meta:${ROOT_BUCKET}/metadata" || true
+
+              # Upload URI and MD5 files with staging-<PR>- prefix into bucket-level metadata dir
+              rclone copyto "${META_DIR}/${name}.uri" "r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.uri" \
+                --header-upload "Content-Type: text/plain; charset=utf-8" -v
+
+              rclone copyto "${META_DIR}/${name}.md5" "r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.md5" \
+                --header-upload "Content-Type: text/plain; charset=utf-8" -v
+            done
+          done
+
+          echo "✅ Staging metadata upload complete."
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ steps.op-load-secret.outputs.APP_ID }}
+          private-key: ${{ steps.op-load-secret.outputs.APP_PRIVATE_KEY }}
 
       - name: Commit and push metadata files
         run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add cognata/metadata/*.uri || true
-          git add cognata/metadata/*.md5 2>/dev/null || true
+          git config user.name "mlc-r2-infra[bot]"
+          git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
+
+          # Ensure all subsequent git operations (commit, fetch) use the App token
+          git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
+
+          git add */metadata/*
+          git diff --cached --name-status
           if git diff --cached --quiet; then
             echo "No metadata changes to commit."
-            exit 0
+          else
+            git commit -m "Commit metadata files (auto-generated by workflow)" || true
+            git push origin HEAD:"${GITHUB_HEAD_REF}"
           fi
-          git commit -m "Auto-generate metadata files" || true
-
-          # Push back to the PR branch
-          git push origin HEAD:"${GITHUB_HEAD_REF}" 
 
       - name: Comment PR with metadata generation summary
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           script: |
             const { execSync } = require('child_process');
             // Fetch main for comparison
             execSync('git fetch --depth=1 origin main');
-            const diff = execSync('git diff --name-only origin/main HEAD -- */metadata/*.uri */metadata/*.md5').toString().trim();
+            const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
             const files = diff ? diff.split('\n') : [];
 
-            let body = '## ✅ Metadata files generated\n\n';
+            let body = '## 📝 Metadata files generated and staged\n\n';
             if (files.length) {
-              body += '### 🔄 Files changed vs `main`\n';
+              body += '### 🔄 Metadata files changed vs `main`\n';
               files.forEach(f => body += `- \`${f}\`\n`);
             } else {
               body += 'No metadata file changes compared to main.';
             }
 
-            body += '\n---\n*🤖 This comment was automatically generated by the metadata workflow.*';
+            // Append dataset-size table if available
+            const fs = require('fs');
+            try {
+              const raw = fs.readFileSync('size_report.txt', 'utf8').trim().split('\n').slice(1); // drop header
+              if (raw.length) {
+                body += '\n\n### 📦 Dataset sizes\n\n| Folder | Dataset | Files | Size |\n| ------ | ------- | ----- | ---- |\n';
+                raw.forEach(line => {
+                  const [folder, dataset, files, bytes, hr] = line.split(',');
+                  body += `| ${folder} | ${dataset} | ${files} | ${hr} |\n`;
+                });
+              }
+            } catch (e) {
+              // size_report.txt not found – ignore
+            }
+
+            body += '\n---\n*🤖 This comment was automatically generated by the generate metadata workflow.*';
 
             const comments = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -122,7 +221,7 @@ jobs:
               issue_number: context.issue.number,
             });
 
-            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('✅ Metadata files generated'));
+            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('Metadata files generated'));
 
             if (existing) {
               await github.rest.issues.updateComment({

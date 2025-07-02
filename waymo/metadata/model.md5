@@ -1,0 +1,4 @@
+405fbe483d350a139c0ef753985bfa33  pp_ep36.pth
+493bdb1852750a0fc9eb27fb113d0a92  deeplabv3+.onnx
+512ebfb85b334160e3a770ee7703ab8f  pp.onnx
+f6b9c180cb29e85d1467b96d86d36b2c  best_deeplabv3plus_resnet50_waymo_os16.pth

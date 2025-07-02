@@ -5,15 +5,19 @@
 :root {
     --primary-color: #343C52;
     --secondary-color: #535869;
-    --accent-color: #355B65;
+    --accent-color: #CCEBD4;
     --bg-color: #ffffff;
-    --text-color: #343C52;
+    --text-color: #0F1321;
+    --text-color-light: #FBFBFC;
     --border-color: #EBEEF4;
-    --code-bg: #F7F8FA;
-    --success-color: #62826C;
-    --warning-color: #E8B460;
+    --dataset-bg: #355B65;
+    --code-bg: #1F363C;
+    --arrow-color: #355B65;
+    --warning-color: #F7CB84;
+    --info-color: #BED3FB;
     --light-gray: #F7F8FA;
-    --hover-color: #173D47;
+    --light-gray-dark: #EBEEF4;
+    --hover-color: #B3CEBA;
 }
 
 * {
@@ -140,12 +144,12 @@ ul ul, ol ul, ul ol, ol ol {
 }
 
 code {
-    background-color: var(--code-bg);
+    background-color: var(--light-gray-dark);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     font-size: 0.875em;
-    color: var(--primary-color);
+    color: var(--text-color);
     border: 1px solid var(--border-color);
 }
 
@@ -158,11 +162,11 @@ code {
 
 .code-block {
     background-color: var(--code-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--code-bg);
     border-radius: 6px;
     padding: 1.5rem;
     padding-right: 5rem; /* Make room for copy button */
-    margin: 1.5rem 0;
+    margin: 1rem 0 0.75rem 0;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     font-size: 0.875rem;
     overflow-x: auto;
@@ -174,7 +178,7 @@ code {
     background: none;
     padding: 0;
     border: none;
-    color: var(--primary-color);
+    color: var(--text-color-light);
     font-weight: 500;
 }
 
@@ -183,7 +187,7 @@ code {
     top: 1rem;
     right: 1rem;
     background: var(--accent-color);
-    color: white;
+    color: var(--text-color);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -198,11 +202,12 @@ code {
 }
 
 .dataset-section {
-    background: var(--light-gray);
+    background: var(--dataset-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
     margin: 2rem 0;
+    color: var(--text-color-light);
 }
 
 .command-section {
@@ -218,21 +223,21 @@ code {
 }
 
 .alert-info {
-    background-color: #BED3FB;
-    border-color: #4E6BA1;
-    color: #37548A;
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+    color: var(--text-color);
 }
 
 .alert-warning {
-    background-color: #F7CB84;
-    border-color: #E8B460;
-    color: #343C52;
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: var(--text-color);
 }
 
 /* Collapsible details styling */
 details {
     margin: 1.5rem 0;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--light-gray);
     border-radius: 6px;
     background-color: var(--light-gray);
 }
@@ -251,7 +256,7 @@ summary {
 }
 
 summary:hover {
-    background-color: rgba(53, 91, 101, 0.05);
+    background-color: var(--light-gray-dark);
 }
 
 /* Hide default browser markers for all browsers */
@@ -276,7 +281,7 @@ summary::before {
     display: inline-block;
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
-    color: var(--accent-color);
+    color: var(--arrow-color);
 }
 
 details[open] summary::before {
@@ -386,4 +391,11 @@ details ul ul, details ol ul, details ul ol, details ol ol {
 #quick-start-placeholder {
     visibility: hidden;
     min-height: 399px;           
+}
+
+/* Use light text inside dataset cards */
+.dataset-section,
+.dataset-section .dataset-title,
+.dataset-section .dataset-description {
+    color: var(--text-color-light);
 } 
