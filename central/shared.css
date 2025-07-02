@@ -16,7 +16,7 @@
     --warning-color: #F7CB84;
     --info-color: #BED3FB;
     --light-gray: #F7F8FA;
-    --light-gray-code: #EBEEF4;
+    --light-gray-dark: #EBEEF4;
     --hover-color: #B3CEBA;
 }
 
@@ -144,7 +144,7 @@ ul ul, ol ul, ul ol, ol ol {
 }
 
 code {
-    background-color: var(--light-gray-code);
+    background-color: var(--light-gray-dark);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
@@ -256,7 +256,7 @@ summary {
 }
 
 summary:hover {
-    background-color: rgba(53, 91, 101, 0.05);
+    background-color: var(--light-gray-dark);
 }
 
 /* Hide default browser markers for all browsers */
