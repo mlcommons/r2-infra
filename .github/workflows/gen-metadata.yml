@@ -8,6 +8,11 @@ on:
       - '*/metadata.json'
       - '.github/workflows/gen-metadata.yml'
 
+# Prevent overlapping runs on the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   generate-metadata:
     if: github.actor != 'mlc-r2-infra[bot]'

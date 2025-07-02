@@ -10,6 +10,11 @@ on:
       - 'central/*'
       - '.github/workflows/deploy-r2-staging.yml'
 
+# Prevent overlapping runs on the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy-staging:
     if: github.actor != 'mlc-r2-infra[bot]'
