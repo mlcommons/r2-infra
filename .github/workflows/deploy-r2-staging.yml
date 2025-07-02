@@ -85,7 +85,11 @@ jobs:
               echo "  └── Processing and uploading index.html..."
               # Create a temporary file with staging URLs
               temp_file=$(mktemp)
-              sed "s|https://r2-infra\\.mlcommons-storage\\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central|g" "${folder}index.html" > "$temp_file"
+              # Rewrite central asset URLs and insert staging prefix before metadata filenames
+              sed -E "\
+                s|https://r2-infra\\.mlcommons-storage\\.org/central|https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central|g;\
+                s|(https://[a-zA-Z0-9.-]+\.mlcommons-storage\.org/metadata/)staging-[0-9]+-?||g;\
+                s|(https://[a-zA-Z0-9.-]+\.mlcommons-storage\.org/metadata/)|\1staging-${PR_NUM}-|g" "${folder}index.html" > "$temp_file"
               
               # Upload the modified file
               rclone copyto "$temp_file" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name/index.html -v
