@@ -6,6 +6,7 @@ on:
     types: [ opened, synchronize, reopened ]
     paths:
       - '*/metadata.json'
+      - '*/index.html'
       - '.github/workflows/gen-metadata.yml'
 
 # Prevent overlapping runs on the same PR/branch
