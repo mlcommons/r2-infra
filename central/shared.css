@@ -184,7 +184,7 @@ code {
     top: 1rem;
     right: 1rem;
     background: var(--accent-color);
-    color: white;
+    color: var(--text-color);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -277,7 +277,7 @@ summary::before {
     display: inline-block;
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
-    color: var(--accent-color);
+    color: var(--primary-color);
 }
 
 details[open] summary::before {
