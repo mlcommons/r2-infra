@@ -1,0 +1,22 @@
+{
+    "bucket": "mlcommons-llama3-1",
+    "domain": "llama3-1.mlcommons-storage.org",
+    "datasets": [
+      {
+        "name": "llama3-1-405b-instruct",
+        "subpath": "data/inference/Llama-3.1-405B-Instruct/"
+      },
+      {
+        "name": "llama3-1-8b-instruct",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct/"
+      },
+      {
+        "name": "llama3-1-405b-nemo-hf-checkpoint",
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/"
+      },
+      {
+        "name": "llama3-1-8b-nemo-hf-checkpoint",
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/"
+      }
+    ]
+  } 
