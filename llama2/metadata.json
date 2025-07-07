@@ -1,20 +1,23 @@
 {
-    "bucket": "mlcommons-llama2",
-    "domain": "llama2.mlcommons-storage.org",
-    "datasets": {
-      "Available Models": [
-        {
-          "name": "llama-2-7b-chat-hf",
-          "subpath": "data/Llama-2-7b-chat-hf/"
-        },
-        {
-          "name": "llama-2-70b-chat-hf",
-          "subpath": "data/Llama-2-70b-chat-hf/"
-        },
-        {
-          "name": "llama-2-70b-fused-qkv-mlperf",
-          "subpath": "data/Llama-2-70b-fused-qkv-mlperf/"
-        }
-      ]
-    }
-  } 
+  "bucket": "mlcommons-llama2",
+  "domain": "llama2.mlcommons-storage.org",
+  "datasets": {
+    "Available Models": [
+      {
+        "name": "llama-2-7b-chat-hf",
+        "subpath": "data/Llama-2-7b-chat-hf/",
+        "size": "54GB"
+      },
+      {
+        "name": "llama-2-70b-chat-hf",
+        "subpath": "data/Llama-2-70b-chat-hf/",
+        "size": "552GB"
+      },
+      {
+        "name": "llama-2-70b-fused-qkv-mlperf",
+        "subpath": "data/Llama-2-70b-fused-qkv-mlperf/",
+        "size": "0B"
+      }
+    ]
+  }
+}

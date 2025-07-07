@@ -5,8 +5,9 @@
     "Available Datasets": [
       {
         "name": "cognata-dataset",
-        "subpath": "data/mlc_cognata_dataset/"
+        "subpath": "data/mlc_cognata_dataset/",
+        "size": "2.1TB"
       }
     ]
   }
-} 
+}

@@ -1,30 +1,30 @@
 {
-    "bucket": "mlcommons-llama3-1",
-    "domain": "llama3-1.mlcommons-storage.org",
-    "datasets": {
-      "Inference Models": [
-        {
-          "name": "llama3-1-405b-instruct",
-          "subpath": "data/inference/Llama-3.1-405B-Instruct/",
-          "size": "2.5TB"
-        },
-        {
-          "name": "llama3-1-8b-instruct",
-          "subpath": "data/inference/Llama-3.1-8B-Instruct/",
-          "size": "33GB"
-        }
-      ],
-      "Training Checkpoints": [
-        {
-          "name": "llama3-1-405b-nemo-hf-checkpoint",
-          "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/",
-          "size": "1.3TB"
-        },
-        {
-          "name": "llama3-1-8b-nemo-hf-checkpoint",
-          "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/",
-          "size": "24GB"
-        }
-      ]
-    }
-  } 
+  "bucket": "mlcommons-llama3-1",
+  "domain": "llama3-1.mlcommons-storage.org",
+  "datasets": {
+    "Inference Models": [
+      {
+        "name": "llama3-1-405b-instruct",
+        "subpath": "data/inference/Llama-3.1-405B-Instruct/",
+        "size": "2.5TB"
+      },
+      {
+        "name": "llama3-1-8b-instruct",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct/",
+        "size": "33GB"
+      }
+    ],
+    "Training Checkpoints": [
+      {
+        "name": "llama3-1-405b-nemo-hf-checkpoint",
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/",
+        "size": "1.3TB"
+      },
+      {
+        "name": "llama3-1-8b-nemo-hf-checkpoint",
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/",
+        "size": "24GB"
+      }
+    ]
+  }
+}
