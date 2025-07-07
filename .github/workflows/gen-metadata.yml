@@ -111,6 +111,13 @@ jobs:
                 hr="${bytes}B"
               fi
               echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
+
+              # Add size to metadata.json
+              echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
+              tmp_json=$(mktemp)
+              jq --arg name "$name" --arg size "$hr" \
+                '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
+                "$json" > "$tmp_json" && mv "$tmp_json" "$json"
             done
           done
 
