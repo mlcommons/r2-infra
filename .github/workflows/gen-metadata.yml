@@ -140,9 +140,6 @@ jobs:
 
               echo "📤 ${folder}/${name}: copying to r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.{uri,md5}"
 
-              # Ensure bucket-level metadata directory exists (ignore errors if it already exists)
-              rclone mkdir "r2-meta:${ROOT_BUCKET}/metadata" || true
-
               # Upload URI and MD5 files with staging-<PR>- prefix into bucket-level metadata dir
               rclone copyto "${META_DIR}/${name}.uri" "r2-meta:${ROOT_BUCKET}/metadata/staging-${PR_NUM}-${name}.uri" \
                 --header-upload "Content-Type: text/plain; charset=utf-8" -v

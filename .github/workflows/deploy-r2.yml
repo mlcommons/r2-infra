@@ -49,24 +49,30 @@ jobs:
         echo "🔍 Discovering buckets to deploy..."
         
         for folder in */; do
-          if [ -f "${folder}.bucket" ]; then
-            BUCKET_NAME=$(cat "${folder}.bucket" | tr -d ' \t\n\r')
+          if [ -f "${folder}metadata.json" ]; then
+            BUCKET_NAME=$(jq -r '.bucket' "${folder}metadata.json")
+            if [ -z "$BUCKET_NAME" ] || [ "$BUCKET_NAME" = "null" ]; then
+                echo "::error::Bucket name missing in ${folder}metadata.json. Skipping.";
+                continue;
+            fi
             folder_name=${folder%/}  # Remove trailing slash for cleaner output
             
             echo "📦 Deploying ${folder_name} to bucket: $BUCKET_NAME"
             
             if [ "$folder" = "central/" ]; then
               echo "  └── Uploading all central resources..."
-              rclone copy "$folder" r2-deploy:$BUCKET_NAME/central --exclude "*.bucket" -v
-            else
+              rclone copy "$folder" "r2-deploy:${BUCKET_NAME}/central" --exclude "metadata.json" -v
+            elif [ -f "${folder}index.html" ]; then
               echo "  └── Uploading index.html..."
-              rclone copy "${folder}index.html" r2-deploy:$BUCKET_NAME -v
+              rclone copy "${folder}index.html" "r2-deploy:${BUCKET_NAME}" -v
+            else
+              echo "  └── Skipping index.html (not found)"
             fi
             echo "  ✅ ${folder_name} deployment complete"
             echo ""
           else
             folder_name=${folder%/}
-            echo "⏭️  Skipping ${folder_name} (no .bucket file found)"
+            echo "⏭️  Skipping ${folder_name} (no metadata.json file found)"
           fi
         done
         
