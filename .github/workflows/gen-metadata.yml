@@ -80,7 +80,7 @@ jobs:
 
             echo "📂 Processing $folder (bucket: $ROOT_BUCKET)"
 
-            mapfile -t DATASETS < <(jq -c '.datasets | values | .[]' "$json")
+            mapfile -t DATASETS < <(jq -c '.datasets | values | .[][]' "$json")
             for dataset in "${DATASETS[@]}"; do
               name=$(echo "$dataset" | jq -r '.name')
               subpath=$(echo "$dataset" | jq -r '.subpath')
@@ -129,7 +129,7 @@ jobs:
             folder="$(dirname "$json")"
             ROOT_BUCKET=$(jq -r '.bucket' "$json")
 
-            mapfile -t DATASETS < <(jq -c '.datasets | values | .[]' "$json")
+            mapfile -t DATASETS < <(jq -c '.datasets | values | .[][]' "$json")
             for dataset in "${DATASETS[@]}"; do
               name=$(echo "$dataset" | jq -r '.name')
               subpath=$(echo "$dataset" | jq -r '.subpath')
