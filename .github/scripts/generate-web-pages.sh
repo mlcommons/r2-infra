@@ -53,9 +53,9 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     
     # 3. Dataset Sections
     dataset_sections_file=$(mktemp)
-    categories=$(jq -r '.datasets | keys[]' "$metadata_file")
+    mapfile -t categories < <(jq -r '.datasets | keys[]' "$metadata_file")
     
-    for category in $categories; do
+    for category in "${categories[@]}"; do
         echo "<h2>$category</h2>" >> "$dataset_sections_file"
         jq -c ".datasets[\"$category\"][]" "$metadata_file" | while IFS= read -r dataset_json; do
             name=$(echo "$dataset_json" | jq -r '.name')
