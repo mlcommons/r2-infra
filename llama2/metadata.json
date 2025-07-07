@@ -22,7 +22,7 @@
         "subpath": "data/Llama2-70b-fused-qkv-mlperf/",
         "title": "Llama 2 70B Parameter Fused QKV MLPerf Model",
         "description": "Llama 2 70B parameter fused QKV MLPerf model",
-        "size": "0B"
+        "size": "276GB"
       }
     ]
   }
