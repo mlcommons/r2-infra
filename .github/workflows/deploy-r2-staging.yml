@@ -125,7 +125,7 @@ jobs:
         done
         echo ""
         echo "📦 Central resources:"
-        if [ -f "central/.bucket" ]; then
+        if [ -f "central/metadata.json" ]; then
           echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.css"
           echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.js"
           echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared-content.html"
