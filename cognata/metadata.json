@@ -4,7 +4,7 @@
   "title": "MLCommons Cognata Dataset Download",
   "license_notice": "The MLCommons Cognata dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://drive.google.com/drive/folders/1OiN-cMyYzhEjHwwyCPW1PcP3HTay5NpI' target='_blank'>this end-user license agreement</a>.",
   "datasets": {
-    "Cognata Dataset": [
+    "": [
       {
         "name": "cognata-dataset",
         "subpath": "data/mlc_cognata_dataset/",
