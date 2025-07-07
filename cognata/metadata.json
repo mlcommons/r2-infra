@@ -1,10 +1,12 @@
 {
   "bucket": "mlcommons-cognata",
   "domain": "cognata.mlcommons-storage.org",
-  "datasets": [
-    {
-      "name": "cognata-dataset",
-      "subpath": "data/mlc_cognata_dataset/"
-    }
-  ]
+  "datasets": {
+    "Available Datasets": [
+      {
+        "name": "cognata-dataset",
+        "subpath": "data/mlc_cognata_dataset/"
+      }
+    ]
+  }
 } 

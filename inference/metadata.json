@@ -1,14 +1,16 @@
 {
     "bucket": "mlcommons-inference-wg-public",
     "domain": "inference.mlcommons-storage.org",
-    "datasets": [
-      {
-        "name": "whisper-dataset",
-        "subpath": "Whisper/dataset"
-      },
-      {
-        "name": "whisper-model",
-        "subpath": "Whisper/model"
-      }
-    ]
-  } 
+    "datasets": {
+        "Whisper Benchmark": [
+            {
+                "name": "whisper-model",
+                "subpath": "data/whisper/model"
+            },
+            {
+                "name": "whisper-dataset",
+                "subpath": "data/whisper/dataset"
+            }
+        ]
+    }
+} 
