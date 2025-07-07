@@ -1,6 +1,7 @@
 {
   "bucket": "mlcommons-training-wg-public",
   "domain": "training.mlcommons-storage.org",
+  "title": "MLPerf Training Benchmark Data Download",
   "datasets": {
     "FLUX.1 Benchmark": [
       {

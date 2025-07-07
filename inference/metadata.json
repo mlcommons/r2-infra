@@ -1,6 +1,7 @@
 {
   "bucket": "mlcommons-inference-wg-public",
   "domain": "inference.mlcommons-storage.org",
+  "title": "MLPerf Inference Benchmark Data Download",
   "datasets": {
     "Whisper Benchmark": [
       {

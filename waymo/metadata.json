@@ -1,6 +1,7 @@
 {
   "bucket": "mlcommons-waymo",
   "domain": "waymo.mlcommons-storage.org",
+  "title": "MLCommons Waymo Download",
   "license-notice": "The Waymo Open Dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of the <a href='https://waymo.com/open/terms/' target='_blank'>Waymo Open Dataset License Agreement</a>.",
   "datasets": {
     "Available Downloads": [
