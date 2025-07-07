@@ -14,20 +14,22 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
-    <!-- Early load shared header & quick-start -->
+    <!-- Load shared header & quick-start as early as possible -->
     <script defer>
       document.addEventListener('DOMContentLoaded', () => {
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
-          .then(r=>r.text())
-          .then(html=>{
-            const t=document.createElement('div'); t.innerHTML=html;
-            const head=t.querySelector('.header-strip');
-            const quick=t.querySelector('#quick-start-section');
-            head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            const header = tmp.querySelector('.header-strip');
+            const quick  = tmp.querySelector('#quick-start-section');
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
             const holder=document.getElementById('quick-start-placeholder');
             if(quick && holder){ holder.replaceWith(quick); }
-            if(typeof initializeCopyButtons==='function') initializeCopyButtons();
-          }).catch(err=>console.error('Failed to load shared content:',err));
+            if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
+          })
+          .catch(err => console.error('Failed to load shared content:', err));
       });
     </script>
 </head>
@@ -39,82 +41,72 @@
         <div class="container">
             <h1>MLPerf Training Benchmark Data Download</h1>
             
-            <!-- Quick-Start skeleton -->
+            
+
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
-                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
+                </div>
             </div>
         
-        <h2>Available Downloads</h2>
-
-        <h3>FLUX.1 Benchmark</h3>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">All FLUX.1 dataset files</h3>
-            <p class="dataset-description">CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set (~2.6TB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-datasets.uri</code>
-                </div>
-            </div>
+            <h2>FLUX.1 Benchmark</h2>
+<div class="dataset-section">
+    <h3 class="dataset-title">All FLUX.1 dataset files</h3>
+    <p class="dataset-description">CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set (~2.7TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-datasets.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">CC12M dataset</h3>
-            <p class="dataset-description">Conceptual 12M dataset for the FLUX.1 benchmark (~103GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-disk.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">CC12M dataset</h3>
+    <p class="dataset-description">Conceptual 12M dataset for the FLUX.1 benchmark (~163GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-disk.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">CC12M preprocessed dataset</h3>
-            <p class="dataset-description">Conceptual 12M preprocessed dataset for the FLUX.1 benchmark (~2.4TB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-preprocessed.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">CC12M preprocessed dataset</h3>
+    <p class="dataset-description">Conceptual 12M preprocessed dataset for the FLUX.1 benchmark (~2.4TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-preprocessed.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">COCO dataset</h3>
-            <p class="dataset-description">Common Objects in Context dataset for the FLUX.1 benchmark (~3.6GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">COCO dataset</h3>
+    <p class="dataset-description">Common Objects in Context dataset for the FLUX.1 benchmark (~3.6GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">COCO preprocessed dataset</h3>
-            <p class="dataset-description">Common Objects in Context preprocessed dataset for the FLUX.1 benchmark (~65GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco-preprocessed.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">COCO preprocessed dataset</h3>
+    <p class="dataset-description">Common Objects in Context preprocessed dataset for the FLUX.1 benchmark (~65GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco-preprocessed.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">COCO 2014 30K validation set</h3>
-            <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data for the FLUX.1 benchmark (~2MB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco-2014-val-30k.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">COCO 2014 30K validation set</h3>
+    <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data for the FLUX.1 benchmark (~2.0MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-coco-2014-val-30k.uri</code>
         </div>
-
+    </div>
+</div>
+        
         </div>
     </div>
 </body>
-</html>
+</html> 

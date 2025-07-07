@@ -14,20 +14,22 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
-    <!-- Early load shared header & quick-start -->
+    <!-- Load shared header & quick-start as early as possible -->
     <script defer>
       document.addEventListener('DOMContentLoaded', () => {
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
-          .then(r=>r.text())
-          .then(html=>{
-            const t=document.createElement('div'); t.innerHTML=html;
-            const head=t.querySelector('.header-strip');
-            const quick=t.querySelector('#quick-start-section');
-            head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            const header = tmp.querySelector('.header-strip');
+            const quick  = tmp.querySelector('#quick-start-section');
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
             const holder=document.getElementById('quick-start-placeholder');
             if(quick && holder){ holder.replaceWith(quick); }
-            if(typeof initializeCopyButtons==='function') initializeCopyButtons();
-          }).catch(err=>console.error('Failed to load shared content:',err));
+            if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
+          })
+          .catch(err => console.error('Failed to load shared content:', err));
       });
     </script>
 </head>
@@ -39,33 +41,27 @@
         <div class="container">
             <h1>MLCommons Cognata Dataset Download</h1>
             
-            <div class="alert alert-info">
-                <strong>Licensing Notice:</strong> The MLCommons Cognata dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://drive.google.com/drive/folders/1OiN-cMyYzhEjHwwyCPW1PcP3HTay5NpI" target="_blank">this end-user license agreement</a>.
-            </div>
+            <div class="alert alert-info"><strong>Licensing Notice:</strong> Cognata synthetic driving dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://cognata.com/cognata-mlperf-license-agreement/' target='_blank'>this license agreement</a> from Cognata.</div>
 
-            <!-- Quick-Start skeleton -->
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
-                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
-            </div>
-        
-        <h2>Available Datasets</h2>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Cognata Dataset</h3>
-            <p class="dataset-description">Cognata synthetic driving dataset for autonomous vehicle benchmarks (~276GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-dataset.uri</code>
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
                 </div>
             </div>
+        
+            <h2>Available Datasets</h2>
+<div class="dataset-section">
+    <h3 class="dataset-title">Cognata Dataset</h3>
+    <p class="dataset-description">Cognata synthetic driving dataset for autonomous vehicle benchmarks (~2.1TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-dataset.uri</code>
         </div>
-        
-        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
-        
-        <!-- Shared content removed -->
+    </div>
+</div>
         
         </div>
     </div>
 </body>
-</html>
+</html> 

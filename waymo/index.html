@@ -14,16 +14,17 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
-    <!-- Load shared header & quick-start early to avoid layout shift -->
+    <!-- Load shared header & quick-start as early as possible -->
     <script defer>
       document.addEventListener('DOMContentLoaded', () => {
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
           .then(r => r.text())
           .then(html => {
-            const tmp = document.createElement('div'); tmp.innerHTML = html;
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
             const header = tmp.querySelector('.header-strip');
             const quick  = tmp.querySelector('#quick-start-section');
-            header && (document.getElementById('header-placeholder').innerHTML = header.outerHTML);
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
             const holder=document.getElementById('quick-start-placeholder');
             if(quick && holder){ holder.replaceWith(quick); }
             if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
@@ -40,50 +41,45 @@
         <div class="container">
             <h1>MLCommons Waymo Download</h1>
             
-            <div class="alert alert-info">
-                <strong>Licensing Notice:</strong> The Waymo Open Dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of the <a href="https://waymo.com/open/terms/" target="_blank">Waymo Open Dataset License Agreement</a>.
-            </div>
+            <div class="alert alert-info"><strong>Licensing Notice:</strong> The Waymo Open Dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of the <a href='https://waymo.com/open/terms/' target='_blank'>Waymo Open Dataset License Agreement</a>.</div>
 
-            <!-- Quick-Start skeleton -->
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
-                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
-            </div>
-        
-        <h2>Available Downloads</h2>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Preprocessed Dataset & Model</h3>
-            <p class="dataset-description">Preprocessed Waymo Open Dataset and the model checkpoints (~470GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://waymo.mlcommons-storage.org/metadata/dataset-model.uri</code>
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
                 </div>
             </div>
-        </div>
         
-        <div class="dataset-section">
-            <h3 class="dataset-title">Preprocessed Dataset</h3>
-            <p class="dataset-description">The preprocessed Waymo Open Dataset without the model checkpoints (~469GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/kitti_format https://waymo.mlcommons-storage.org/metadata/dataset.uri</code>
-                </div>
-            </div>
+            <h2>Available Downloads</h2>
+<div class="dataset-section">
+    <h3 class="dataset-title">Preprocessed Dataset __DATASET_SECTIONS__ Model</h3>
+    <p class="dataset-description">Preprocessed Waymo Open Dataset and the model checkpoints (~470GB) (~470GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://waymo.mlcommons-storage.org/metadata/dataset-model.uri</code>
         </div>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Model</h3>
-            <p class="dataset-description">The model checkpoints without the preprocessed Waymo Open Dataset (~648MB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/model https://waymo.mlcommons-storage.org/metadata/model.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Preprocessed Dataset</h3>
+    <p class="dataset-description">The preprocessed Waymo Open Dataset without the model checkpoints (~469GB) (~469GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/kitti_format https://waymo.mlcommons-storage.org/metadata/dataset.uri</code>
         </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Model</h3>
+    <p class="dataset-description">The model checkpoints without the preprocessed Waymo Open Dataset (~648MB) (~648MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/model https://waymo.mlcommons-storage.org/metadata/model.uri</code>
+        </div>
+    </div>
+</div>
         
+        </div>
     </div>
 </body>
 </html> 

@@ -14,20 +14,22 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
-    <!-- Early load shared header & quick-start -->
+    <!-- Load shared header & quick-start as early as possible -->
     <script defer>
       document.addEventListener('DOMContentLoaded', () => {
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
-          .then(r=>r.text())
-          .then(html=>{
-            const t=document.createElement('div'); t.innerHTML=html;
-            const head=t.querySelector('.header-strip');
-            const quick=t.querySelector('#quick-start-section');
-            head && (document.getElementById('header-placeholder').innerHTML=head.outerHTML);
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            const header = tmp.querySelector('.header-strip');
+            const quick  = tmp.querySelector('#quick-start-section');
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
             const holder=document.getElementById('quick-start-placeholder');
             if(quick && holder){ holder.replaceWith(quick); }
-            if(typeof initializeCopyButtons==='function') initializeCopyButtons();
-          }).catch(err=>console.error('Failed to load shared content:',err));
+            if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
+          })
+          .catch(err => console.error('Failed to load shared content:', err));
       });
     </script>
 </head>
@@ -39,38 +41,36 @@
         <div class="container">
             <h1>MLPerf Inference Benchmark Data Download</h1>
             
-            <!-- Quick-Start skeleton -->
+            
+
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
-                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
+                </div>
             </div>
         
-        <h2>Available Downloads</h2>
-
-        <h3>Whisper Benchmark</h3>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">Whisper Model</h3>
-            <p class="dataset-description">Whisper large-v3 model for the Whisper benchmark (~25GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d whisper/model https://inference.mlcommons-storage.org/metadata/whisper-model.uri</code>
-                </div>
-            </div>
+            <h2>Whisper Benchmark</h2>
+<div class="dataset-section">
+    <h3 class="dataset-title">Whisper Model</h3>
+    <p class="dataset-description">Whisper large-v3 model for the Whisper benchmark (~25GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d whisper/model https://inference.mlcommons-storage.org/metadata/whisper-model.uri</code>
         </div>
-
-        <div class="dataset-section">
-            <h3 class="dataset-title">Whisper Dataset</h3>
-            <p class="dataset-description">LibriSpeech dataset for the Whisper benchmark (~4.6GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d whisper/dataset https://inference.mlcommons-storage.org/metadata/whisper-dataset.uri</code>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Whisper Dataset</h3>
+    <p class="dataset-description">LibriSpeech dataset for the Whisper benchmark (~4.6GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d whisper/dataset https://inference.mlcommons-storage.org/metadata/whisper-dataset.uri</code>
         </div>
-
+    </div>
+</div>
+        
         </div>
     </div>
 </body>
-</html>
+</html> 
