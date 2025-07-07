@@ -2,7 +2,7 @@
   "bucket": "mlcommons-cognata",
   "domain": "cognata.mlcommons-storage.org",
   "title": "MLCommons Cognata Dataset Download",
-  "license-notice": "Cognata synthetic driving dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://cognata.com/cognata-mlperf-license-agreement/' target='_blank'>this license agreement</a> from Cognata.",
+  "license_notice": "Cognata synthetic driving dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://cognata.com/cognata-mlperf-license-agreement/' target='_blank'>this license agreement</a> from Cognata.",
   "datasets": {
     "Available Datasets": [
       {

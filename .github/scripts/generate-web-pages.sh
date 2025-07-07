@@ -28,7 +28,7 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     # --- Read metadata from JSON file ---
     domain=$(jq -r '.domain' "$metadata_file")
     page_title=$(jq -r '.title' "$metadata_file")
-    license_notice=$(jq -r '.license-notice' "$metadata_file")
+    license_notice=$(jq -r '.license_notice' "$metadata_file")
     
     if [ -z "$domain" ] || [ "$domain" == "null" ]; then
         echo "    - ⚠️ Warning: Skipping '${folder_name}' because 'domain' is missing in metadata.json"
