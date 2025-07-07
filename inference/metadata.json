@@ -6,11 +6,17 @@
       {
         "name": "whisper-model",
         "subpath": "data/whisper/model",
+        "title": "Whisper Model",
+        "description": "Whisper large-v3 model for the Whisper benchmark",
+        "destination": "whisper/model",
         "size": "0B"
       },
       {
         "name": "whisper-dataset",
         "subpath": "data/whisper/dataset",
+        "title": "Whisper Dataset",
+        "description": "LibriSpeech dataset for the Whisper benchmark",
+        "destination": "whisper/dataset",
         "size": "0B"
       }
     ]

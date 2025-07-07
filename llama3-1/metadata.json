@@ -6,11 +6,15 @@
       {
         "name": "llama3-1-405b-instruct",
         "subpath": "data/inference/Llama-3.1-405B-Instruct/",
+        "title": "Llama 3.1 405B Parameter Instruct Model",
+        "description": "Llama 3.1 405B parameter Instruct model for inference",
         "size": "2.5TB"
       },
       {
         "name": "llama3-1-8b-instruct",
         "subpath": "data/inference/Llama-3.1-8B-Instruct/",
+        "title": "Llama 3.1 8B Parameter Instruct Model",
+        "description": "Llama 3.1 8B parameter Instruct model for inference",
         "size": "33GB"
       }
     ],
@@ -18,11 +22,17 @@
       {
         "name": "llama3-1-405b-nemo-hf-checkpoint",
         "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/",
+        "title": "Llama 3.1 405B Parameter NeMo HF Checkpoint",
+        "description": "Llama 3.1 405B parameter NeMo-formatted Hugging Face checkpoint for training",
+        "destination": "nemo-formatted-hf-checkpoint/405b",
         "size": "1.3TB"
       },
       {
         "name": "llama3-1-8b-nemo-hf-checkpoint",
         "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/",
+        "title": "Llama 3.1 8B Parameter NeMo HF Checkpoint",
+        "description": "Llama 3.1 8B parameter NeMo-formatted Hugging Face checkpoint for training",
+        "destination": "nemo-formatted-hf-checkpoint/8b",
         "size": "24GB"
       }
     ]

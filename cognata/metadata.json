@@ -6,6 +6,8 @@
       {
         "name": "cognata-dataset",
         "subpath": "data/mlc_cognata_dataset/",
+        "title": "Cognata Dataset",
+        "description": "Cognata synthetic driving dataset for autonomous vehicle benchmarks",
         "size": "2.1TB"
       }
     ]
