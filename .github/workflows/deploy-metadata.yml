@@ -60,9 +60,6 @@ jobs:
 
               echo "📦 Processing ${folder_name} -> bucket ${BUCKET_NAME}"
 
-              # Create metadata dir in bucket if it doesn't exist
-              rclone mkdir "r2-deploy:${BUCKET_NAME}/metadata" 2>/dev/null || true
-
               # Copy metadata files
               rclone copy "${folder}metadata/" "r2-deploy:${BUCKET_NAME}/metadata" --header-upload "Content-Type: text/plain; charset=utf-8" -v
 
