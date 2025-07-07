@@ -10,7 +10,7 @@
         "title": "Whisper Model",
         "description": "Whisper large-v3 model for the Whisper benchmark",
         "destination": "whisper/model",
-        "size": "0B"
+        "size": "25GB"
       },
       {
         "name": "whisper-dataset",
@@ -18,7 +18,7 @@
         "title": "Whisper Dataset",
         "description": "LibriSpeech dataset for the Whisper benchmark",
         "destination": "whisper/dataset",
-        "size": "0B"
+        "size": "4.6GB"
       }
     ]
   }

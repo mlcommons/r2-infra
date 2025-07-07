@@ -10,7 +10,7 @@
         "title": "All FLUX.1 dataset files",
         "description": "CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set",
         "destination": "flux_1_datasets",
-        "size": "4.7TB"
+        "size": "2.7TB"
       },
       {
         "name": "flux-1-cc12m-disk",
@@ -24,7 +24,7 @@
         "subpath": "flux_1/datasets/cc12m_preprocessed/",
         "title": "CC12M preprocessed dataset",
         "description": "Conceptual 12M preprocessed dataset for the FLUX.1 benchmark",
-        "size": "4.5TB"
+        "size": "2.4TB"
       },
       {
         "name": "flux-1-coco",
