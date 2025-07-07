@@ -173,6 +173,7 @@ jobs:
           # Ensure all subsequent git operations (commit, fetch) use the App token
           git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
 
+          git add */metadata.json
           git add */metadata/*
           git diff --cached --name-status
           if git diff --cached --quiet; then
