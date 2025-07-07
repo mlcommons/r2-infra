@@ -21,6 +21,9 @@ DESCRIPTION:
     1. dataset.uri - Contains the base URL for accessing the dataset files
     2. dataset.md5 - Contains MD5 checksums for all files in the dataset
     
+    The script determines if a path is a file or a directory based on whether it
+    ends with a trailing slash. Always use a trailing slash for directories.
+    
     The script will prompt you for the following information:
     - Bucket name and path within the bucket
     - Public URL for the bucket (without https://)
@@ -35,8 +38,10 @@ EXAMPLES:
     bash generate-r2-metadata.sh -h
 
 INPUT PROMPTS:
-    Bucket Path: Enter the bucket name and optional path within the bucket
-                 Examples: 'my-bucket/data/dataset-name'
+    Bucket Path: Enter the bucket name and optional path. Use a trailing slash
+                 '/' to indicate a directory.
+                 Examples: 'my-bucket/data/dataset-dir/' (directory)
+                           'my-bucket/data/individual-file.tsv' (file)
                  
     Bucket URL:  Enter the public URL without 'https://' prefix
                  Example: 'inference-private.mlcommons-storage.org'
@@ -138,7 +143,7 @@ check_rclone() {
 check_rclone
 
 # Prompt for bucket name/path
-read -p "Enter bucket name and path within bucket (e.g., 'bucket-name/data/subdirectory/subdirectory'): " DATASET_PATH
+read -p "Enter bucket name and path. Use a trailing slash for directories (e.g., 'bucket/path/dir/'): " DATASET_PATH
 
 # Remove trailing slash if present to normalize the path
 DATASET_PATH="${DATASET_PATH%/}"
@@ -197,26 +202,17 @@ echo "Bucket access verified successfully."
 METADATA_DIR="metadata"
 mkdir -p "$METADATA_DIR"
 
-# Check if the path is a file or a directory.
-# We do this by `lsjson`-ing the parent and checking the IsDir flag of the item.
-parent_dir=$(dirname "$BUCKET_SUBPATH")
-item_name=$(basename "$BUCKET_SUBPATH")
-rclone_parent_path="$BUCKET_NAME"
-if [[ "$parent_dir" != "." ]]; then
-  rclone_parent_path="$BUCKET_NAME/$parent_dir"
-fi
-item_info=$(rclone lsjson "${TMP_REMOTE}:${rclone_parent_path}" --include "/$item_name")
-
-# If item_info is empty or IsDir is true, it's a directory. Otherwise, a file.
-if [[ -z "$item_info" || "$(echo "$item_info" | jq '.[0].IsDir')" == "true" ]]; then
-  uri_path="$BUCKET_SUBPATH"
+# Check if the path is a file or a directory based on the presence of a trailing slash.
+# If no trailing slash, it is assumed to be a file.
+if [[ "$BUCKET_SUBPATH" == */ || -z "$BUCKET_SUBPATH" ]]; then
+  uri_path="${BUCKET_SUBPATH%/}"
   echo "The provided path is a directory. The URI will point to the directory itself."
 else
-  uri_path="$parent_dir"
+  uri_path=$(dirname "${BUCKET_SUBPATH%/}")
   echo "The provided path is a file. The URI will point to its parent directory."
 fi
 
-# Construct the final URI, ensuring it ends with a slash.
+# Construct the final URI.
 if [[ -z "$uri_path" || "$uri_path" == "." ]]; then
   URI="https://${URL}"
 else

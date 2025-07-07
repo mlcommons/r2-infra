@@ -85,31 +85,22 @@ jobs:
               name=$(echo "$dataset" | jq -r '.name')
               subpath=$(echo "$dataset" | jq -r '.subpath')
 
-              # Trim possible trailing slash from subpath for URI and bucket path
+              # Trim possible trailing slash from subpath for bucket path
               clean_subpath="${subpath%/}"
               bucket_path="$ROOT_BUCKET/$clean_subpath"
 
-              # Check if the subpath is a file or directory.
-              # We do this by `lsjson`-ing the parent and checking the IsDir flag of the item.
-              parent_dir=$(dirname "$clean_subpath")
-              item_name=$(basename "$clean_subpath")
-              rclone_parent_path="$ROOT_BUCKET"
-              if [[ "$parent_dir" != "." ]]; then
-                rclone_parent_path="$ROOT_BUCKET/$parent_dir"
-              fi
-              item_info=$(rclone lsjson "r2-meta:$rclone_parent_path" --include "/$item_name")
-              
-              # If item_info is empty or IsDir is true, it's a directory. Otherwise, a file.
-              if [[ -z "$item_info" || "$(echo "$item_info" | jq '.[0].IsDir')" == "true" ]]; then
+              # It's a directory if the original subpath ends with a slash.
+              # Otherwise, we assume it's a file.
+              if [[ "$subpath" == */ ]]; then
                 uri_path="$clean_subpath"
                 echo "    (subpath is a directory)"
               else
-                uri_path="$parent_dir"
+                uri_path=$(dirname "$clean_subpath")
                 echo "    (subpath is a file)"
               fi
               
               # Construct the final URI.
-              if [[ "$uri_path" == "." ]]; then
+              if [[ "$uri_path" == "." || -z "$uri_path" ]]; then
                 uri="https://${ROOT_DOMAIN}"
               else
                 uri="https://${ROOT_DOMAIN}/${uri_path%/}"
