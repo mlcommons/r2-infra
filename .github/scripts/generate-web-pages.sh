@@ -37,6 +37,11 @@ safe_replace() {
     ' "$replacement_file" "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
 }
 
+# Helper to HTML-escape special characters
+html_escape() {
+    echo "$1" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
+}
+
 # Find and process all metadata.json files (excluding central)
 find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_file; do
     dir=$(dirname "$metadata_file")
@@ -73,16 +78,22 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     
     # 3. Dataset Sections
     dataset_sections_file=$(mktemp)
-    mapfile -t categories < <(jq -r '.datasets | keys[]' "$metadata_file")
     
-    for category in "${categories[@]}"; do
-        echo "<h3>$category</h3>" >> "$dataset_sections_file"
-        jq -c ".datasets[\"$category\"][]" "$metadata_file" | while IFS= read -r dataset_json; do
+    # Get categories and process them one by one
+    while IFS= read -r category; do
+        cat_heading=$(html_escape "$category")
+        echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+        
+        # Get all datasets for this category and process them
+        while IFS= read -r dataset_json; do
             name=$(echo "$dataset_json" | jq -r '.name')
-            title=$(echo "$dataset_json" | jq -r '.title')
-            description=$(echo "$dataset_json" | jq -r '.description')
+            raw_title=$(echo "$dataset_json" | jq -r '.title')
+            raw_description=$(echo "$dataset_json" | jq -r '.description')
             size=$(echo "$dataset_json" | jq -r '.size')
             destination=$(echo "$dataset_json" | jq -r '.destination')
+            
+            title=$(html_escape "$raw_title")
+            description=$(html_escape "$raw_description")
             
             full_desc="$description"
             if [ -n "$size" ] && [ "$size" != "null" ] && [ "$size" != "0B" ]; then
@@ -107,8 +118,8 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     </div>
 </div>
 EOF
-        done
-    done
+        done < <(jq -c ".datasets[\"$category\"][]" "$metadata_file")
+    done < <(jq -r '.datasets | keys[]' "$metadata_file")
     
     safe_replace "__DATASET_SECTIONS__" "$dataset_sections_file" "$output_html_file"
     rm "$dataset_sections_file"
