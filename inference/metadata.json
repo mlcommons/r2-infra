@@ -42,7 +42,7 @@
         "title": "Llama3.1-8b DailyMail Calibration Dataset",
         "description": "DailyMail dataset for the Llama3.1-8b benchmark",
         "destination": "llama3.1_8b/datasets"
-      },
+      }
     ],
     "Whisper Benchmark": [
       {
