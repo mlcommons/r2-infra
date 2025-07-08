@@ -23,21 +23,16 @@ safe_replace() {
         return 1
     fi
     
-    # Use awk directly to avoid sed's special character issues
-    awk -v placeholder="$placeholder" -v repl_file="$replacement_file" '
-    BEGIN {
-        # Read replacement content
-        while ((getline line < repl_file) > 0) {
-            if (replacement == "") replacement = line
-            else replacement = replacement "\n" line
+    # Use perl for literal string replacement to avoid regex issues
+    perl -i -pe "
+        BEGIN { 
+            undef $/; 
+            open(my \$fh, '<', '$replacement_file') or die \"Cannot open replacement file: \$!\"; 
+            \$replacement = <\$fh>; 
+            close(\$fh); 
         }
-        close(repl_file)
-    }
-    {
-        # Use gsub to replace all occurrences of the placeholder
-        gsub(placeholder, replacement)
-        print
-    }' "$target_file" > "${target_file}.tmp" && mv "${target_file}.tmp" "$target_file"
+        s/\Q$placeholder\E/\$replacement/g;
+    " "$target_file"
     
     echo "    - DEBUG: safe_replace completed"
 }
