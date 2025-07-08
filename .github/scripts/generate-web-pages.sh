@@ -6,35 +6,34 @@ TEMPLATE_FILE="templates/template-index.html"
 DOWNLOADER_SCRIPT_URL="https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh"
 
 # Helper function for multiline search and replace
-# awk is safer for multiline replacement than sed
+# Uses a simpler approach to avoid escaping issues
 safe_replace() {
     local placeholder="$1"
     local replacement_file="$2"
     local target_file="$3"
-
-    # This awk command safely replaces a placeholder in a target file with the
-    # content of a replacement file. It reads the replacement file first (FNR==NR),
-    # stores its content in a variable 'r', then reads the target file and
-    # performs the substitution line by line. This avoids shell expansion issues.
-    awk -v p="$placeholder" '
+    
+    # Use a unique temporary marker that won't conflict with content
+    local temp_marker="__TEMP_REPLACEMENT_MARKER_$$__"
+    
+    # First, replace the placeholder with our temporary marker
+    sed "s|$placeholder|$temp_marker|g" "$target_file" > "$target_file.tmp"
+    
+    # Then use awk to replace the temporary marker with the file content
+    awk -v marker="$temp_marker" '
         FNR==NR {
-            # While reading the first file (replacement_file), build the replacement string.
-            r = r ? r "\n" $0 : $0
+            # Read the replacement file content
+            content = content ? content "\n" $0 : $0
             next
         }
         {
-            # For the second file (target_file), perform the substitution.
-            # We must escape ampersands and backslashes in the replacement string
-            # just before using it, which is done only once.
-            if (!escaped) {
-                gsub(/\\/, "\\\\", r)
-                gsub(/&/, "\\&", r)
-                escaped = 1
-            }
-            gsub(p, r)
+            # Replace the temporary marker with the content
+            gsub(marker, content)
             print
         }
-    ' "$replacement_file" "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
+    ' "$replacement_file" "$target_file.tmp" > "$target_file"
+    
+    # Clean up temporary file
+    rm "$target_file.tmp"
 }
 
 # Helper to HTML-escape special characters
