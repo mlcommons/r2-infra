@@ -12,20 +12,44 @@ safe_replace() {
     local replacement_file="$2"
     local target_file="$3"
     
-    # Use Python with arguments passed via environment variables to avoid shell escaping issues
-    PLACEHOLDER="$placeholder" REPLACEMENT_FILE="$replacement_file" TARGET_FILE="$target_file" python3 -c "
-import os
-placeholder = os.environ['PLACEHOLDER']
-replacement_file = os.environ['REPLACEMENT_FILE']
-target_file = os.environ['TARGET_FILE']
-
-with open(replacement_file, 'r') as f:
-    replacement = f.read()
-with open(target_file, 'r') as f:
-    content = f.read()
-with open(target_file, 'w') as f:
-    f.write(content.replace(placeholder, replacement))
-"
+    echo "    - DEBUG: safe_replace called with placeholder='$placeholder', replacement_file='$replacement_file', target_file='$target_file'"
+    
+    # Check if files exist
+    if [[ ! -f "$replacement_file" ]]; then
+        echo "    - ERROR: replacement_file '$replacement_file' does not exist"
+        return 1
+    fi
+    if [[ ! -f "$target_file" ]]; then
+        echo "    - ERROR: target_file '$target_file' does not exist"
+        return 1
+    fi
+    
+    # Use a simple sed-based approach instead of Python to avoid environment variable issues
+    # First create a temporary file with a unique marker
+    local temp_marker="__TEMP_MARKER_${RANDOM}_${RANDOM}__"
+    
+    # Replace placeholder with temporary marker
+    sed "s|${placeholder}|${temp_marker}|g" "$target_file" > "${target_file}.tmp1"
+    
+    # Use awk to replace the temporary marker with the file content
+    awk -v marker="$temp_marker" -v repl_file="$replacement_file" '
+    BEGIN {
+        # Read replacement content
+        while ((getline line < repl_file) > 0) {
+            if (replacement == "") replacement = line
+            else replacement = replacement "\n" line
+        }
+        close(repl_file)
+    }
+    {
+        gsub(marker, replacement)
+        print
+    }' "${target_file}.tmp1" > "$target_file"
+    
+    # Clean up
+    rm -f "${target_file}.tmp1"
+    
+    echo "    - DEBUG: safe_replace completed"
 }
 
 # Helper to HTML-escape special characters
@@ -89,6 +113,8 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
             title=$(html_escape "$raw_title")
             description=$(html_escape "$raw_description")
             
+            echo "    - DEBUG: Processing dataset '$name' with raw_title='$raw_title' -> escaped_title='$title'"
+            
             full_desc="$description"
             if [ -n "$size" ] && [ "$size" != "null" ] && [ "$size" != "0B" ]; then
                 full_desc+=" (~${size})"
@@ -114,6 +140,11 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
 EOF
         done < <(jq -c ".datasets[\"$category\"][]" "$metadata_file")
     done < <(jq -r '.datasets | keys[]' "$metadata_file")
+    
+    echo "    - DEBUG: About to call safe_replace for __DATASET_SECTIONS__"
+    echo "    - DEBUG: dataset_sections_file contains:"
+    cat "$dataset_sections_file" | head -5
+    echo "    - DEBUG: (showing first 5 lines only)"
     
     safe_replace "__DATASET_SECTIONS__" "$dataset_sections_file" "$output_html_file"
     rm "$dataset_sections_file"
