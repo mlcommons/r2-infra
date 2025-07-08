@@ -28,6 +28,14 @@
         "description": "Llama 2 70B parameter fused QKV MLPerf model",
         "size": "276GB"
       }
+    ],
+    "Training Data": [
+      {
+        "name": "scrolls-gov-report-8k",
+        "subpath": "data/training/scrolls_gov_report_8k/",
+        "title": "Scrolls Gov Report 8k",
+        "description": "Preprocessed Scrolls Gov Report 8k dataset for the Llama 2 Training benchmark",
+      }
     ]
   }
 }
