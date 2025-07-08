@@ -21,6 +21,29 @@
         "size": "17MB"
       }
     ],
+    "Llama-3.1-8b": [
+      {
+        "name": "llama3.1-8b-cnn-eval",
+        "subpath": "llama3.1_8b/datasets/cnn_eval.json",
+        "title": "Llama3.1-8b Full Dataset",
+        "description": "CNN dataset for the Llama3.1-8b benchmark",
+        "destination": "llama3.1_8b/datasets"
+      },
+      {
+        "name": "llama3.1-8b-sample-cnn-eval-5000",
+        "subpath": "llama3.1_8b/datasets/sample_cnn_eval_5000.json",
+        "title": "Llama3.1-8b 5000 Samples Dataset",
+        "description": "Sample CNN dataset for the Llama3.1-8b benchmark",
+        "destination": "llama3.1_8b/datasets"
+      },
+      {
+        "name": "llama3.1-8b-cnn-dailymail-calibration",
+        "subpath": "llama3.1_8b/datasets/cnn_dailymail_calibration.json",
+        "title": "Llama3.1-8b DailyMail Calibration Dataset",
+        "description": "DailyMail dataset for the Llama3.1-8b benchmark",
+        "destination": "llama3.1_8b/datasets"
+      },
+    ],
     "Whisper Benchmark": [
       {
         "name": "whisper-model",
