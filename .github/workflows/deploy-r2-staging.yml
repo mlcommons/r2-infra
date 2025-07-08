@@ -5,10 +5,10 @@ on:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
-      - '*/index.html'
       - '*/metadata.json'
-      - '*/metadata/*'
       - 'central/*'
+      - 'templates/template-index.html'
+      - '.github/scripts/generate-web-pages.sh'
       - '.github/workflows/deploy-r2-staging.yml'
 
 # Prevent overlapping runs on the same PR/branch
