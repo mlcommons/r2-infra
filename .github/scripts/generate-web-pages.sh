@@ -11,20 +11,30 @@ safe_replace() {
     local placeholder="$1"
     local replacement_file="$2"
     local target_file="$3"
-    
-    # In awk's gsub, `&` is a special character representing the matched text. It
-    # must be escaped in the replacement string to be treated as a literal.
-    # Backslashes also need to be escaped. This is done inside the awk BEGIN
-    # block to avoid shell quoting issues.
-    awk -v p="$placeholder" -v r="$(cat "$replacement_file")" '
-    BEGIN {
-        gsub(/\\/, "\\\\", r); # First, escape backslashes
-        gsub(/&/, "\\&", r);   # Then, escape ampersands
-    }
-    {
-        gsub(p, r);
-        print;
-    }' "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
+
+    # This awk command safely replaces a placeholder in a target file with the
+    # content of a replacement file. It reads the replacement file first (FNR==NR),
+    # stores its content in a variable 'r', then reads the target file and
+    # performs the substitution line by line. This avoids shell expansion issues.
+    awk -v p="$placeholder" '
+        FNR==NR {
+            # While reading the first file (replacement_file), build the replacement string.
+            r = r ? r "\n" $0 : $0
+            next
+        }
+        {
+            # For the second file (target_file), perform the substitution.
+            # We must escape ampersands and backslashes in the replacement string
+            # just before using it, which is done only once.
+            if (!escaped) {
+                gsub(/\\/, "\\\\", r)
+                gsub(/&/, "\\&", r)
+                escaped = 1
+            }
+            gsub(p, r)
+            print
+        }
+    ' "$replacement_file" "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
 }
 
 # Find and process all metadata.json files (excluding central)
