@@ -11,7 +11,14 @@ safe_replace() {
     local placeholder="$1"
     local replacement_file="$2"
     local target_file="$3"
-    awk -v p="$placeholder" -v r="$(cat "$replacement_file")" '{
+    
+    # In awk's gsub, `&` is a special character representing the matched text.
+    # We must escape it in the replacement string to treat it as a literal.
+    # We also need to escape backslashes to prevent them from being interpreted.
+    local escaped_replacement
+    escaped_replacement=$(sed -e 's/\\/\\\\/g' -e 's/&/\\\&/g' < "$replacement_file")
+
+    awk -v p="$placeholder" -v r="$escaped_replacement" '{
         gsub(p, r);
         print;
     }' "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
