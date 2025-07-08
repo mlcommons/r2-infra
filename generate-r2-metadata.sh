@@ -21,6 +21,9 @@ DESCRIPTION:
     1. dataset.uri - Contains the base URL for accessing the dataset files
     2. dataset.md5 - Contains MD5 checksums for all files in the dataset
     
+    The script determines if a path is a file or a directory based on whether it
+    ends with a trailing slash. Always use a trailing slash for directories.
+    
     The script will prompt you for the following information:
     - Bucket name and path within the bucket
     - Public URL for the bucket (without https://)
@@ -35,8 +38,10 @@ EXAMPLES:
     bash generate-r2-metadata.sh -h
 
 INPUT PROMPTS:
-    Bucket Path: Enter the bucket name and optional path within the bucket
-                 Examples: 'my-bucket/data/dataset-name'
+    Bucket Path: Enter the bucket name and optional path. Use a trailing slash
+                 '/' to indicate a directory.
+                 Examples: 'my-bucket/data/dataset-dir/' (directory)
+                           'my-bucket/data/individual-file.tsv' (file)
                  
     Bucket URL:  Enter the public URL without 'https://' prefix
                  Example: 'inference-private.mlcommons-storage.org'
@@ -138,7 +143,7 @@ check_rclone() {
 check_rclone
 
 # Prompt for bucket name/path
-read -p "Enter bucket name and path within bucket (e.g., 'bucket-name/data/subdirectory/subdirectory'): " DATASET_PATH
+read -p "Enter bucket name and path. Use a trailing slash for directories (e.g., 'bucket/path/dir/'): " DATASET_PATH
 
 # Remove trailing slash if present to normalize the path
 DATASET_PATH="${DATASET_PATH%/}"
@@ -197,36 +202,55 @@ echo "Bucket access verified successfully."
 METADATA_DIR="metadata"
 mkdir -p "$METADATA_DIR"
 
+# Check if the path is a file or a directory based on the presence of a trailing slash.
+# If no trailing slash, it is assumed to be a file.
+if [[ "$BUCKET_SUBPATH" == */ || -z "$BUCKET_SUBPATH" ]]; then
+  uri_path="${BUCKET_SUBPATH%/}"
+  echo "The provided path is a directory. The URI will point to the directory itself."
+else
+  uri_path=$(dirname "${BUCKET_SUBPATH%/}")
+  echo "The provided path is a file. The URI will point to its parent directory."
+fi
+
+# Construct the final URI.
+if [[ -z "$uri_path" || "$uri_path" == "." ]]; then
+  URI="https://${URL}"
+else
+  URI="https://${URL}/${uri_path%/}"
+fi
+
 # Generate dataset.uri file
-echo "Generating ${METADATA_DIR}/${DATASET_NAME}.uri..."
-echo "https://${URL}/${BUCKET_SUBPATH}" > "${METADATA_DIR}/${DATASET_NAME}.uri"
+URI_FILE="${METADATA_DIR}/${DATASET_NAME}.uri"
+echo "Generating URI file: ${URI_FILE}"
+echo "$URI" > "$URI_FILE"
 
 # Generate dataset.md5 file
-echo "Generating ${METADATA_DIR}/${DATASET_NAME}.md5..."
+MD5_FILE="${METADATA_DIR}/${DATASET_NAME}.md5"
+echo "Generating MD5 file: ${MD5_FILE}"
+echo "This may take a while for large datasets..."
 
-# List objects and generate checksums using rclone md5sum
-echo "Computing checksums for all files..."
-if ! rclone md5sum "${TMP_REMOTE}:${DATASET_PATH}" > "${METADATA_DIR}/${DATASET_NAME}.md5"; then
-  echo "Error: Failed to compute checksums for files in '${DATASET_PATH}'" >&2
-  echo "This could be due to:" >&2
-  echo "  - Network connectivity issues" >&2
-  echo "  - Insufficient permissions to read files" >&2
-  echo "  - Bucket or path does not exist" >&2
-  rm -f "${METADATA_DIR}/${DATASET_NAME}.md5"  # Clean up empty file
-  rm -f "${METADATA_DIR}/${DATASET_NAME}.uri"  # Clean up uri file too
-  exit 1
+if ! rclone md5sum "${TMP_REMOTE}:${DATASET_PATH}" | sort > "$MD5_FILE"; then
+    echo "Error: Failed to generate MD5 list for dataset '${DATASET_NAME}'" >&2
+    echo "This could be due to:" >&2
+    echo "  - Invalid credentials" >&2
+    echo "  - Insufficient permissions" >&2
+    echo "  - Incorrect bucket name or path" >&2
+    echo "  - Network connectivity issues" >&2
+    rm -f "$MD5_FILE"  # Clean up empty file
+    rm -f "$URI_FILE"  # Clean up uri file too
+    exit 1
 fi
 
 # Verify that the md5 file is not empty
-if [ ! -s "${METADATA_DIR}/${DATASET_NAME}.md5" ]; then
+if [ ! -s "$MD5_FILE" ]; then
   echo "Error: Generated checksums file is empty" >&2
   echo "This indicates no files were found in the specified bucket path: '${DATASET_PATH}'" >&2
-  rm -f "${METADATA_DIR}/${DATASET_NAME}.md5"  # Clean up empty file
-  rm -f "${METADATA_DIR}/${DATASET_NAME}.uri"  # Clean up uri file too
+  rm -f "$MD5_FILE"  # Clean up empty file
+  rm -f "$URI_FILE"  # Clean up uri file too
   exit 1
 fi
 
-echo "Successfully computed checksums for $(wc -l < "${METADATA_DIR}/${DATASET_NAME}.md5") files."
+echo "Successfully computed checksums for $(wc -l < "$MD5_FILE") files."
 
 # Get dataset size information
 echo "Getting dataset size information..."
@@ -284,12 +308,12 @@ if [[ "$UPLOAD_CHOICE" =~ ^[Yy]$ ]]; then
 
     # Upload the files
     echo "Uploading metadata files to bucket..."
-    rclone copy "${METADATA_DIR}/${DATASET_NAME}.uri" "${TMP_REMOTE}:${BUCKET_NAME}/${METADATA_BUCKET_PATH}/" --header-upload "Content-Type: text/plain; charset=utf-8" || {
+    rclone copy "$URI_FILE" "${TMP_REMOTE}:${BUCKET_NAME}/${METADATA_BUCKET_PATH}/" --header-upload "Content-Type: text/plain; charset=utf-8" || {
         echo "Error: Failed to upload ${DATASET_NAME}.uri" >&2
         exit 1
     }
     
-    rclone copy "${METADATA_DIR}/${DATASET_NAME}.md5" "${TMP_REMOTE}:${BUCKET_NAME}/${METADATA_BUCKET_PATH}/" --header-upload "Content-Type: text/plain; charset=utf-8" || {
+    rclone copy "$MD5_FILE" "${TMP_REMOTE}:${BUCKET_NAME}/${METADATA_BUCKET_PATH}/" --header-upload "Content-Type: text/plain; charset=utf-8" || {
         echo "Error: Failed to upload ${DATASET_NAME}.md5" >&2
         exit 1
     }

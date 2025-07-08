@@ -1,18 +1,33 @@
 {
-    "bucket": "mlcommons-waymo",
-    "domain": "waymo.mlcommons-storage.org",
-    "datasets": [
+  "bucket": "mlcommons-waymo",
+  "domain": "waymo.mlcommons-storage.org",
+  "title": "MLCommons Waymo Download",
+  "license_notice": "The Waymo Open Dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of the <a href='https://waymo.com/open/terms/' target='_blank'>Waymo Open Dataset License Agreement</a>.",
+  "datasets": {
+    "Waymo Open Dataset": [
       {
         "name": "dataset-model",
-        "subpath": "data/waymo_preprocessed_dataset/"
+        "subpath": "data/waymo_preprocessed_dataset/",
+        "title": "Preprocessed Dataset & Model",
+        "description": "Preprocessed Waymo Open Dataset and the model checkpoints",
+        "size": "470GB"
       },
       {
         "name": "dataset",
-        "subpath": "data/waymo_preprocessed_dataset/kitti_format/"
+        "subpath": "data/waymo_preprocessed_dataset/kitti_format/",
+        "title": "Preprocessed Dataset",
+        "description": "The preprocessed Waymo Open Dataset without the model checkpoints",
+        "destination": "waymo_preprocessed_dataset/kitti_format",
+        "size": "469GB"
       },
       {
         "name": "model",
-        "subpath": "data/waymo_preprocessed_dataset/model/"
+        "subpath": "data/waymo_preprocessed_dataset/model/",
+        "title": "Model",
+        "description": "The model checkpoints without the preprocessed Waymo Open Dataset",
+        "destination": "waymo_preprocessed_dataset/model",
+        "size": "648MB"
       }
     ]
-  } 
+  }
+}

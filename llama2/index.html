@@ -41,9 +41,8 @@
         <div class="container">
             <h1>MLCommons Llama 2 Download</h1>
             
-            <div class="alert alert-info">
-                <strong>Licensing Notice:</strong> Llama 2 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://llama2.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_License_-_12.05.2023%20-%20signed.pdf" target="_blank">this side letter</a> from Meta.
-            </div>
+            <div class="alert alert-info"><strong>Licensing Notice:</strong> Llama 2 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://llama2.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_2_License_(9.9.2024)_-_signed.pdf' target='_blank'>this side letter</a> from Meta.</div>
+
 
             <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
@@ -52,46 +51,50 @@
                 </div>
             </div>
         
-        <h2>Available Models</h2>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 2 7B Parameter Model</h3>
-            <p class="dataset-description">Pre-converted Hugging Face checkpoints for the Llama 2 7B parameter chat model (~54GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-7b-chat-hf.uri</code>
-                </div>
-            </div>
-        </div>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 2 70B Parameter Model</h3>
-            <p class="dataset-description">Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model (~552GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-70b-chat-hf.uri</code>
-                </div>
-            </div>
-        </div>
+            <h2>Available Downloads</h2>
 
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 2 70B Parameter Fused QKV MLPerf Model</h3>
-            <p class="dataset-description">Llama 2 70B parameter fused QKV MLPerf model (~276GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-70b-fused-qkv-mlperf.uri</code>
-                </div>
-            </div>
+            <h3>Inference Models</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 7B Parameter Model</h3>
+    <p class="dataset-description">Pre-converted Hugging Face checkpoints for the Llama 2 7B parameter chat model (~54GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-7b-chat-hf.uri</code>
         </div>
-        
-        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
-        
-        <!-- Shared content removed -->
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 70B Parameter Model</h3>
+    <p class="dataset-description">Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model (~552GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-70b-chat-hf.uri</code>
+        </div>
+    </div>
+</div>
+<h3>Training Models</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 70B Parameter Fused QKV MLPerf Model</h3>
+    <p class="dataset-description">Llama 2 70B parameter fused QKV MLPerf model (~276GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama-2-70b-fused-qkv-mlperf.uri</code>
+        </div>
+    </div>
+</div>
+<h3>Training Data</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Scrolls Gov Report 8k</h3>
+    <p class="dataset-description">Preprocessed Scrolls Gov Report 8k dataset for the Llama 2 Training benchmark (~112MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/scrolls-gov-report-8k.uri</code>
+        </div>
+    </div>
+</div>
+
         
         </div>
     </div>
 </body>
-</html>
+</html> 

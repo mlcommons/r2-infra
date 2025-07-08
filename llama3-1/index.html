@@ -14,16 +14,17 @@
     <!-- Load shared CSS and JS from central bucket -->
     <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
     <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
-    <!-- Load shared header & quick-start early to avoid layout shift -->
+    <!-- Load shared header & quick-start as early as possible -->
     <script defer>
       document.addEventListener('DOMContentLoaded', () => {
         fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
           .then(r => r.text())
           .then(html => {
-            const tmp = document.createElement('div'); tmp.innerHTML = html;
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
             const header = tmp.querySelector('.header-strip');
             const quick  = tmp.querySelector('#quick-start-section');
-            header && (document.getElementById('header-placeholder').innerHTML = header.outerHTML);
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
             const holder=document.getElementById('quick-start-placeholder');
             if(quick && holder){ holder.replaceWith(quick); }
             if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
@@ -40,61 +41,58 @@
         <div class="container">
             <h1>MLCommons Llama 3.1 Download</h1>
             
-            <div class="alert alert-info">
-                <strong>Licensing Notice:</strong> Llama 3.1 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href="https://llama3-1.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf" target="_blank">this side letter</a> from Meta.
-            </div>
+            <div class="alert alert-info"><strong>Licensing Notice:</strong> Llama 3.1 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://llama3-1.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf' target='_blank'>this side letter</a> from Meta.</div>
 
-            <!-- Quick-Start skeleton -->
+
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
             <div id="quick-start-placeholder" style="visibility:hidden">
-                <div class="alert alert-info"><strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.</div>
-            </div>
-        
-        <h2>Inference Models</h2>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 3.1 405B Parameter Instruct Model</h3>
-            <p class="dataset-description">Llama 3.1 405B parameter Instruct model for inference (~2.4TB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama3-1.mlcommons-storage.org/metadata/llama3-1-405b-instruct.uri</code>
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
                 </div>
             </div>
-        </div>
         
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 3.1 8B Parameter Instruct Model</h3>
-            <p class="dataset-description">Llama 3.1 8B parameter model for inference (~32GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama3-1.mlcommons-storage.org/metadata/llama3-1-8b-instruct.uri</code>
-                </div>
-            </div>
-        </div>
+            <h2>Available Downloads</h2>
 
-        <h2>Training Checkpoints</h2>
-        
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 3.1 405B Parameter NeMo HF Checkpoint</h3>
-            <p class="dataset-description">Llama 3.1 405B parameter NeMo-formatted Hugging Face checkpoint for training (~1.3TB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d nemo-formatted-hf-checkpoint/405b https://llama3-1.mlcommons-storage.org/metadata/llama3-1-405b-nemo-hf-checkpoint.uri</code>
-                </div>
-            </div>
+            <h3>Inference Models</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 405B Parameter Instruct Model</h3>
+    <p class="dataset-description">Llama 3.1 405B parameter Instruct model for inference (~2.5TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama3-1.mlcommons-storage.org/metadata/llama3-1-405b-instruct.uri</code>
         </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 8B Parameter Instruct Model</h3>
+    <p class="dataset-description">Llama 3.1 8B parameter Instruct model for inference (~33GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama3-1.mlcommons-storage.org/metadata/llama3-1-8b-instruct.uri</code>
+        </div>
+    </div>
+</div>
+<h3>Training Checkpoints</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 405B Parameter NeMo HF Checkpoint</h3>
+    <p class="dataset-description">Llama 3.1 405B parameter NeMo-formatted Hugging Face checkpoint for training (~1.3TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d nemo-formatted-hf-checkpoint/405b https://llama3-1.mlcommons-storage.org/metadata/llama3-1-405b-nemo-hf-checkpoint.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 8B Parameter NeMo HF Checkpoint</h3>
+    <p class="dataset-description">Llama 3.1 8B parameter NeMo-formatted Hugging Face checkpoint for training (~24GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d nemo-formatted-hf-checkpoint/8b https://llama3-1.mlcommons-storage.org/metadata/llama3-1-8b-nemo-hf-checkpoint.uri</code>
+        </div>
+    </div>
+</div>
+
         
-        <div class="dataset-section">
-            <h3 class="dataset-title">Llama 3.1 8B Parameter NeMo HF Checkpoint</h3>
-            <p class="dataset-description">Llama 3.1 8B parameter NeMo-formatted Hugging Face checkpoint for training (~24GB)</p>
-            
-            <div class="command-section">
-                <div class="code-block">
-                    <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d nemo-formatted-hf-checkpoint/8b https://llama3-1.mlcommons-storage.org/metadata/llama3-1-8b-nemo-hf-checkpoint.uri</code>
-                </div>
-            </div>
         </div>
     </div>
 </body>

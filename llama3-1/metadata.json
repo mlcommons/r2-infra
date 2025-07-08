@@ -1,22 +1,42 @@
 {
-    "bucket": "mlcommons-llama3-1",
-    "domain": "llama3-1.mlcommons-storage.org",
-    "datasets": [
+  "bucket": "mlcommons-llama3-1",
+  "domain": "llama3-1.mlcommons-storage.org",
+  "title": "MLCommons Llama 3.1 Download",
+  "license_notice": "Llama 3.1 models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://llama3-1.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf' target='_blank'>this side letter</a> from Meta.",
+  "datasets": {
+    "Inference Models": [
       {
         "name": "llama3-1-405b-instruct",
-        "subpath": "data/inference/Llama-3.1-405B-Instruct/"
+        "subpath": "data/inference/Llama-3.1-405B-Instruct/",
+        "title": "Llama 3.1 405B Parameter Instruct Model",
+        "description": "Llama 3.1 405B parameter Instruct model for inference",
+        "size": "2.5TB"
       },
       {
         "name": "llama3-1-8b-instruct",
-        "subpath": "data/inference/Llama-3.1-8B-Instruct/"
-      },
+        "subpath": "data/inference/Llama-3.1-8B-Instruct/",
+        "title": "Llama 3.1 8B Parameter Instruct Model",
+        "description": "Llama 3.1 8B parameter Instruct model for inference",
+        "size": "33GB"
+      }
+    ],
+    "Training Checkpoints": [
       {
         "name": "llama3-1-405b-nemo-hf-checkpoint",
-        "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/"
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/405b/",
+        "title": "Llama 3.1 405B Parameter NeMo HF Checkpoint",
+        "description": "Llama 3.1 405B parameter NeMo-formatted Hugging Face checkpoint for training",
+        "destination": "nemo-formatted-hf-checkpoint/405b",
+        "size": "1.3TB"
       },
       {
         "name": "llama3-1-8b-nemo-hf-checkpoint",
-        "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/"
+        "subpath": "data/training/nemo-formatted-hf-checkpoint/8b/",
+        "title": "Llama 3.1 8B Parameter NeMo HF Checkpoint",
+        "description": "Llama 3.1 8B parameter NeMo-formatted Hugging Face checkpoint for training",
+        "destination": "nemo-formatted-hf-checkpoint/8b",
+        "size": "24GB"
       }
     ]
-  } 
+  }
+}

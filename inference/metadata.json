@@ -1,14 +1,25 @@
 {
-    "bucket": "mlcommons-inference-wg-public",
-    "domain": "inference.mlcommons-storage.org",
-    "datasets": [
-      {
-        "name": "whisper-dataset",
-        "subpath": "Whisper/dataset"
-      },
+  "bucket": "mlcommons-inference-wg-public",
+  "domain": "inference.mlcommons-storage.org",
+  "title": "MLPerf Inference Benchmark Data Download",
+  "datasets": {
+    "Whisper Benchmark": [
       {
         "name": "whisper-model",
-        "subpath": "Whisper/model"
+        "subpath": "Whisper/model/",
+        "title": "Whisper Model",
+        "description": "Whisper large-v3 model for the Whisper benchmark",
+        "destination": "whisper/model",
+        "size": "25GB"
+      },
+      {
+        "name": "whisper-dataset",
+        "subpath": "Whisper/dataset/",
+        "title": "Whisper Dataset",
+        "description": "LibriSpeech dataset for the Whisper benchmark",
+        "destination": "whisper/dataset",
+        "size": "4.6GB"
       }
     ]
-  } 
+  }
+}

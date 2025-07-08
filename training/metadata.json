@@ -1,26 +1,53 @@
 {
-    "bucket": "mlcommons-training-wg-public",
-    "domain": "training.mlcommons-storage.org",
-    "datasets": [
+  "bucket": "mlcommons-training-wg-public",
+  "domain": "training.mlcommons-storage.org",
+  "title": "MLPerf Training Benchmark Data Download",
+  "datasets": {
+    "FLUX.1 Benchmark": [
       {
         "name": "flux-1-datasets",
-        "subpath": "flux_1/datasets/"
+        "subpath": "flux_1/datasets/",
+        "title": "All FLUX.1 dataset files",
+        "description": "CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set",
+        "destination": "flux_1_datasets",
+        "size": "2.7TB"
       },
       {
         "name": "flux-1-cc12m-disk",
-        "subpath": "flux_1/datasets/cc12m_disk/"
+        "subpath": "flux_1/datasets/cc12m_disk/",
+        "title": "CC12M dataset",
+        "description": "Conceptual 12M dataset for the FLUX.1 benchmark",
+        "size": "163GB"
       },
       {
         "name": "flux-1-cc12m-preprocessed",
-        "subpath": "flux_1/datasets/cc12m_preprocessed/"
+        "subpath": "flux_1/datasets/cc12m_preprocessed/",
+        "title": "CC12M preprocessed dataset",
+        "description": "Conceptual 12M preprocessed dataset for the FLUX.1 benchmark",
+        "size": "2.4TB"
       },
       {
         "name": "flux-1-coco",
-        "subpath": "flux_1/datasets/coco/"
+        "subpath": "flux_1/datasets/coco/",
+        "title": "COCO dataset",
+        "description": "Common Objects in Context dataset for the FLUX.1 benchmark",
+        "size": "3.6GB"
       },
       {
         "name": "flux-1-coco-preprocessed",
-        "subpath": "flux_1/datasets/coco_preprocessed/"
+        "subpath": "flux_1/datasets/coco_preprocessed/",
+        "title": "COCO preprocessed dataset",
+        "description": "Common Objects in Context preprocessed dataset for the FLUX.1 benchmark",
+        "size": "65GB"
+      },
+      {
+        "name": "flux-1-coco-2014-val-30k",
+        "subpath": "flux_1/datasets/val2014_30k.tsv",
+        "title": "COCO 2014 30K validation set",
+        "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data for the FLUX.1 benchmark",
+        "destination": "flux_1_datasets",
+        "size": "2.0MB"
       }
     ]
-  } 
+  }
+}
