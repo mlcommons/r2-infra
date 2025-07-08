@@ -6,21 +6,25 @@ TEMPLATE_FILE="templates/template-index.html"
 DOWNLOADER_SCRIPT_URL="https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh"
 
 # Helper function for multiline search and replace
-# Uses a simpler approach to avoid escaping issues
+# Uses Python with proper argument passing to avoid shell expansion issues
 safe_replace() {
     local placeholder="$1"
     local replacement_file="$2"
     local target_file="$3"
     
-    # Use Python to do the replacement safely
-    python3 -c "
-import sys
-with open('$replacement_file', 'r') as f:
+    # Use Python with arguments passed via environment variables to avoid shell escaping issues
+    PLACEHOLDER="$placeholder" REPLACEMENT_FILE="$replacement_file" TARGET_FILE="$target_file" python3 -c "
+import os
+placeholder = os.environ['PLACEHOLDER']
+replacement_file = os.environ['REPLACEMENT_FILE']
+target_file = os.environ['TARGET_FILE']
+
+with open(replacement_file, 'r') as f:
     replacement = f.read()
-with open('$target_file', 'r') as f:
+with open(target_file, 'r') as f:
     content = f.read()
-with open('$target_file', 'w') as f:
-    f.write(content.replace('$placeholder', replacement))
+with open(target_file, 'w') as f:
+    f.write(content.replace(placeholder, replacement))
 "
 }
 
@@ -68,8 +72,11 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     
     # Get categories and process them one by one
     while IFS= read -r category; do
-        cat_heading=$(html_escape "$category")
-        echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+        # Only add category heading if category name is not empty
+        if [ -n "$category" ]; then
+            cat_heading=$(html_escape "$category")
+            echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+        fi
         
         # Get all datasets for this category and process them
         while IFS= read -r dataset_json; do
