@@ -6,7 +6,6 @@ TEMPLATE_FILE="templates/template-index.html"
 DOWNLOADER_SCRIPT_URL="https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh"
 
 # Helper function for multiline search and replace
-# Uses Python with proper argument passing to avoid shell expansion issues
 safe_replace() {
     local placeholder="$1"
     local replacement_file="$2"
@@ -24,15 +23,8 @@ safe_replace() {
         return 1
     fi
     
-    # Use a simple sed-based approach instead of Python to avoid environment variable issues
-    # First create a temporary file with a unique marker
-    local temp_marker="__TEMP_MARKER_${RANDOM}_${RANDOM}__"
-    
-    # Replace placeholder with temporary marker
-    sed "s|${placeholder}|${temp_marker}|g" "$target_file" > "${target_file}.tmp1"
-    
-    # Use awk to replace the temporary marker with the file content
-    awk -v marker="$temp_marker" -v repl_file="$replacement_file" '
+    # Use awk directly to avoid sed's special character issues
+    awk -v placeholder="$placeholder" -v repl_file="$replacement_file" '
     BEGIN {
         # Read replacement content
         while ((getline line < repl_file) > 0) {
@@ -42,12 +34,10 @@ safe_replace() {
         close(repl_file)
     }
     {
-        gsub(marker, replacement)
+        # Use gsub to replace all occurrences of the placeholder
+        gsub(placeholder, replacement)
         print
-    }' "${target_file}.tmp1" > "$target_file"
-    
-    # Clean up
-    rm -f "${target_file}.tmp1"
+    }' "$target_file" > "${target_file}.tmp" && mv "${target_file}.tmp" "$target_file"
     
     echo "    - DEBUG: safe_replace completed"
 }
