@@ -124,7 +124,7 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
 </div>
 EOF
         done < <(jq -c ".datasets[\"$category\"][]" "$metadata_file")
-    done < <(jq -r '.datasets | keys[]' "$metadata_file")
+    done < <(jq -r '.datasets | keys_unsorted[]' "$metadata_file")
     
     echo "    - DEBUG: About to call safe_replace for __DATASET_SECTIONS__"
     echo "    - DEBUG: dataset_sections_file contains:"
