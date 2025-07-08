@@ -12,28 +12,19 @@ safe_replace() {
     local replacement_file="$2"
     local target_file="$3"
     
-    # Use a unique temporary marker that won't conflict with content
-    local temp_marker="__TEMP_REPLACEMENT_MARKER_$$__"
-    
-    # First, replace the placeholder with our temporary marker
-    sed "s|$placeholder|$temp_marker|g" "$target_file" > "$target_file.tmp"
-    
-    # Then use awk to replace the temporary marker with the file content
-    awk -v marker="$temp_marker" '
-        FNR==NR {
-            # Read the replacement file content
-            content = content ? content "\n" $0 : $0
-            next
-        }
-        {
-            # Replace the temporary marker with the content
-            gsub(marker, content)
-            print
-        }
-    ' "$replacement_file" "$target_file.tmp" > "$target_file"
-    
-    # Clean up temporary file
-    rm "$target_file.tmp"
+    # In awk's gsub, `&` is a special character representing the matched text. It
+    # must be escaped in the replacement string to be treated as a literal.
+    # Backslashes also need to be escaped. This is done inside the awk BEGIN
+    # block to avoid shell quoting issues.
+    awk -v p="$placeholder" -v r="$(cat "$replacement_file")" '
+    BEGIN {
+        gsub(/\\/, "\\\\", r); # First, escape backslashes
+        gsub(/&/, "\\&", r);   # Then, escape ampersands
+    }
+    {
+        gsub(p, r);
+        print;
+    }' "$target_file" > "$target_file.tmp" && mv "$target_file.tmp" "$target_file"
 }
 
 # Helper to HTML-escape special characters
