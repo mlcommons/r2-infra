@@ -9,14 +9,14 @@
         "name": "dataset-model",
         "subpath": "data/waymo_preprocessed_dataset/",
         "title": "Preprocessed Dataset & Model",
-        "description": "Preprocessed Waymo Open Dataset and the model checkpoints (~470GB)",
+        "description": "Preprocessed Waymo Open Dataset and the model checkpoints",
         "size": "470GB"
       },
       {
         "name": "dataset",
         "subpath": "data/waymo_preprocessed_dataset/kitti_format/",
         "title": "Preprocessed Dataset",
-        "description": "The preprocessed Waymo Open Dataset without the model checkpoints (~469GB)",
+        "description": "The preprocessed Waymo Open Dataset without the model checkpoints",
         "destination": "waymo_preprocessed_dataset/kitti_format",
         "size": "469GB"
       },
@@ -24,7 +24,7 @@
         "name": "model",
         "subpath": "data/waymo_preprocessed_dataset/model/",
         "title": "Model",
-        "description": "The model checkpoints without the preprocessed Waymo Open Dataset (~648MB)",
+        "description": "The model checkpoints without the preprocessed Waymo Open Dataset",
         "destination": "waymo_preprocessed_dataset/model",
         "size": "648MB"
       }
