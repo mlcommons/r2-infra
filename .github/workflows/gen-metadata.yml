@@ -84,35 +84,41 @@ jobs:
             for dataset in "${DATASETS[@]}"; do
               name=$(echo "$dataset" | jq -r '.name')
               subpath=$(echo "$dataset" | jq -r '.subpath')
+              metadata_override=$(echo "$dataset" | jq -r '.metadata_override // false')
 
               # Trim possible trailing slash from subpath for bucket path
               clean_subpath="${subpath%/}"
               bucket_path="$ROOT_BUCKET/$clean_subpath"
 
-              # It's a directory if the original subpath ends with a slash.
-              # Otherwise, we assume it's a file.
-              if [[ "$subpath" == */ ]]; then
-                uri_path="$clean_subpath"
-                echo "    (subpath is a directory)"
-              else
-                uri_path=$(dirname "$clean_subpath")
-                echo "    (subpath is a file)"
-              fi
-              
-              # Construct the final URI.
-              if [[ "$uri_path" == "." || -z "$uri_path" ]]; then
-                uri="https://${ROOT_DOMAIN}"
-              else
-                uri="https://${ROOT_DOMAIN}/${uri_path%/}"
-              fi
+              # Generate metadata files unless metadata_override is true
+              if [[ "$metadata_override" != "true" ]]; then
+                # It's a directory if the original subpath ends with a slash.
+                # Otherwise, we assume it's a file.
+                if [[ "$subpath" == */ ]]; then
+                  uri_path="$clean_subpath"
+                  echo "    (subpath is a directory)"
+                else
+                  uri_path=$(dirname "$clean_subpath")
+                  echo "    (subpath is a file)"
+                fi
+                
+                # Construct the final URI.
+                if [[ "$uri_path" == "." || -z "$uri_path" ]]; then
+                  uri="https://${ROOT_DOMAIN}"
+                else
+                  uri="https://${ROOT_DOMAIN}/${uri_path%/}"
+                fi
 
-              echo "  • Generating .uri for $name => $uri"
-              echo "$uri" > "$META_DIR/${name}.uri"
+                echo "  • Generating .uri for $name => $uri"
+                echo "$uri" > "$META_DIR/${name}.uri"
 
-              echo "    Generating .md5 for $name from $bucket_path (sorted)"
-              if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
-                echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
-                exit 1
+                echo "    Generating .md5 for $name from $bucket_path (sorted)"
+                if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
+                  echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
+                  exit 1
+                fi
+              else
+                echo "  • Skipping metadata generation for $name (metadata_override: true)"
               fi
 
               # Collect dataset size information for PR comment
