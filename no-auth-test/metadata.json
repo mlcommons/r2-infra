@@ -2,20 +2,22 @@
   "bucket": "mlcommons-no-auth-test",
   "domain": "no-auth-test.mlcommons-storage.org",
   "title": "MLCommons No-Auth Test Data Download",
-  "datasets": [
-    {
-      "name": "dataset",
-      "subpath": "data/dataset",
-      "title": "Dataset",
-      "description": "Dataset"
-    },
-    {
-      "name": "single-file-dataset",
-      "subpath": "data/dataset",
-      "title": "Single File Dataset",
-      "description": "Single File Dataset",
-      "size": "",
-      "metadata_override": true
-    }
-  ]
+  "datasets": {
+    "Dataset": [
+      {
+        "name": "dataset",
+        "subpath": "data/dataset",
+        "title": "Dataset",
+        "description": "Dataset"
+      },
+      {
+        "name": "single-file-dataset",
+        "subpath": "data/dataset",
+        "title": "Single File Dataset",
+        "description": "Single File Dataset",
+        "size": "",
+        "metadata_override": true
+      }
+    ]
+  }
 }
