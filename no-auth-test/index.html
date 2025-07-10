@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLCommons No-Auth Test Data Download</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://r2-infra.mlcommons-storage.org/central/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://r2-infra.mlcommons-storage.org/central/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://r2-infra.mlcommons-storage.org/central/favicon/site.webmanifest">
+    
+    <!-- Load shared CSS and JS from central bucket -->
+    <link rel="stylesheet" href="https://r2-infra.mlcommons-storage.org/central/shared.css">
+    <script src="https://r2-infra.mlcommons-storage.org/central/shared.js"></script>
+    <!-- Load shared header & quick-start as early as possible -->
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://r2-infra.mlcommons-storage.org/central/shared-content.html')
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            const header = tmp.querySelector('.header-strip');
+            const quick  = tmp.querySelector('#quick-start-section');
+            if (header) document.getElementById('header-placeholder').innerHTML = header.outerHTML;
+            const holder=document.getElementById('quick-start-placeholder');
+            if(quick && holder){ holder.replaceWith(quick); }
+            if (typeof initializeCopyButtons === 'function') initializeCopyButtons();
+          })
+          .catch(err => console.error('Failed to load shared content:', err));
+      });
+    </script>
+</head>
+<body>
+    <!-- Header will be loaded from shared content -->
+    <div id="header-placeholder"></div>
+    
+    <div class="page-content">
+        <div class="container">
+            <h1>MLCommons No-Auth Test Data Download</h1>
+            
+            
+
+            <!-- Quick-Start skeleton to reserve space (visibility hidden) -->
+            <div id="quick-start-placeholder" style="visibility:hidden">
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Copy one of the commands below and run it in your terminal to download the indicated dataset.
+                </div>
+            </div>
+        
+            <h2>Available Downloads</h2>
+
+            <h3>Dataset</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Dataset</h3>
+    <p class="dataset-description">Dataset (~150KB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://no-auth-test.mlcommons-storage.org/metadata/dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Single File Dataset</h3>
+    <p class="dataset-description">Single File Dataset (~5.4KB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://no-auth-test.mlcommons-storage.org/metadata/single-file-dataset.uri</code>
+        </div>
+    </div>
+</div>
+
+        
+        </div>
+    </div>
+</body>
+</html> 

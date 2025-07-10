@@ -59,7 +59,7 @@ jobs:
             no_check_bucket=true --non-interactive
           rclone listremotes
 
-      - name: Generate metadata files for all datasets
+      - name: Generate metadata files for datasets
         run: |
           set -euo pipefail
 
@@ -84,55 +84,69 @@ jobs:
             for dataset in "${DATASETS[@]}"; do
               name=$(echo "$dataset" | jq -r '.name')
               subpath=$(echo "$dataset" | jq -r '.subpath')
+              metadata_override=$(echo "$dataset" | jq -r '.metadata_override // false')
 
               # Trim possible trailing slash from subpath for bucket path
               clean_subpath="${subpath%/}"
               bucket_path="$ROOT_BUCKET/$clean_subpath"
 
-              # It's a directory if the original subpath ends with a slash.
-              # Otherwise, we assume it's a file.
-              if [[ "$subpath" == */ ]]; then
-                uri_path="$clean_subpath"
-                echo "    (subpath is a directory)"
+              # Generate metadata files and collect size unless metadata_override is true
+              if [[ "$metadata_override" != "true" ]]; then
+                # It's a directory if the original subpath ends with a slash.
+                # Otherwise, we assume it's a file.
+                if [[ "$subpath" == */ ]]; then
+                  uri_path="$clean_subpath"
+                  echo "    (subpath is a directory)"
+                else
+                  uri_path=$(dirname "$clean_subpath")
+                  echo "    (subpath is a file)"
+                fi
+                
+                # Construct the final URI.
+                if [[ "$uri_path" == "." || -z "$uri_path" ]]; then
+                  uri="https://${ROOT_DOMAIN}"
+                else
+                  uri="https://${ROOT_DOMAIN}/${uri_path%/}"
+                fi
+
+                echo "  • Generating .uri for $name => $uri"
+                echo "$uri" > "$META_DIR/${name}.uri"
+
+                echo "    Generating .md5 for $name from $bucket_path (sorted)"
+                if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
+                  echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
+                  exit 1
+                fi
+
+                # Collect dataset size information for PR comment
+                size_json=$(rclone size --json "r2-meta:${bucket_path}" || echo '{}')
+                files=$(echo "$size_json" | jq -r '.count // 0')
+                bytes=$(echo "$size_json" | jq -r '.bytes // 0')
+                if command -v numfmt >/dev/null; then
+                  # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
+                  hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
+                else
+                  hr="${bytes}B"
+                fi
+                echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
+
+                # Add size to metadata.json
+                echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
+                tmp_json=$(mktemp)
+                jq --arg name "$name" --arg size "$hr" \
+                  '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
+                  "$json" > "$tmp_json" && mv "$tmp_json" "$json"
               else
-                uri_path=$(dirname "$clean_subpath")
-                echo "    (subpath is a file)"
+                echo "  • Skipping metadata generation and size calculation for $name (metadata_override: true)"
+                
+                # For datasets with metadata_override, get the existing size from the JSON for PR comment
+                existing_size=$(echo "$dataset" | jq -r '.size // "unknown"')
+                if [[ "$existing_size" != "unknown" && "$existing_size" != "null" && -n "$existing_size" ]]; then
+                  echo "${folder},${name},manual,manual,${existing_size}" >> "$SIZE_FILE"
+                else
+                  echo "${folder},${name},manual,manual,size not specified" >> "$SIZE_FILE"
+                fi
               fi
-              
-              # Construct the final URI.
-              if [[ "$uri_path" == "." || -z "$uri_path" ]]; then
-                uri="https://${ROOT_DOMAIN}"
-              else
-                uri="https://${ROOT_DOMAIN}/${uri_path%/}"
-              fi
-
-              echo "  • Generating .uri for $name => $uri"
-              echo "$uri" > "$META_DIR/${name}.uri"
-
-              echo "    Generating .md5 for $name from $bucket_path (sorted)"
-              if ! rclone md5sum "r2-meta:${bucket_path}" | LC_ALL=C sort > "$META_DIR/${name}.md5"; then
-                echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
-                exit 1
-              fi
-
-              # Collect dataset size information for PR comment
-              size_json=$(rclone size --json "r2-meta:${bucket_path}" || echo '{}')
-              files=$(echo "$size_json" | jq -r '.count // 0')
-              bytes=$(echo "$size_json" | jq -r '.bytes // 0')
-              if command -v numfmt >/dev/null; then
-                # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
-                hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
-              else
-                hr="${bytes}B"
-              fi
-              echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
-
-              # Add size to metadata.json
-              echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
-              tmp_json=$(mktemp)
-              jq --arg name "$name" --arg size "$hr" \
-                '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
-                "$json" > "$tmp_json" && mv "$tmp_json" "$json"
             done
           done
 
@@ -180,33 +194,6 @@ jobs:
           app-id: ${{ steps.op-load-secret.outputs.APP_ID }}
           private-key: ${{ steps.op-load-secret.outputs.APP_PRIVATE_KEY }}
 
-      - name: Commit and push metadata files
-        run: |
-          git config user.name "mlc-r2-infra[bot]"
-          git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
-
-          # Ensure all subsequent git operations (commit, fetch) use the App token
-          git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
-
-          git add */metadata.json
-          git add */metadata/*
-          git diff --cached --name-status
-          if git diff --cached --quiet; then
-            echo "No metadata changes to commit."
-          else
-            git commit -m "Commit metadata files (auto-generated by workflow)" || true
-            
-            # Pull latest changes and rebase if necessary to avoid conflicts
-            echo "Pulling latest changes before pushing..."
-            git pull --rebase origin "${GITHUB_HEAD_REF}" || {
-              echo "Rebase failed, trying merge strategy..."
-              git rebase --abort 2>/dev/null || true
-              git pull origin "${GITHUB_HEAD_REF}"
-            }
-            
-            git push origin HEAD:"${GITHUB_HEAD_REF}"
-          fi
-
       - name: Comment PR with metadata generation summary
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -215,6 +202,8 @@ jobs:
         with:
           script: |
             const { execSync } = require('child_process');
+            // Configure git remote to use the App token for authentication
+            execSync(`git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"`);
             // Fetch main for comparison
             execSync('git fetch --depth=1 origin main');
             const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
@@ -267,4 +256,31 @@ jobs:
                 issue_number: context.issue.number,
                 body,
               });
-            } 
+            }
+
+      - name: Commit and push metadata files
+        run: |
+          git config user.name "mlc-r2-infra[bot]"
+          git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
+
+          # Ensure all subsequent git operations (commit, fetch) use the App token
+          git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
+
+          git add */metadata.json
+          git add */metadata/*
+          git diff --cached --name-status
+          if git diff --cached --quiet; then
+            echo "No metadata changes to commit."
+          else
+            git commit -m "Commit metadata files (auto-generated by workflow)" || true
+            
+            # Pull latest changes and rebase if necessary to avoid conflicts
+            echo "Pulling latest changes before pushing..."
+            git pull --rebase origin "${GITHUB_HEAD_REF}" || {
+              echo "Rebase failed, trying merge strategy..."
+              git rebase --abort 2>/dev/null || true
+              git pull origin "${GITHUB_HEAD_REF}"
+            }
+            
+            git push origin HEAD:"${GITHUB_HEAD_REF}"
+          fi 
