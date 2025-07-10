@@ -202,6 +202,8 @@ jobs:
         with:
           script: |
             const { execSync } = require('child_process');
+            // Configure git remote to use the App token for authentication
+            execSync(`git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"`);
             // Fetch main for comparison
             execSync('git fetch --depth=1 origin main');
             const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
