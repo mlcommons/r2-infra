@@ -59,7 +59,7 @@ jobs:
             no_check_bucket=true --non-interactive
           rclone listremotes
 
-      - name: Generate metadata files for all datasets
+      - name: Generate metadata files for datasets
         run: |
           set -euo pipefail
 
@@ -90,7 +90,7 @@ jobs:
               clean_subpath="${subpath%/}"
               bucket_path="$ROOT_BUCKET/$clean_subpath"
 
-              # Generate metadata files unless metadata_override is true
+              # Generate metadata files and collect size unless metadata_override is true
               if [[ "$metadata_override" != "true" ]]; then
                 # It's a directory if the original subpath ends with a slash.
                 # Otherwise, we assume it's a file.
@@ -117,28 +117,36 @@ jobs:
                   echo "::error::Failed to generate MD5 list for ${name} (folder: $folder). Aborting."
                   exit 1
                 fi
-              else
-                echo "  • Skipping metadata generation for $name (metadata_override: true)"
-              fi
 
-              # Collect dataset size information for PR comment
-              size_json=$(rclone size --json "r2-meta:${bucket_path}" || echo '{}')
-              files=$(echo "$size_json" | jq -r '.count // 0')
-              bytes=$(echo "$size_json" | jq -r '.bytes // 0')
-              if command -v numfmt >/dev/null; then
-                # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
-                hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
-              else
-                hr="${bytes}B"
-              fi
-              echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
+                # Collect dataset size information for PR comment
+                size_json=$(rclone size --json "r2-meta:${bucket_path}" || echo '{}')
+                files=$(echo "$size_json" | jq -r '.count // 0')
+                bytes=$(echo "$size_json" | jq -r '.bytes // 0')
+                if command -v numfmt >/dev/null; then
+                  # Use base-10 SI units so sizes show as MB/GB/TB instead of MiB/GiB/TiB
+                  hr=$(numfmt --to=si --suffix=B "${bytes}" 2>/dev/null || echo "${bytes}B")
+                else
+                  hr="${bytes}B"
+                fi
+                echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
 
-              # Add size to metadata.json
-              echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
-              tmp_json=$(mktemp)
-              jq --arg name "$name" --arg size "$hr" \
-                '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
-                "$json" > "$tmp_json" && mv "$tmp_json" "$json"
+                # Add size to metadata.json
+                echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
+                tmp_json=$(mktemp)
+                jq --arg name "$name" --arg size "$hr" \
+                  '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
+                  "$json" > "$tmp_json" && mv "$tmp_json" "$json"
+              else
+                echo "  • Skipping metadata generation and size calculation for $name (metadata_override: true)"
+                
+                # For datasets with metadata_override, get the existing size from the JSON for PR comment
+                existing_size=$(echo "$dataset" | jq -r '.size // "unknown"')
+                if [[ "$existing_size" != "unknown" && "$existing_size" != "null" && -n "$existing_size" ]]; then
+                  echo "${folder},${name},manual,manual,${existing_size}" >> "$SIZE_FILE"
+                else
+                  echo "${folder},${name},manual,manual,size not specified" >> "$SIZE_FILE"
+                fi
+              fi
             done
           done
 
