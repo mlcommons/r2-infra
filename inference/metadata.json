@@ -5,6 +5,14 @@
   "datasets": {
     "DeepSeek-R1": [
       {
+        "name": "deepseek-r1-0528",
+        "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
+        "title": "DeepSeek-R1-0528 Model",
+        "description": "DeepSeek-R1-0528 model for the DeepSeek-R1 benchmark",
+        "destination": "deepseek-r1/models",
+        "size": "689GB"
+      },
+      {
         "name": "deepseek-r1-dataset-4388-fp8-eval",
         "subpath": "deepseek_r1/datasets/mlperf_deepseek_r1_dataset_4388_fp8_eval.pkl",
         "title": "DeepSeek-R1 Preprocessed Dataset",
@@ -19,14 +27,6 @@
         "description": "Calibration dataset for the DeepSeek-R1 benchmark",
         "destination": "deepseek-r1/datasets",
         "size": "17MB"
-      },
-      {
-        "name": "deepseek-r1-model-0528",
-        "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
-        "title": "DeepSeek-R1 Model",
-        "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark",
-        "destination": "deepseek-r1/models",
-        "size": "689GB"
       }
     ],
     "Llama-3.1-8b": [
