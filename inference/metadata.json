@@ -26,7 +26,6 @@
         "title": "DeepSeek-R1 Model",
         "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark",
         "destination": "deepseek-r1/models",
-        
       }
     ],
     "Llama-3.1-8b": [
