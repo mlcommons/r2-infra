@@ -58,7 +58,7 @@
     <p class="dataset-description">Preprocessed dataset for the DeepSeek-R1 benchmark (~147MB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d deepseek-r1/datasets https://inference.mlcommons-storage.org/metadata/deepseek-r1-dataset-4388-fp8-eval.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/deepseek-r1-dataset-4388-fp8-eval.uri</code>
         </div>
     </div>
 </div>
@@ -67,7 +67,35 @@
     <p class="dataset-description">Calibration dataset for the DeepSeek-R1 benchmark (~17MB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d deepseek-r1/datasets https://inference.mlcommons-storage.org/metadata/deepseek-r1-calibration-dataset-500-fp8-eval.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/deepseek-r1-calibration-dataset-500-fp8-eval.uri</code>
+        </div>
+    </div>
+</div>
+<h3>Llama 3.1 8b</h3>
+<div class="dataset-section">
+    <h3 class="dataset-title">Full CNN evaluation dataset (Inference Datacenter)</h3>
+    <p class="dataset-description">CNN dataset for the Llama 3.1 8b Inference Datacenter benchmark (~267MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/llama3-1-8b-cnn-eval.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">5000 samples CNN evaluation dataset (Inference Edge)</h3>
+    <p class="dataset-description">Sample CNN dataset for the Llama 3.1 8b Inference Edge benchmark (~95MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/llama3-1-8b-sample-cnn-eval-5000.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">CNN-DailyMail calibration dataset</h3>
+    <p class="dataset-description">CNN-DailyMail calibration dataset for the Llama 3.1 8b benchmark (~21MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/llama3-1-8b-cnn-dailymail-calibration.uri</code>
         </div>
     </div>
 </div>
