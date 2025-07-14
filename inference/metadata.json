@@ -20,12 +20,13 @@
         "destination": "deepseek-r1/datasets",
         "size": "17MB"
       },
-      { 
+      {
         "name": "deepseek-r1-model-0528",
         "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
         "title": "DeepSeek-R1 Model",
         "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark",
-        "destination": "deepseek-r1/models"
+        "destination": "deepseek-r1/models",
+        "size": "689GB"
       }
     ],
     "Llama-3.1-8b": [
@@ -34,21 +35,24 @@
         "subpath": "llama3.1_8b/datasets/cnn_eval.json",
         "title": "Llama3.1-8b Full Dataset",
         "description": "CNN dataset for the Llama3.1-8b benchmark",
-        "destination": "llama3.1_8b/datasets"
+        "destination": "llama3.1_8b/datasets",
+        "size": "267MB"
       },
       {
         "name": "llama3.1-8b-sample-cnn-eval-5000",
         "subpath": "llama3.1_8b/datasets/sample_cnn_eval_5000.json",
         "title": "Llama3.1-8b 5000 Samples Dataset",
         "description": "Sample CNN dataset for the Llama3.1-8b benchmark",
-        "destination": "llama3.1_8b/datasets"
+        "destination": "llama3.1_8b/datasets",
+        "size": "95MB"
       },
       {
         "name": "llama3.1-8b-cnn-dailymail-calibration",
         "subpath": "llama3.1_8b/datasets/cnn_dailymail_calibration.json",
         "title": "Llama3.1-8b DailyMail Calibration Dataset",
         "description": "DailyMail dataset for the Llama3.1-8b benchmark",
-        "destination": "llama3.1_8b/datasets"
+        "destination": "llama3.1_8b/datasets",
+        "size": "21MB"
       }
     ],
     "Whisper Benchmark": [
