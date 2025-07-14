@@ -142,9 +142,9 @@ jobs:
                 # For datasets with metadata_override, get the existing size from the JSON for PR comment
                 existing_size=$(echo "$dataset" | jq -r '.size // "unknown"')
                 if [[ "$existing_size" != "unknown" && "$existing_size" != "null" && -n "$existing_size" ]]; then
-                  echo "${folder},${name},manual,manual,${existing_size}" >> "$SIZE_FILE"
+                  echo "${folder},${name},bypassed,bypassed,${existing_size}" >> "$SIZE_FILE"
                 else
-                  echo "${folder},${name},manual,manual,size not specified" >> "$SIZE_FILE"
+                  echo "${folder},${name},bypassed,bypassed,size not specified" >> "$SIZE_FILE"
                 fi
               fi
             done
