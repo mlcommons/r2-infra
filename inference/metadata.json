@@ -17,7 +17,7 @@
         "title": "DeepSeek-R1 Datasets",
         "description": "Full preprocessed dataset and calibration dataset for the DeepSeek-R1 benchmark",
         "destination": "./",
-        "size": "17MB"
+        "size": "163MB"
       }
     ],
     "Llama 3.1 8b": [
