@@ -1,0 +1,16 @@
+{
+  "bucket": "mlcommons-auth-test",
+  "domain": "auth-test.mlcommons-storage.org",
+  "title": "MLCommons Auth Test Data Download",
+  "datasets": {
+    "Dataset": [
+      {
+        "name": "dataset",
+        "subpath": "data/dataset/",
+        "title": "Dataset",
+        "description": "Dataset",
+        "size": "150KB"
+      }
+    ]
+  }
+}
