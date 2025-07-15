@@ -12,18 +12,12 @@
         "size": "689GB"
       },
       {
-        "name": "deepseek-r1-dataset-4388-fp8-eval",
-        "subpath": "deepseek_r1/datasets/mlperf_deepseek_r1_dataset_4388_fp8_eval.pkl",
-        "title": "DeepSeek-R1 Preprocessed Dataset",
-        "description": "Preprocessed dataset for the DeepSeek-R1 benchmark",
-        "size": "147MB"
-      },
-      {
-        "name": "deepseek-r1-calibration-dataset-500-fp8-eval",
-        "subpath": "deepseek_r1/datasets/mlperf_deepseek_r1_calibration_dataset_500_fp8_eval.pkl",
-        "title": "DeepSeek-R1 Calibration Dataset",
-        "description": "Calibration dataset for the DeepSeek-R1 benchmark",
-        "size": "17MB"
+        "name": "deepseek-r1-datasets-fp8-eval",
+        "subpath": "deepseek_r1/datasets/",
+        "title": "DeepSeek-R1 Datasets",
+        "description": "Full preprocessed dataset and calibration dataset for the DeepSeek-R1 benchmark",
+        "destination": "./",
+        "size": "163MB"
       }
     ],
     "Llama 3.1 8b": [
