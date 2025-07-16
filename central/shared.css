@@ -253,8 +253,7 @@ summary {
     outline: none;
     user-select: none;
     transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
+    line-height: 1.2;
 }
 
 summary:hover {
@@ -285,6 +284,8 @@ summary::before {
     transition: transform 0.2s ease;
     color: var(--arrow-color);
     vertical-align: middle;
+    font-size: 1rem;
+    line-height: 1.2;
 }
 
 details[open] summary::before {
@@ -303,6 +304,8 @@ summary h3, summary strong {
     padding: 0;
     color: inherit;
     vertical-align: middle;
+    font-size: 1rem;
+    line-height: 1.2;
 }
 
 details > *:not(summary) {
