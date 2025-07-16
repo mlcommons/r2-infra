@@ -4,7 +4,7 @@
   "title": "MLPerf Inference Benchmark Data Download",
   "index_expandable": "true",
   "datasets": {
-    "DeepSeek-R1": [
+    "DeepSeek-R1 Benchmark": [
       {
         "name": "deepseek-r1-0528",
         "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
@@ -21,7 +21,7 @@
         "size": "163MB"
       }
     ],
-    "Llama 3.1 8b": [
+    "Llama 3.1 8b Benchmark": [
       {
         "name": "llama3-1-8b-cnn-eval",
         "subpath": "llama3.1_8b/datasets/cnn_eval.json",
