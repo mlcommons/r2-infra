@@ -55,6 +55,7 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     page_title=$(jq -r '.title' "$metadata_file")
     license_notice=$(jq -r '.license_notice' "$metadata_file")
     index_override=$(jq -r '.index_override // "false"' "$metadata_file")
+    index_expandable=$(jq -r '.index_expandable // "false"' "$metadata_file")
     
     if [ -z "$domain" ] || [ "$domain" == "null" ]; then
         echo "    - ⚠️ Warning: Skipping '${folder_name}' because 'domain' is missing in metadata.json"
@@ -90,7 +91,13 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
         # Only add category heading if category name is not empty
         if [ -n "$category" ]; then
             cat_heading=$(html_escape "$category")
-            echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+            
+            # Check if sections should be expandable
+            if [ "$index_expandable" == "true" ]; then
+                echo "<details><summary><h3>$cat_heading</h3> (click to expand)</summary>" >> "$dataset_sections_file"
+            else
+                echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+            fi
         fi
         
         # Get all datasets for this category and process them
@@ -130,6 +137,11 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
 </div>
 EOF
         done < <(jq -c ".datasets[\"$category\"][]" "$metadata_file")
+        
+        # Close details tag if expandable and category was not empty
+        if [ "$index_expandable" == "true" ] && [ -n "$category" ]; then
+            echo "</details>" >> "$dataset_sections_file"
+        fi
     done < <(jq -r '.datasets | keys_unsorted[]' "$metadata_file")
     
     echo "    - DEBUG: About to call safe_replace for __DATASET_SECTIONS__"
