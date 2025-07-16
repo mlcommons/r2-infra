@@ -151,6 +151,8 @@ code {
     font-size: 0.875em;
     color: var(--text-color);
     border: 1px solid var(--border-color);
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .dataset-description {
