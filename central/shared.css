@@ -300,13 +300,18 @@ details summary h3,
 details summary h4, 
 details summary h5, 
 details summary h6 {
-    display: inline-block !important;
+    display: inline !important;
     margin: 0 !important;
     padding: 0 !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
     color: inherit !important;
     vertical-align: baseline !important;
+    float: none !important;
+    clear: none !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: inherit !important;
 }
 
 details > *:not(summary) {
