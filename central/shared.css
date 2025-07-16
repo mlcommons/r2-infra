@@ -253,6 +253,8 @@ summary {
     outline: none;
     user-select: none;
     transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
     line-height: 1.2;
 }
 
@@ -283,11 +285,9 @@ summary::before {
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
     color: var(--arrow-color);
-    vertical-align: baseline;
     font-size: 1rem;
     line-height: 1;
-    position: relative;
-    top: 0.1em;
+    flex-shrink: 0;
 }
 
 details[open] summary::before {
@@ -305,9 +305,6 @@ summary h3, summary strong {
     margin: 0;
     padding: 0;
     color: inherit;
-    vertical-align: baseline;
-    position: relative;
-    top: 0.2em;
 }
 
 details > *:not(summary) {
