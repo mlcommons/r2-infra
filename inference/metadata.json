@@ -2,6 +2,7 @@
   "bucket": "mlcommons-inference-wg-public",
   "domain": "inference.mlcommons-storage.org",
   "title": "MLPerf Inference Benchmark Data Download",
+  "index_override": "true",
   "datasets": {
     "DeepSeek-R1": [
       {

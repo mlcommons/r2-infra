@@ -54,9 +54,15 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     domain=$(jq -r '.domain' "$metadata_file")
     page_title=$(jq -r '.title' "$metadata_file")
     license_notice=$(jq -r '.license_notice' "$metadata_file")
+    index_override=$(jq -r '.index_override // "false"' "$metadata_file")
     
     if [ -z "$domain" ] || [ "$domain" == "null" ]; then
         echo "    - ⚠️ Warning: Skipping '${folder_name}' because 'domain' is missing in metadata.json"
+        continue
+    fi
+    
+    if [ "$index_override" == "true" ]; then
+        echo "    - ⚠️ Skipping '${folder_name}' because 'index_override' is set to true in metadata.json"
         continue
     fi
     
