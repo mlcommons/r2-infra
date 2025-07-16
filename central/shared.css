@@ -255,6 +255,7 @@ summary {
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;
+    white-space: pre-wrap;
 }
 
 summary:hover {
