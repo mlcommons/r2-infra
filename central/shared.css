@@ -256,6 +256,7 @@ summary {
     display: flex;
     align-items: center;
     white-space: pre-wrap;
+    -webkit-tap-highlight-color: transparent;
 }
 
 summary:hover {
