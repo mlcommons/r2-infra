@@ -307,7 +307,7 @@ summary h3, summary strong {
     color: inherit;
     vertical-align: baseline;
     position: relative;
-    top: -0.1em;
+    top: 0.2em;
 }
 
 details > *:not(summary) {
