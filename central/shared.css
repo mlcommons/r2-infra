@@ -253,6 +253,8 @@ summary {
     outline: none;
     user-select: none;
     transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
 }
 
 summary:hover {
@@ -282,6 +284,9 @@ summary::before {
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
     color: var(--arrow-color);
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
 }
 
 details[open] summary::before {
@@ -293,8 +298,8 @@ details[open] summary {
     margin-bottom: 0;
 }
 
-/* Make h3 elements inside summary display inline */
-summary h3 {
+/* Make h3 & strong elements inside summary display inline */
+summary h3, summary strong {
     display: inline;
     margin: 0;
     padding: 0;
@@ -310,6 +315,11 @@ details > *:not(summary) {
 details p {
     margin: 0 0 0.125rem 0; /* Much tighter spacing between p and ol */
     padding-left: 0.80rem; /* Reduced padding to align with list item text */
+}
+
+/* Override padding for dataset descriptions to align with titles */
+details .dataset-description {
+    padding-left: 0;
 }
 
 details ol, details ul {
