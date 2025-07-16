@@ -216,10 +216,11 @@ code {
 
 .alert {
     padding: 1rem 1.5rem;
-    margin: 1.5rem 0 0.5rem 0;
+    margin: 1.5rem 0;
     border-radius: 6px;
     border: 1px solid;
     font-weight: 500;
+    line-height: 1.2;
 }
 
 .alert-info {
@@ -255,7 +256,6 @@ summary {
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;
-    line-height: 1.2;
 }
 
 summary:hover {
