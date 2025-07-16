@@ -293,25 +293,14 @@ details[open] summary {
     margin-bottom: 0;
 }
 
-/* Make heading elements inside summary display inline */
-details summary h1, 
-details summary h2, 
-details summary h3, 
-details summary h4, 
-details summary h5, 
-details summary h6 {
-    display: inline !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
-    color: inherit !important;
-    vertical-align: baseline !important;
-    float: none !important;
-    clear: none !important;
-    width: auto !important;
-    height: auto !important;
-    line-height: inherit !important;
+/* Make h3 elements inside summary display inline */
+summary h3 {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: inherit;
 }
 
 details > *:not(summary) {
