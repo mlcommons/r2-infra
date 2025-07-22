@@ -13,7 +13,7 @@
       },
       {
         "name": "microset",
-        "subpath": "data/dataset/microset",
+        "subpath": "data/dataset/microset/",
         "hidden": true,
         "size": "75KB"
       },
