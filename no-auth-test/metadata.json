@@ -12,6 +12,11 @@
         "size": "150KB"
       },
       {
+        "name": "microset",
+        "subpath": "data/dataset/microset",
+        "hidden": true
+      },
+      {
         "name": "single-file-dataset",
         "subpath": "data/dataset",
         "title": "Single File Dataset",
