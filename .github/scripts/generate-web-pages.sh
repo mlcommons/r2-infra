@@ -107,6 +107,13 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
             raw_description=$(echo "$dataset_json" | jq -r '.description')
             size=$(echo "$dataset_json" | jq -r '.size')
             destination=$(echo "$dataset_json" | jq -r '.destination')
+            hidden=$(echo "$dataset_json" | jq -r '.hidden // "false"')
+            
+            # Skip this dataset if it's marked as hidden
+            if [ "$hidden" == "true" ]; then
+                echo "    - DEBUG: Skipping dataset '$name' (marked as hidden)"
+                continue
+            fi
             
             title=$(html_escape "$raw_title")
             description=$(html_escape "$raw_description")
