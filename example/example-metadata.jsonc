@@ -4,19 +4,21 @@
 * to generate and deploy the infra files that support the MLC R2 Downloader.
 */
 {
-  "bucket": "mlcommons-example-bucket", // Bucket name
-  "domain": "example.mlcommons-storage.org", // Domain name associated with the bucket
-  "title": "MLCommons Example Bucket", // Title displayed on the index.html page associated with the bucket
-  "license_notice": "This bucket is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://example.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf' target='_blank'>this side letter</a> from Meta.", // license notice
-  "index_expandable": "true", // (optional) If true, the categories in the index.html page will be trunkated into expandable sections
-  "index_override": "true", // (optional) If true, the index.html page will not be generated, allowing for a custom index.html page to be defined in the directory shared with the metadata.json file
-  "datasets": { // Datasets are grouped in categories
-    "Benchmark1": [
+  "bucket": "mlcommons-example-bucket", // bucket name
+  "domain": "example.mlcommons-storage.org", // domain name associated with the bucket
+  "title": "MLCommons Example Bucket", // title displayed on the index.html page associated with the bucket
+  "license_notice": "This bucket is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://example.mlcommons-storage.org/data/MLCommons_-_Meta_Platforms%2C_Inc._-_Letter_Agreement_to_Llama_3.1_License_(9.9.2024)_-_signed.pdf' target='_blank'>this side letter</a> from Meta.",
+  // (optional) if the bucket requires a license agreement to access it, define license notice text to be displayed on the index.html page
+  "index_expandable": "true", // (optional) if true, the categories in the index.html page will be trunkated into expandable sections
+  "index_override": "true", // (optional) if true, the index.html page will not be generated, allowing for a custom index.html page to be defined in the directory shared with the metadata.json file
+  "datasets": { // datasets are grouped in categories
+    "Benchmark1": [ // category name displayed on the index.html page
       {
-        "name": "benchmark1-model-1",
-        "subpath": "data/benchmark1/benchmark1-model-1/",
-        "title": "Benchmark1 Model 1",
-        "description": "Benchmark1 model 1 for inference",
+        "name": "benchmark1-model-1", // name used by the download command & generated metadata files
+        "subpath": "data/benchmark1/benchmark1-model-1/", // path to the directory (must end with a trailing slash) or file within the bucket
+        "title": "Benchmark1 Model 1", // title displayed on the index.html page
+        "description": "Benchmark1 model 1 for inference", // description displayed on the index.html page
+        "destination": "custom-directory-name", // (optional) if set, the download command will specify a custom destination directory using the -d flag
         "size": "1GB" // size is automatically added by gen-metadata.yml unless metadata_override is set
       },
       {
@@ -24,13 +26,13 @@
         "subpath": "data/benchmark1/benchmark1-dataset-1/",
         "title": "Benchmark1 Dataset 1",
         "description": "Benchmark1 dataset 1 for training",
-        "metadata_override": "true", // (optional) If true, the metadata files will not be generated, allowing for custom metadata files to be defined in the metadata subdirectory
-        "size": "10GB"
+        "metadata_override": "true", // (optional) if true, the metadata files will not be generated, allowing for custom metadata files to be defined in the metadata subdirectory
+        "size": "10GB" // since metadata_override is set, the size must be manually defined
       },
       {
         "name": "benchmark1-dataset-subset",
         "subpath": "data/benchmark1/benchmark1-dataset-subset/",
-        "hidden": "true" // (optional) If true, the dataset will not be displayed in the index.html page
+        "hidden": "true" // (optional) if true, the dataset will not be displayed in the index.html page
       }
     ],
     "Benchmark2": [
