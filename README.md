@@ -4,15 +4,15 @@ This repository functions as the source of truth and version control for the met
 
 **README Overview:**
 
-* [Infrastructure Components](Infrastructure-Components)
-    * [Cloudflare R2 Buckets](Infrastructure-Components#cloudflare-r2-buckets)
-    * [Cloudflare Access](Infrastructure-Components#cloudflare-access)
-        * [Programatic Access](Infrastructure-Components#programatic-access-with-service-tokens)
-    * [Metadata Files](Infrastructure-Components#metadata-files)
-    * [Download Command Pages](Infrastructure-Components#download-command-pages-indexhtml)
-* [Defining Metadata](Defining-Metadata)
-* [Generating & Staging Infra Files](Generating-&-Staging-Infra-Files)
-* [Deploying to Prod](Deploying-to-Prod)
+* [Infrastructure Components](#infrastructure-components)
+    * [Cloudflare R2 Buckets](#cloudflare-r2-buckets)
+    * [Cloudflare Access](#cloudflare-access)
+        * [Programatic Access](#programatic-access-with-service-tokens)
+    * [Metadata Files](#metadata-files)
+    * [Download Command Pages](#download-command-pages-indexhtml)
+* [Defining Metadata](#defining-metadata-metadatajson)
+* [Generating & Staging Infra Files](#generating--staging-infra-files)
+* [Deploying to Prod](#deploying-to-prod)
 
 ## Infrastructure Components
 
