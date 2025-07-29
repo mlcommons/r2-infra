@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
-      - '*/metadata.json'
+      - '*/manifest.json'
       - '*/index.html'
       - '.github/workflows/gen-metadata.yml'
 
@@ -67,9 +67,9 @@ jobs:
           SIZE_FILE="$GITHUB_WORKSPACE/size_report.txt"
           echo "folder,dataset,files,bytes,hr" > "$SIZE_FILE"
 
-          for json in */metadata.json; do
+          for json in */manifest.json; do
             # Skip central resources folder if present
-            [[ "$json" == "central/metadata.json" ]] && continue
+            [[ "$json" == "central/manifest.json" ]] && continue
 
             folder="$(dirname "$json")"  # e.g., 'waymo'
             META_DIR="${folder}/metadata"
@@ -130,7 +130,7 @@ jobs:
                 fi
                 echo "${folder},${name},${files},${bytes},${hr}" >> "$SIZE_FILE"
 
-                # Add size to metadata.json
+                # Add size to manifest.json
                 echo "    📝 Adding size '${hr}' to ${json} for dataset '${name}'"
                 tmp_json=$(mktemp)
                 jq --arg name "$name" --arg size "$hr" \
@@ -158,9 +158,9 @@ jobs:
 
           PR_NUM="${{ github.event.number }}"
 
-          for json in */metadata.json; do
+          for json in */manifest.json; do
             # Skip central resources folder if present
-            [[ "$json" == "central/metadata.json" ]] && continue
+            [[ "$json" == "central/manifest.json" ]] && continue
 
             folder="$(dirname "$json")"
             ROOT_BUCKET=$(jq -r '.bucket' "$json")
@@ -202,7 +202,7 @@ jobs:
           # Ensure all subsequent git operations (commit, fetch) use the App token
           git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
 
-          git add */metadata.json
+          git add */manifest.json
           git add */metadata/*
           git diff --cached --name-status
           if git diff --cached --quiet; then

@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
-      - '*/metadata.json'
+      - '*/manifest.json'
       - 'central/*'
       - 'templates/template-index.html'
       - '.github/scripts/generate-web-pages.sh'
@@ -105,7 +105,7 @@ jobs:
         deployed_count=0
         
         for folder in */; do
-          if [ -f "${folder}metadata.json" ]; then
+          if [ -f "${folder}manifest.json" ]; then
             folder_name=${folder%/}  # Remove trailing slash for cleaner output
             
             # Skip if no index.html for non-central folders
@@ -118,7 +118,7 @@ jobs:
             
             if [ "$folder" = "central/" ]; then
               echo "  └── Uploading all central resources..."
-              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name --exclude "metadata.json" -v
+              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name --exclude "manifest.json" -v
             else
               echo "  └── Processing and uploading index.html..."
               # Create a temporary file with staging URLs
@@ -141,7 +141,7 @@ jobs:
             deployed_count=$((deployed_count + 1))
           else
             folder_name=${folder%/}
-            echo "⏭️  Skipping ${folder_name} (no metadata.json file found)"
+            echo "⏭️  Skipping ${folder_name} (no manifest.json file found)"
           fi
         done
         
@@ -153,7 +153,7 @@ jobs:
         echo ""
         echo "📄 Index pages:"
         for folder in */; do
-          if [ -f "${folder}metadata.json" ]; then
+          if [ -f "${folder}manifest.json" ]; then
             folder_name=${folder%/}
             if [ "$folder" != "central/" ]; then
               echo "  🔗 ${folder_name}: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/${folder_name}/index.html"
@@ -162,7 +162,7 @@ jobs:
         done
         echo ""
         echo "📦 Central resources:"
-        if [ -f "central/metadata.json" ]; then
+        if [ -f "central/manifest.json" ]; then
           echo "  🔗 Shared CSS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.css"
           echo "  🔗 Shared JS: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared.js"
           echo "  🔗 Shared content: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/central/shared-content.html"
@@ -180,14 +180,14 @@ jobs:
           let comment = `## 🚀 Web staging deployment complete\n\n`;
           comment += `Your changes have been deployed to the staging environment and are ready for review!\n\n`;
           
-          // Get list of folders with metadata.json files
+          // Get list of folders with manifest.json files
           const fs = require('fs');
           const folders = fs.readdirSync('.', { withFileTypes: true })
             .filter(dirent => dirent.isDirectory())
             .map(dirent => dirent.name)
             .filter(folder => {
               try {
-                return fs.existsSync(`${folder}/metadata.json`) && fs.existsSync(`${folder}/index.html`);
+                return fs.existsSync(`${folder}/manifest.json`) && fs.existsSync(`${folder}/index.html`);
               } catch {
                 return false;
               }
