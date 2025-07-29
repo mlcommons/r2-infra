@@ -1,5 +1,5 @@
 /* 
-* This JSONC (JSON with comments) file is a commented example of the metadata.json files 
+* This JSONC (JSON with comments) file is a commented example of the manifest.json files 
 * that define the bucket and dataset info used by the GitHub Actions workflows in this repo
 * to generate and deploy the infra files that support the MLC R2 Downloader.
 */

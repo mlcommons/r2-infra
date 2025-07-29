@@ -1,6 +1,6 @@
 # MLCommons Cloudflare R2 Infra
 
-This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to Infrascuture as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on the dataset information defined in JSON files.
+This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to Infrascuture as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on bucket information defined in JSON manifest files.
 
 **README Overview:**
 
@@ -11,7 +11,7 @@ This repository functions as the source of truth and version control for the met
     * [Metadata Files](#metadata-files)
     * [Download Command Pages](#download-command)
 * [Repository Structure](#repository-structure)
-* [Defining Bucket Metadata](#defining-bucket-metadata)
+* [Defining Bucket Manifests](#defining-bucket-manifests)
 * [Generating & Staging Infra Files](#generating--staging-infra-files)
 * [Deploying to Prod](#deploying-to-prod)
 
@@ -55,11 +55,11 @@ Each of these download command pages follows the same format and shares styling,
 
 ## Repository Structure
 
-Other than the `templates` and `example` directories, every directory in this repo corresponds to a R2 bucket. The `metadata.json` configuration file within each of these directories defines, among other things, the name of the bucket, which the various GitHub Actions workflow in the repo use to determine where to deploy the resources within each bucket.
+Other than the `templates` and `example` directories, every directory in this repo corresponds to a R2 bucket. The `manifest.json` configuration file within each of these directories defines, among other things, the name of the bucket, which the various GitHub Actions workflow in the repo use to determine where to deploy the resources within each bucket.
 
-The `central` directory contains the shared web files that are deployed to the `mlcommons-r2-infra` bucket. The remaining directories correspond to buckets containing data meant for distribution by way of the MLC R2 Downloader. Within each of these directories is an `index.html` file and a `metadata` subdirectory containing `.uri` and `.md5` metadata files. These files are all deployed directly from this repo to the corresponding buckets.
+The `central` directory contains the shared web files that are deployed to the `mlcommons-r2-infra` bucket. The remaining directories correspond to buckets containing data meant for distribution by way of the MLC R2 Downloader. Within each of these directories is an `index.html` file and a `metadata` subdirectory containing `.uri` and `.md5` files. These files are all deployed directly from this repo to the corresponding buckets.
 
-## Defining Bucket Metadata
+## Defining Bucket Manifests
 
 ## Generating & Staging Infra Files
 

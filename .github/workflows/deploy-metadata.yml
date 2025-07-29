@@ -49,11 +49,11 @@ jobs:
           echo "🚀 Deploying metadata files to R2 buckets..."
           deployed_count=0
           for folder in */; do
-            # Need metadata.json and metadata directory
-            if [ -f "${folder}metadata.json" ] && [ -d "${folder}metadata" ]; then
-              BUCKET_NAME=$(jq -r '.bucket' "${folder}metadata.json")
+            # Need manifest.json and metadata directory
+            if [ -f "${folder}manifest.json" ] && [ -d "${folder}metadata" ]; then
+              BUCKET_NAME=$(jq -r '.bucket' "${folder}manifest.json")
               if [ -z "$BUCKET_NAME" ] || [ "$BUCKET_NAME" = "null" ]; then
-                echo "::error::Bucket name missing in ${folder}metadata.json. Skipping.";
+                echo "::error::Bucket name missing in ${folder}manifest.json. Skipping.";
                 continue;
               fi
               folder_name=${folder%/}

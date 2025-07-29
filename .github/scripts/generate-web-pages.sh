@@ -42,8 +42,8 @@ html_escape() {
     echo "$1" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
 }
 
-# Find and process all metadata.json files (excluding central)
-find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_file; do
+# Find and process all manifest.json files (excluding central)
+find . -name "manifest.json" -not -path "./central/*" | while read -r metadata_file; do
     dir=$(dirname "$metadata_file")
     folder_name=$(basename "$dir")
     output_html_file="${dir}/index.html"
@@ -58,12 +58,12 @@ find . -name "metadata.json" -not -path "./central/*" | while read -r metadata_f
     index_expandable=$(jq -r '.index_expandable // "false"' "$metadata_file")
     
     if [ -z "$domain" ] || [ "$domain" == "null" ]; then
-        echo "    - ⚠️ Warning: Skipping '${folder_name}' because 'domain' is missing in metadata.json"
+        echo "    - ⚠️ Warning: Skipping '${folder_name}' because 'domain' is missing in manifest.json"
         continue
     fi
     
     if [ "$index_override" == "true" ]; then
-        echo "    - ⚠️ Skipping '${folder_name}' because 'index_override' is set to true in metadata.json"
+        echo "    - ⚠️ Skipping '${folder_name}' because 'index_override' is set to true in manifest.json"
         continue
     fi
     
