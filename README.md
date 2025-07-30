@@ -13,6 +13,7 @@ This repository functions as the source of truth and version control for the met
     * [Download Command Pages](#download-command)
 * [Repository Structure](#repository-structure)
 * [Defining Bucket Manifests](#defining-bucket-manifests)
+    * [Specifying Destination Directory](#specifying-destination-directory)
     * [Overriding File Generation](#overriding-file-generation)
 * [Generating & Staging Infra Files](#generating--staging-infra-files)
     * [Automated File Generation](#automated-file-generation)
@@ -40,9 +41,11 @@ This token is stored in 1Password and the GitHub Actions workflows in this repo 
 
 ### Cloudflare Access
 
-In the case of a bucket used to distribute data with an authentication requirement, such as Members-only access and or a license agreement, a Cloudflare Access Application must be created for the bucket subdomain _**before**_ configuring the subdomain in the bucket settings. Configuration in the reverse order would result in a period in which unauthorized unauthorized access would be possible.
+In the case of a bucket used to distribute data with an authentication requirement, such as Members-only access and or a license agreement, a Cloudflare Access Application must be created for the bucket subdomain _**before**_ configuring the subdomain in the bucket settings. Configuration in the reverse order would result in a period in which unauthorized access would be possible.
 
-Cloudflare Access Application requirements:
+Clouflare Access is usually used in conjunction with the [License Agreement Flow](https://github.com/mlcommons/license-agreement-flow) system, which automatically adds users to a Cloudflare Access Rule Group once they've signed a EULA, granting them access to the corresponding bucket.
+
+**Cloudflare Access Application requirements:**
 
 * A dedicated Access Policy with a session length of two weeks that allows anyone in a dedicated Rule Group to access the application.
 * Login methods of One-time PIN and Google SSO
@@ -86,7 +89,7 @@ Every directory in this repo that corresponds to a R2 bucket contains a `manifes
 The [`example-manifest.jsonc`](example/example-manifest.jsonc) file in the example directory serves as a commented example of a manifest, with the comments explaining each property. Bucket manifests use the following heirarchical structure:
 
 ```
- {
+{
   bucket info
   datasets {
     category [
@@ -95,8 +98,16 @@ The [`example-manifest.jsonc`](example/example-manifest.jsonc) file in the examp
       }
     ]
   }
- }
+}
 ```
+
+### Specifying Destination Directory
+
+By default, the MLC R2 Downloader determines the destination directory based on the contents of the metadata files. If the `.md5` files specifies only a single file to be downloaded, the Downloader downloads the files directly to the current working directory from which the script was run. If more than one file is specified, then the Downloader downloads the files into a directory with the same name as the directory containing the files in the bucket.
+
+In some cases you may want to specify an alternative download directory, and the Downloader supports doing so with the `-d <download-path>` option. While anyone can modify the destination directory by passing this flag with the download command, you can define a destination directory for each dataset in a bucket manifest using the `destination` property. Then, when the `index.html` files are generated, a matching `-d` flag will be added to the appropriate download commands.
+
+With the `destination` property you can define the download destination as the working directory (`./`), a single directory (`<directory-name>`), or even a file path with multiple directories (`<directory-name>/<subdirectory-name>`).
 
 ### Overriding File Generation
 
