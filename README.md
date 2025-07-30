@@ -85,7 +85,7 @@ Every directory in this repo that corresponds to a R2 bucket contains a `manifes
 
 The [`example-manifest.jsonc`](example/example-manifest.jsonc) file in the example directory serves as a commented example of a manifest, with the comments explaining each property. Bucket manifests use the following heirarchical structure:
 
-```json
+```
  {
   bucket info
   datasets {
