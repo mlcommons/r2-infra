@@ -103,9 +103,9 @@ The [`example-manifest.jsonc`](example/example-manifest.jsonc) file in the examp
 
 ### Specifying Destination Directory
 
-By default, the MLC R2 Downloader determines the destination directory based on the contents of the metadata files. If the `.md5` files specifies only a single file to be downloaded, the Downloader downloads the files directly to the current working directory from which the script was run. If more than one file is specified, then the Downloader downloads the files into a directory with the same name as the directory containing the files in the bucket.
+By default, the MLC R2 Downloader determines the destination directory based on the contents of the metadata files. If the `.md5` file specifies only a single file to be downloaded, the Downloader downloads the files directly to the current working directory from which the script was run. If more than one file is specified, then the Downloader downloads the files into a directory with the same name as the directory containing the files in the bucket.
 
-In some cases you may want to specify an alternative download directory, and the Downloader supports doing so with the `-d <download-path>` option. While anyone can modify the destination directory by passing this flag with the download command, you can define a destination directory for each dataset in a bucket manifest using the `destination` property. Then, when the `index.html` files are generated, a matching `-d` flag will be added to the appropriate download commands.
+In some cases you may want to specify an alternative download directory, and the Downloader supports doing so with the `-d <download-path>` option. While anyone can modify the destination directory by passing this flag with the download command, you can define a destination directory to be included in the official download command for each dataset displayed on the download command web pages. You can do so by adding the `destination` property to a dataset defined in a bucket manifest. Then, when the `index.html` files are generated, a matching `-d` flag will be added to the appropriate download command.
 
 With the `destination` property you can define the download destination as the working directory (`./`), a single directory (`<directory-name>`), or even a file path with multiple directories (`<directory-name>/<subdirectory-name>`).
 
