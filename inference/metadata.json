@@ -34,7 +34,7 @@
         "subpath": "llama3.1_8b/datasets/sample_cnn_eval_5000.json",
         "title": "5000 samples CNN evaluation dataset (Inference Edge)",
         "description": "Sample CNN dataset for the Llama 3.1 8b Inference Edge benchmark",
-        "size": "95MB"
+        "size": "101MB"
       },
       {
         "name": "llama3-1-8b-cnn-dailymail-calibration",
@@ -64,4 +64,3 @@
     ]
   }
 }
-
