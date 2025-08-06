@@ -1,6 +1,6 @@
 # MLCommons Cloudflare R2 Infra
 
-This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to Infrascuture as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on bucket information defined in JSON manifest files.
+This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to infrastructure as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on bucket information defined in JSON manifest files.
 
 **README Table of Contents:**
 
