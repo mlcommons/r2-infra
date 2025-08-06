@@ -1,6 +1,6 @@
 # MLCommons Cloudflare R2 Infra
 
-This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to Infrascuture as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on bucket information defined in JSON manifest files.
+This repository functions as the source of truth and version control for the metadata and web files that support the [MLC R2 Downloader](https://github.com/mlcommons/r2-downloader). This infrastructure adheres to Infrastructure as Code (IaC) methodology, using GitHub Actions to automatically generate and deploy the infra files based on bucket information defined in JSON manifest files.
 
 **README Table of Contents:**
 
@@ -33,7 +33,7 @@ This repository functions as the source of truth and version control for the met
 
 ### Cloudflare R2 Buckets
 
-Buckets containing data to be distributed via the MLC R2 Downloader require a custom domain to be configured in the bucket's settings. This custom domain should be a subdomain of `mlcommons-storage.org`, which is domain registered with Cloudflare specifically for R2 data distribution. When configuring the custom domain in the bucket, set the minimum TLS version to 1.2, as version 1.0 and 1.1 are legacy versions with significant security vunerabilities.
+Buckets containing data to be distributed via the MLC R2 Downloader require a custom domain to be configured in the bucket's settings. This custom domain should be a subdomain of `mlcommons-storage.org`, which is domain registered with Cloudflare specifically for R2 data distribution. When configuring the custom domain in the bucket, set the minimum TLS version to 1.2, as version 1.0 and 1.1 are legacy versions with significant security vulnerabilities.
 
 #### R2 API Token
 
