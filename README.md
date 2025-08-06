@@ -33,7 +33,7 @@ This repository functions as the source of truth and version control for the met
 
 ### Cloudflare R2 Buckets
 
-Buckets containing data to be distributed via the MLC R2 Downloader require a custom domain to be configured in the bucket's settings. This custom domain should be a subdomain of `mlcommons-storage.org`, which is domain registered with Cloudflare specifically for R2 data distribution. When configuring the custom domain in the bucket, set the minimum TLS version to 1.2, as version 1.0 and 1.1 are legacy versions with significant security vunerabilities.
+Buckets containing data to be distributed via the MLC R2 Downloader require a custom domain to be configured in the bucket's settings. This custom domain should be a subdomain of `mlcommons-storage.org`, which is domain registered with Cloudflare specifically for R2 data distribution. When configuring the custom domain in the bucket, set the minimum TLS version to 1.2, as version 1.0 and 1.1 are legacy versions with significant security vulnerabilities.
 
 #### R2 API Token
 
