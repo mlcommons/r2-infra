@@ -2,7 +2,7 @@
   "bucket": "mlcommons-nuscenes",
   "domain": "nuscenes.mlcommons-storage.org",
   "title": "MLCommons nuScenes Dataset Download",
-  "license_notice": "The nuScenes dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of CC BY-NC-SA 4.0 and subject to additional terms of use noted in <a href='https://www.nuscenes.org/terms-of-use' target='_blank'>The Terms of Use</a>. <a herf='https://drive.google.com/file/d/1hbDI4tJ1EmcyVLz8w65OmHS3DymIMxEq/'>This letter</a> from Motional, the nuScenes dataset provider, provides additional clarity regarding the scope of 'non-commercial' vs 'commercial' use by MLC & its members of the nuScenes Materials.",
+  "license_notice": "The nuScenes dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of CC BY-NC-SA 4.0 and subject to additional terms of use noted in <a href='https://www.nuscenes.org/terms-of-use' target='_blank'>The Terms of Use</a>. <a href='https://drive.google.com/file/d/1hbDI4tJ1EmcyVLz8w65OmHS3DymIMxEq/'>This letter</a> from Motional, the nuScenes dataset provider, provides additional clarity regarding the scope of 'non-commercial' vs 'commercial' use by MLC & its members of the nuScenes Materials.",
   "datasets": {
     "": [
       {
