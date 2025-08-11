@@ -10,7 +10,7 @@
         "subpath": "data/nuscenes_dataset/",
         "title": "nuScenes Preprocessed Dataset",
         "description": "nuScenes preprocessed dataset for autonomous vehicle benchmarks",
-        "size": "0B"
+        "size": "412GB"
       }
     ]
   }
