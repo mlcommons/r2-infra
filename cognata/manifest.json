@@ -2,7 +2,7 @@
   "bucket": "mlcommons-cognata",
   "domain": "cognata.mlcommons-storage.org",
   "title": "MLCommons Cognata Dataset Download",
-  "license_notice": "The MLCommons Cognata dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://drive.google.com/drive/folders/1OiN-cMyYzhEjHwwyCPW1PcP3HTay5NpI' target='_blank'>this end-user license agreement</a>.",
+  "license_notice": "The MLCommons Cognata dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://drive.google.com/file/d/12337Sj9h_n6jkIeoz39oajsIRPfLG27U' target='_blank'>this end-user license agreement</a>.",
   "datasets": {
     "": [
       {
