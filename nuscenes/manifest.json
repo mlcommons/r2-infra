@@ -7,7 +7,7 @@
     "": [
       {
         "name": "nuscenes-dataset",
-        "subpath": "data/mlc_nuscenes_dataset/",
+        "subpath": "data/nuscenes_dataset/",
         "title": "nuScenes Preprocessed Dataset",
         "description": "nuScenes preprocessed dataset for autonomous vehicle benchmarks",
         "size": "0B"
