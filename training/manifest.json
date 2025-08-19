@@ -56,6 +56,7 @@
         "subpath": "llama3_1/datasets/c4/llama3_1_8b/",
         "title": "Llama 3.1 8B preprocessed C4 dataset",
         "description": "Llama 3.1 8B C4 dataset preprocessed with the Llama 3.1 8B tokenizer",
+        "destination": "llama3_1_8b_preprocessed_c4_dataset",
         "size": "86GB"
       },
       {
@@ -63,6 +64,7 @@
         "subpath": "llama3_1/tokenizers/llama3_1_8b/",
         "title": "Llama 3.1 8B tokenizer",
         "description": "Llama 3.1 8B tokenizer",
+        "destination": "llama3_1_8b_tokenizer",
         "size": "33GB"
       }
     ]
