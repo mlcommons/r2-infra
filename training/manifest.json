@@ -2,7 +2,16 @@
   "bucket": "mlcommons-training-wg-public",
   "domain": "training.mlcommons-storage.org",
   "title": "MLPerf Training Benchmark Data Download",
+  "index_expandable": "true",
   "datasets": {
+    "DLRM v2 Benchmark": [
+      {
+        "name": "dlrmv2-preprocessed-criteo-click-logs-dataset",
+        "subpath": "torchrec_dlrm/datasets/preprocessed_criteo_click_logs/",
+        "title": "Criteo 4TB multi-hot dataset",
+        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset"
+      }
+    ],
     "FLUX.1 Benchmark": [
       {
         "name": "flux-1-datasets",
@@ -16,28 +25,28 @@
         "name": "flux-1-cc12m-disk",
         "subpath": "flux_1/datasets/cc12m_disk/",
         "title": "CC12M dataset",
-        "description": "Conceptual 12M dataset for the FLUX.1 benchmark",
+        "description": "Conceptual 12M dataset",
         "size": "163GB"
       },
       {
         "name": "flux-1-cc12m-preprocessed",
         "subpath": "flux_1/datasets/cc12m_preprocessed/",
         "title": "CC12M preprocessed dataset",
-        "description": "Conceptual 12M preprocessed dataset for the FLUX.1 benchmark",
+        "description": "Conceptual 12M preprocessed dataset",
         "size": "2.4TB"
       },
       {
         "name": "flux-1-coco",
         "subpath": "flux_1/datasets/coco/",
         "title": "COCO dataset",
-        "description": "Common Objects in Context dataset for the FLUX.1 benchmark",
+        "description": "Common Objects in Context dataset",
         "size": "3.6GB"
       },
       {
         "name": "flux-1-coco-preprocessed",
         "subpath": "flux_1/datasets/coco_preprocessed/",
         "title": "COCO preprocessed dataset",
-        "description": "Common Objects in Context preprocessed dataset for the FLUX.1 benchmark",
+        "description": "Common Objects in Context preprocessed dataset",
         "size": "65GB"
       },
       {
