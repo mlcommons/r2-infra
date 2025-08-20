@@ -4,6 +4,15 @@
   "title": "MLPerf Training Benchmark Data Download",
   "index_expandable": "true",
   "datasets": {
+    "DLRM v2 Benchmark": [
+      {
+        "name": "dlrmv2-preprocessed-criteo-click-logs",
+        "subpath": "torchrec_dlrm/datasets/preprocessed_criteo_click_logs/",
+        "title": "Criteo 4TB multi-hot dataset",
+        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset",
+        "size": "4.0TB"
+      }
+    ],
     "FLUX.1 Benchmark": [
       {
         "name": "flux-1-datasets",
