@@ -2,6 +2,7 @@
   "bucket": "mlcommons-training-wg-public",
   "domain": "training.mlcommons-storage.org",
   "title": "MLPerf Training Benchmark Data Download",
+  "index_expandable": "true",
   "datasets": {
     "FLUX.1 Benchmark": [
       {
@@ -16,37 +17,55 @@
         "name": "flux-1-cc12m-disk",
         "subpath": "flux_1/datasets/cc12m_disk/",
         "title": "CC12M dataset",
-        "description": "Conceptual 12M dataset for the FLUX.1 benchmark",
+        "description": "Conceptual 12M dataset",
         "size": "163GB"
       },
       {
         "name": "flux-1-cc12m-preprocessed",
         "subpath": "flux_1/datasets/cc12m_preprocessed/",
         "title": "CC12M preprocessed dataset",
-        "description": "Conceptual 12M preprocessed dataset for the FLUX.1 benchmark",
+        "description": "Conceptual 12M preprocessed dataset",
         "size": "2.4TB"
       },
       {
         "name": "flux-1-coco",
         "subpath": "flux_1/datasets/coco/",
         "title": "COCO dataset",
-        "description": "Common Objects in Context dataset for the FLUX.1 benchmark",
+        "description": "Common Objects in Context dataset",
         "size": "3.6GB"
       },
       {
         "name": "flux-1-coco-preprocessed",
         "subpath": "flux_1/datasets/coco_preprocessed/",
         "title": "COCO preprocessed dataset",
-        "description": "Common Objects in Context preprocessed dataset for the FLUX.1 benchmark",
+        "description": "Common Objects in Context preprocessed dataset",
         "size": "65GB"
       },
       {
         "name": "flux-1-coco-2014-val-30k",
         "subpath": "flux_1/datasets/val2014_30k.tsv",
         "title": "COCO 2014 30K validation set",
-        "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data for the FLUX.1 benchmark",
+        "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data",
         "destination": "flux_1_datasets",
         "size": "2.0MB"
+      }
+    ],
+    "Llama 3.1 8B Benchmark": [
+      {
+        "name": "llama-3-1-8b-preprocessed-c4-dataset",
+        "subpath": "llama3_1/datasets/c4/llama3_1_8b/",
+        "title": "Llama 3.1 8B preprocessed C4 dataset",
+        "description": "Llama 3.1 8B C4 dataset preprocessed with the Llama 3.1 8B tokenizer",
+        "destination": "llama3_1_8b_preprocessed_c4_dataset",
+        "size": "86GB"
+      },
+      {
+        "name": "llama-3-1-8b-tokenizer",
+        "subpath": "llama3_1/tokenizers/llama3_1_8b/",
+        "title": "Llama 3.1 8B tokenizer",
+        "description": "Llama 3.1 8B tokenizer",
+        "destination": "llama3_1_8b_tokenizer",
+        "size": "33GB"
       }
     ]
   }
