@@ -1,0 +1,16 @@
+00af7d6ad0fa8d732f407bc342cb987c  model-00003-of-00004.safetensors
+05d7f21e2e268eb787e461f4a5a2d038  model-00004-of-00004.safetensors
+08292403f8b173e7524d7fba7bbbd2d3  original/tokenizer.model
+2131dc32d5494dd600afe4fd2bbed70c  config.json
+37d2fc7486ce705202a1927f7b68027c  README.md
+4c11d3625eebde6cce27d38416950633  USE_POLICY.md
+53cf4cf12df1da52a733f02170292cbd  tokenizer_config.json
+5d1e239b186cd12fac19afe77e8f9d45  original/params.json
+7c46ceec43eef48f2d999813cf47d3ee  original/consolidated.00.pth
+7dce6de50917697885e722a430a72073  special_tokens_map.json
+86f61743f53fc5656a06bedf8a591f4d  model-00001-of-00004.safetensors
+97963caba5c84a44f77b1e8df5b03142  generation_config.json
+acf81879e949a8569acfdadc825071b8  model-00002-of-00004.safetensors
+b0f1d45ab1be77e4326454bebfaadc28  model.safetensors.index.json
+c78db1e4b2b306efca2b39555ee69106  tokenizer.json
+ec3a84cddd347089328bd0cc41bcae79  LICENSE

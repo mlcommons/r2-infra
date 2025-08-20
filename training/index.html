@@ -64,6 +64,8 @@
 </div>
 </details>
 <details><summary><h3>FLUX.1 Benchmark</h3> (click to expand)</summary>
+
+            <details><summary><h3>FLUX.1 Benchmark</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">All FLUX.1 dataset files</h3>
     <p class="dataset-description">CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set (~2.7TB)</p>
@@ -111,10 +113,31 @@
 </div>
 <div class="dataset-section">
     <h3 class="dataset-title">COCO 2014 30K validation set</h3>
-    <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data for the FLUX.1 benchmark (~2.0MB)</p>
+    <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data (~2.0MB)</p>
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-coco-2014-val-30k.uri</code>
+        </div>
+    </div>
+</div>
+</details>
+
+<details><summary><h3>Llama 3.1 8B Benchmark</h3> (click to expand)</summary>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 8B preprocessed C4 dataset</h3>
+    <p class="dataset-description">Llama 3.1 8B C4 dataset preprocessed with the Llama 3.1 8B tokenizer (~86GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d llama3_1_8b_preprocessed_c4_dataset https://training.mlcommons-storage.org/metadata/llama-3-1-8b-preprocessed-c4-dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 3.1 8B tokenizer</h3>
+    <p class="dataset-description">Llama 3.1 8B tokenizer (~33GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d llama3_1_8b_tokenizer https://training.mlcommons-storage.org/metadata/llama-3-1-8b-tokenizer.uri</code>
         </div>
     </div>
 </div>
