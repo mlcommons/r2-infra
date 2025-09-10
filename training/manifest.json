@@ -64,7 +64,8 @@
         "name": "gnn-igbh-dataset-full",
         "subpath": "graph_neural_network/datasets/igbh/",
         "title": "IGBH dataset",
-        "description": "IGB Heterogenous dataset for the Graph Neural Network benchmark"
+        "description": "IGB Heterogenous dataset for the Graph Neural Network benchmark",
+        "size": "2.4TB"
       }
     ],
     "Llama 3.1 8B Benchmark": [
