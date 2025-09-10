@@ -59,6 +59,15 @@
         "size": "2.0MB"
       }
     ],
+    "Graph Neural Network Benchmark": [
+      {
+        "name": "gnn-igbh-dataset-full",
+        "subpath": "graph_neural_network/datasets/igbh/",
+        "title": "IGBH dataset",
+        "description": "IGB Heterogenous dataset for the Graph Neural Network benchmark",
+        "size": "2.4TB"
+      }
+    ],
     "Llama 3.1 8B Benchmark": [
       {
         "name": "llama-3-1-8b-preprocessed-c4-dataset",
