@@ -48,15 +48,15 @@
         "size": "70GB"
       },
       {
-        "name": "llama2-70b-chat-hf-tp1pp1-fp8-02072024",
-        "subpath": "data/quantized/fp8-quantized-ammo/llama2-70b-chat-hf-tp1pp1-fp8-02072024/",
+        "name": "llama2-70b-chat-hf-tp1pp1-fp8",
+        "subpath": "data/quantized/fp8-quantized-ammo/llama2-70b-chat-hf-tp1pp1-fp8/",
         "title": "Llama 2 70B Parameter Quantized Model (FP8 TP1PP1)",
         "description": "A version of the Llama 2 70B parameter chat model quantized to FP8 with TP1PP1",
         "size": "70GB"
       },
       {
-        "name": "llama2-70b-chat-hf-tp1pp2-fp8-02072024",
-        "subpath": "data/quantized/fp8-quantized-ammo/llama2-70b-chat-hf-tp1pp2-fp8-02072024/",
+        "name": "llama2-70b-chat-hf-tp1pp2-fp8",
+        "subpath": "data/quantized/fp8-quantized-ammo/llama2-70b-chat-hf-tp1pp2-fp8/",
         "title": "Llama 2 70B Parameter Quantized Model (FP8 TP1PP2)",
         "description": "A version of the Llama 2 70B parameter chat model quantized to FP8 with TP1PP2",
         "size": "70GB"
