@@ -53,7 +53,7 @@
         
             <h2>Available Downloads</h2>
 
-            <h3>Inference Models</h3>
+            <details><summary><h3>Inference Models</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">Llama 2 7B Parameter Model</h3>
     <p class="dataset-description">Pre-converted Hugging Face checkpoints for the Llama 2 7B parameter chat model (~54GB)</p>
@@ -72,7 +72,8 @@
         </div>
     </div>
 </div>
-<h3>Training Models</h3>
+</details>
+<details><summary><h3>Training Models</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">Llama 2 70B Parameter Fused QKV MLPerf Model</h3>
     <p class="dataset-description">Llama 2 70B parameter fused QKV MLPerf model (~276GB)</p>
@@ -82,7 +83,8 @@
         </div>
     </div>
 </div>
-<h3>Training Data</h3>
+</details>
+<details><summary><h3>Training Data</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">Scrolls Gov Report 8k</h3>
     <p class="dataset-description">Preprocessed Scrolls Gov Report 8k dataset for the Llama 2 Training benchmark (~112MB)</p>
@@ -92,6 +94,36 @@
         </div>
     </div>
 </div>
+</details>
+<details><summary><h3>Quantized Models (via NVIDIA TensorRT-LLM)</h3> (click to expand)</summary>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 70B Parameter Quantized Model (FP8 TP2PP1)</h3>
+    <p class="dataset-description">A version of the Llama 2 70B parameter chat model quantized to FP8 with TP2PP1 (~70GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama2-70b-chat-hf-tp2pp1-fp8.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 70B Parameter Quantized Model (FP8 TP1PP1)</h3>
+    <p class="dataset-description">A version of the Llama 2 70B parameter chat model quantized to FP8 with TP1PP1 (~70GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama2-70b-chat-hf-tp1pp1-fp8.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Llama 2 70B Parameter Quantized Model (FP8 TP1PP2)</h3>
+    <p class="dataset-description">A version of the Llama 2 70B parameter chat model quantized to FP8 with TP1PP2 (~70GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://llama2.mlcommons-storage.org/metadata/llama2-70b-chat-hf-tp1pp2-fp8.uri</code>
+        </div>
+    </div>
+</div>
+</details>
 
         
         </div>
