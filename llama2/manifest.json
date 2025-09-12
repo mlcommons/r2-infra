@@ -39,7 +39,7 @@
         "size": "112MB"
       }
     ],
-    "Quantized Models": [
+    "Quantized Models (via NVIDIA TensorRT-LLM)": [
       {
         "name": "llama2-70b-chat-hf-tp2pp1-fp8",
         "subpath": "data/quantized/fp8-quantized-ammo/llama2-70b-chat-hf-tp2pp1-fp8/",
