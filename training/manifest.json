@@ -62,7 +62,8 @@
         "name": "flux-1-empty-encodings",
         "subpath": "flux_1/datasets/empty_encodings/",
         "title": "FLUX.1 empty encodings",
-        "description": "Pre-computed empty encodings for the FLUX.1 benchmark"
+        "description": "Pre-computed empty encodings for the FLUX.1 benchmark",
+        "size": "2.1MB"
       }
     ],
     "Graph Neural Network Benchmark": [
