@@ -57,6 +57,13 @@
         "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data",
         "destination": "flux_1_datasets",
         "size": "2.0MB"
+      },
+      {
+        "name": "flux-1-empty-encodings",
+        "subpath": "flux_1/datasets/empty_encodings/",
+        "title": "FLUX.1 empty encodings",
+        "description": "Pre-computed empty encodings for the FLUX.1 benchmark",
+        "size": "2.1MB"
       }
     ],
     "Graph Neural Network Benchmark": [
