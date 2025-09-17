@@ -1,4 +1,4 @@
-name: Deploy web files to staging R2 bucket
+name: Build, commit, and stage web files to staging R2 bucket
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - 'central/*'
       - 'templates/template-index.html'
       - '.github/scripts/generate-web-pages.sh'
-      - '.github/workflows/deploy-r2-staging.yml'
+      - '.github/workflows/build-stage-web.yml'
 
 # Prevent overlapping runs on the same PR/branch
 concurrency:
@@ -19,9 +19,9 @@ concurrency:
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
-    environment: r2-deploy
+    environment: staging-web
     permissions:
-      contents: write      # allow committing back to the PR branch
+      contents: read       # allow checking out the repository
       issues: write        # allow creating/updating comments
       pull-requests: write # required for PR comments when from forks
     
@@ -34,9 +34,7 @@ jobs:
       
     - name: Load secret
       id: op-load-secret
-      uses: 1password/load-secrets-action@v2
-      with:
-        export-env: false
+      uses: 1password/load-secrets-action@v3
       env:
         OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
         R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku

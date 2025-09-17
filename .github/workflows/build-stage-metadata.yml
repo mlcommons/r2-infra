@@ -1,4 +1,4 @@
-name: Generate, commit, and stage metadata files
+name: Build, commit, and stage metadata files
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
     paths:
       - '*/manifest.json'
       - '*/index.html'
-      - '.github/workflows/gen-metadata.yml'
+      - '.github/workflows/build-stage-metadata.yml'
 
 # Prevent overlapping runs on the same PR/branch
 concurrency:
@@ -18,10 +18,10 @@ jobs:
   generate-metadata:
     if: github.actor != 'mlc-r2-infra[bot]'
     runs-on: ubuntu-latest
-    environment: r2-deploy
+    environment: staging-metadata
     permissions:
-      contents: write   # allow pushing back to the PR branch
-      issues: write     # allow workflow to post/update PR comments
+      contents: read       # allow checking out the repository
+      issues: write        # allow workflow to post/update PR comments
       pull-requests: write # needed for PR comment APIs when using pull_request event
 
     steps:
@@ -33,9 +33,7 @@ jobs:
 
       - name: Load R2 secrets from 1Password
         id: op-load-secret
-        uses: 1password/load-secrets-action@v2
-        with:
-          export-env: false
+        uses: 1password/load-secrets-action@v3
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku

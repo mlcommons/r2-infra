@@ -1,4 +1,4 @@
-name: Deploy web files to R2 buckets
+name: Deploy web files to production R2 buckets
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: r2-deploy
+    environment: production-web
     
     steps:
     - name: Checkout repository
@@ -20,9 +20,7 @@ jobs:
       
     - name: Load secret
       id: op-load-secret
-      uses: 1password/load-secrets-action@v2
-      with:
-        export-env: false
+      uses: 1password/load-secrets-action@v3
       env:
         OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
         R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
