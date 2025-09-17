@@ -1,4 +1,4 @@
-name: Build, commit, and stage web files to staging R2 bucket
+name: Build, commit, and stage web files
 
 on:
   pull_request:

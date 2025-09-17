@@ -1,4 +1,4 @@
-name: Deploy web files to production R2 buckets
+name: Deploy web files to production
 
 on:
   push:

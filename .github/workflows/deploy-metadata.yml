@@ -1,4 +1,4 @@
-name: Deploy metadata files to R2 buckets
+name: Deploy metadata files to production
 
 on:
   push:
