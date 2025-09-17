@@ -110,7 +110,7 @@
       },
       {
         "name": "mixtral-8x22b-docker-images",
-        "subpath": "mixtral_8x22b/docker_images/",
+        "subpath": "mixtral_8x22b/docker-images/",
         "title": "Mixtral 8x22b docker images",
         "description": "Mixtral 8x22b docker images for Mixtral 8x22b benchmark environment setup",
         "size": "0B"
