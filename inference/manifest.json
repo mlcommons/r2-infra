@@ -27,14 +27,14 @@
         "subpath": "llama3.1_405b/mlperf_llama3.1_405b_calibration_dataset_512_processed_fp16_eval.pkl/",
         "title": "Llama 3.1 405b Calibration Dataset",
         "description": "Llama 3.1 405b calibration dataset for the Llama 3.1 405b benchmark",
-        "size": "0B"
+        "size": "57MB"
       },
       {
         "name": "mlperf-llama3-1-405b-dataset-8313",
         "subpath": "llama3.1_405b/mlperf_llama3.1_405b_dataset_8313_processed_fp16_eval.pkl/",
         "title": "Llama 3.1 405b Dataset",
         "description": "Llama 3.1 405b dataset for the Llama 3.1 405b benchmark",
-        "size": "0B"
+        "size": "892MB"
       }
     ],
     "Llama 3.1 8b Benchmark": [
