@@ -113,7 +113,7 @@
         "description": "Mixtral 8x22b docker images for Mixtral 8x22b benchmark environment setup"
       }
     ],
-    "Shared Mixtral 8x22b C4 Resources": [
+    "Shared Llama 3.1 405B & Mixtral 8x22b Resources ": [
       {
         "name": "c4-validation-dataset-zipped",
         "subpath": "common/datasets/c4/original/c4-validation-91205-samples.en.json.gz",
