@@ -31,32 +31,6 @@ jobs:
           ref: ${{ github.head_ref }}
           persist-credentials: false
 
-      - name: Load R2 secrets from 1Password
-        id: op-load-secret
-        uses: 1password/load-secrets-action@v3
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
-          R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
-          R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
-          APP_PRIVATE_KEY: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/private key"
-          APP_ID: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/App ID"
-
-      - name: Install rclone
-        run: |
-          sudo -v ; curl https://rclone.org/install.sh | sudo bash
-          rclone version
-
-      - name: Configure temporary rclone remote
-        run: |
-          rclone config create r2-meta s3 \
-            provider=Cloudflare \
-            access_key_id="${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }}" \
-            secret_access_key="${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }}" \
-            endpoint="${{ steps.op-load-secret.outputs.R2_ENDPOINT }}" \
-            no_check_bucket=true --non-interactive
-          rclone listremotes
-
       - name: Get changed directories with manifests
         id: changed_dirs
         run: |
@@ -79,6 +53,35 @@ jobs:
           done
           echo "Manifests to process: [${MANIFEST_FILES# }]"
           echo "manifest_files=${MANIFEST_FILES# }" >> $GITHUB_OUTPUT
+
+      - name: Load R2 secrets from 1Password
+        if: steps.changed_dirs.outputs.manifest_files != ''
+        id: op-load-secret
+        uses: 1password/load-secrets-action@v3
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+          R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+          R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+          APP_PRIVATE_KEY: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/private key"
+          APP_ID: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/App ID"
+
+      - name: Install rclone
+        if: steps.changed_dirs.outputs.manifest_files != ''
+        run: |
+          sudo -v ; curl https://rclone.org/install.sh | sudo bash
+          rclone version
+
+      - name: Configure temporary rclone remote
+        if: steps.changed_dirs.outputs.manifest_files != ''
+        run: |
+          rclone config create r2-meta s3 \
+            provider=Cloudflare \
+            access_key_id="${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }}" \
+            secret_access_key="${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }}" \
+            endpoint="${{ steps.op-load-secret.outputs.R2_ENDPOINT }}" \
+            no_check_bucket=true --non-interactive
+          rclone listremotes
 
       - name: Generate metadata files for datasets
         if: steps.changed_dirs.outputs.manifest_files != ''
