@@ -58,7 +58,7 @@ jobs:
           rclone listremotes
 
       - name: Get changed directories with manifests
-        id: changed-dirs
+        id: changed_dirs
         run: |
           echo "Fetching base branch main..."
           git fetch origin main --depth=1
@@ -67,12 +67,12 @@ jobs:
           echo "Changed files list:"
           echo "$CHANGED_FILES"
           # Get unique directories from changed files
-          changed-dirs=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
+          CHANGED_DIRS=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
           echo "Unique changed directories:"
-          echo "$changed-dirs"
+          echo "$CHANGED_DIRS"
           # Filter for directories that contain a manifest.json and create a list of manifest files
           MANIFEST_FILES=""
-          for dir in $changed-dirs; do
+          for dir in $CHANGED_DIRS; do
             if [ -f "$dir/manifest.json" ]; then
               MANIFEST_FILES="$MANIFEST_FILES $dir/manifest.json"
             fi
@@ -81,7 +81,7 @@ jobs:
           echo "manifest_files=${MANIFEST_FILES# }" >> $GITHUB_OUTPUT
 
       - name: Generate metadata files for datasets
-        if: steps.changed-dirs.outputs.manifest_files != ''
+        if: steps.changed_dirs.outputs.manifest_files != ''
         run: |
           set -euo pipefail
 
@@ -89,7 +89,7 @@ jobs:
           SIZE_FILE="$GITHUB_WORKSPACE/size_report.txt"
           echo "folder,dataset,files,bytes,hr" > "$SIZE_FILE"
 
-          for json in ${{ steps.changed-dirs.outputs.manifest_files }}; do
+          for json in ${{ steps.changed_dirs.outputs.manifest_files }}; do
             # Skip central resources folder if present
             [[ "$json" == "central/manifest.json" ]] && continue
 
@@ -173,7 +173,7 @@ jobs:
           done
 
       - name: Upload staging metadata files to R2 buckets
-        if: steps.changed-dirs.outputs.manifest_files != ''
+        if: steps.changed_dirs.outputs.manifest_files != ''
         run: |
           set -euo pipefail
 
@@ -181,7 +181,7 @@ jobs:
 
           PR_NUM="${{ github.event.number }}"
 
-          for json in ${{ steps.changed-dirs.outputs.manifest_files }}; do
+          for json in ${{ steps.changed_dirs.outputs.manifest_files }}; do
             # Skip central resources folder if present
             [[ "$json" == "central/manifest.json" ]] && continue
 
@@ -211,7 +211,7 @@ jobs:
           echo "✅ Staging metadata upload complete."
 
       - name: Generate GitHub App token
-        if: steps.changed-dirs.outputs.manifest_files != ''
+        if: steps.changed_dirs.outputs.manifest_files != ''
         id: app-token
         uses: actions/create-github-app-token@v2
         with:
@@ -219,7 +219,7 @@ jobs:
           private-key: ${{ steps.op-load-secret.outputs.APP_PRIVATE_KEY }}
 
       - name: Commit and push metadata files
-        if: steps.changed-dirs.outputs.manifest_files != ''
+        if: steps.changed_dirs.outputs.manifest_files != ''
         run: |
           git config user.name "mlc-r2-infra[bot]"
           git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
@@ -247,7 +247,7 @@ jobs:
           fi
 
       - name: Comment PR with metadata generation summary
-        if: steps.changed-dirs.outputs.manifest_files != ''
+        if: steps.changed_dirs.outputs.manifest_files != ''
         uses: actions/github-script@v7
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
