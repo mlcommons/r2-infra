@@ -92,6 +92,42 @@
         "destination": "llama3_1_8b_tokenizer",
         "size": "33GB"
       }
+    ],
+    "Shared Mixtral 8x22b C4 Resources": [
+      {
+        "name": "c4-validation-dataset-zipped",
+        "subpath": "common/datasets/c4/original/c4-validation-91205-samples.en.json.gz",
+        "title": "C4 Validation Dataset Zipped",
+        "description": "C4 customized validation dataset zipped"
+      },
+      {
+        "name": "c4-full-dataset-unzipped",
+        "subpath": "common/datasets/c4/original/en_json/3.0.1/",
+        "title": "C4 Full Dataset Unzipped",
+        "description": "Full C4 fileset unzipped, including all raw train and validation files.",
+        "destination": "./"
+      },
+      {
+        "name": "c4-train-and-eval-datasets",
+        "subpath": "common/datasets/c4/original/",
+        "title": "C4 Train and Eval Datasets",
+        "description": "C4 train and eval datasets",
+        "destination": "c4/original"
+      },
+      {
+        "name": "mixtral-8x22b-preprocessed-c4-dataset",
+        "subpath": "common/datasets/c4/mixtral_8x22b_preprocessed/",
+        "title": "Mixtral 8x22b Preprocessed C4 Dataset",
+        "description": "C4 dataset preprocessed with the Mixtral 8x22b tokenizer",
+        "destination": "c4/mixtral_8x22b_preprocessed"
+      },
+      {
+        "name": "mixtral-8x22b-tokenizer",
+        "subpath": "common/tokenizers/mixtral_8x22b/",
+        "title": "Mixtral 8x22b Tokenizer",
+        "description": "Mixtral 8x22b tokenizer used to preprocess the C4 dataset",
+        "destination": "mixtral_8x22b_tokenizer"
+      }
     ]
   }
 }
