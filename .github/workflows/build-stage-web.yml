@@ -52,13 +52,18 @@ jobs:
           DIRS=$(ls -d */ | grep -v 'example' | sed 's|/||')
         else
           # Get directories of changed manifest.json files
-          DIRS=$(echo "$CHANGED_FILES" | grep 'manifest.json$' | xargs -n1 dirname | sort -u)
+          MANIFEST_DIRS=$(echo "$CHANGED_FILES" | grep 'manifest.json$' || true)
+          if [ -n "$MANIFEST_DIRS" ]; then
+            DIRS=$(echo "$MANIFEST_DIRS" | xargs -n1 dirname | sort -u)
+          fi
           # If central has other changes (not manifest.json), add it
           if echo "$CHANGED_FILES" | grep -q "^central/"; then
             DIRS="$DIRS central"
           fi
-          # remove duplicates
-          DIRS=$(echo $DIRS | tr ' ' '\n' | sort -u | tr '\n' ' ')
+          # remove duplicates and trim whitespace
+          if [ -n "$DIRS" ]; then
+            DIRS=$(echo $DIRS | tr ' ' '\n' | sort -u | tr '\n' ' ' | sed 's/^ *//;s/ *$//')
+          fi
         fi
 
         echo "Directories to process: $DIRS"

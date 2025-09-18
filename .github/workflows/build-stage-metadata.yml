@@ -41,18 +41,25 @@ jobs:
           echo "Changed files list:"
           echo "$CHANGED_FILES"
           # Get unique directories from changed files
-          CHANGED_DIRS=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
+          CHANGED_DIRS=""
+          if [ -n "$CHANGED_FILES" ]; then
+            CHANGED_DIRS=$(echo "$CHANGED_FILES" | xargs -n1 dirname | sort -u)
+          fi
           echo "Unique changed directories:"
           echo "$CHANGED_DIRS"
           # Filter for directories that contain a manifest.json and create a list of manifest files
           MANIFEST_FILES=""
-          for dir in $CHANGED_DIRS; do
-            if [ -f "$dir/manifest.json" ]; then
-              MANIFEST_FILES="$MANIFEST_FILES $dir/manifest.json"
-            fi
-          done
-          echo "Manifests to process: [${MANIFEST_FILES# }]"
-          echo "manifest_files=${MANIFEST_FILES# }" >> $GITHUB_OUTPUT
+          if [ -n "$CHANGED_DIRS" ]; then
+            for dir in $CHANGED_DIRS; do
+              if [ -f "$dir/manifest.json" ]; then
+                MANIFEST_FILES="$MANIFEST_FILES $dir/manifest.json"
+              fi
+            done
+          fi
+          # Trim leading space if any
+          MANIFEST_FILES=$(echo "$MANIFEST_FILES" | sed 's/^ *//')
+          echo "Manifests to process: [$MANIFEST_FILES]"
+          echo "manifest_files=$MANIFEST_FILES" >> $GITHUB_OUTPUT
 
       - name: Load R2 secrets from 1Password
         if: steps.changed_dirs.outputs.manifest_files != ''
