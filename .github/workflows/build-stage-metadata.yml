@@ -262,7 +262,7 @@ jobs:
             const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
             const files = diff ? diff.split('\n') : [];
 
-            let body = '## 📝 Metadata files generated and staged\n\n';
+            let body = '## 📝 Metadata files built and staged\n\n';
             if (files.length) {
               body += '### 🔄 Metadata files changed vs `main`\n';
               files.forEach(f => body += `- \`${f}\`\n`);
@@ -275,7 +275,7 @@ jobs:
             try {
               const raw = fs.readFileSync('size_report.txt', 'utf8').trim().split('\n').slice(1); // drop header
               if (raw.length) {
-                body += '\n\n### 📦 Dataset sizes\n\n| Folder | Dataset | Files | Size |\n| ------ | ------- | ----- | ---- |\n';
+                body += '\n\n### 📦 Relevant dataset information\n\n| Folder | Dataset | Files | Size |\n| ------ | ------- | ----- | ---- |\n';
                 raw.forEach(line => {
                   const [folder, dataset, files, bytes, hr] = line.split(',');
                   body += `| ${folder} | ${dataset} | ${files} | ${hr} |\n`;
@@ -293,7 +293,7 @@ jobs:
               issue_number: context.issue.number,
             });
 
-            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('Metadata files generated'));
+            const existing = comments.data.find(c => c.user.type === 'Bot' && c.body.includes('Metadata files built and staged'));
 
             if (existing) {
               await github.rest.issues.updateComment({
