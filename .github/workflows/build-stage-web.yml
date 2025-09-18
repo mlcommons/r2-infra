@@ -49,7 +49,7 @@ jobs:
 
         DIRS=""
         if [ "$PROCESS_ALL" = "true" ]; then
-          DIRS=$(ls -d */ | grep -v 'example' | sed 's|/||')
+          DIRS=$(ls -d */ | grep -v -e 'example' -e 'templates' | sed 's|/||')
         else
           # Get directories of changed manifest.json files
           MANIFEST_DIRS=$(echo "$CHANGED_FILES" | grep 'manifest.json$' || true)
@@ -67,7 +67,9 @@ jobs:
         fi
 
         echo "Directories to process: $DIRS"
-        echo "dirs=$DIRS" >> $GITHUB_OUTPUT
+        # Ensure DIRS is properly formatted for GitHub Actions output
+        DIRS_CLEAN=$(echo "$DIRS" | tr '\n' ' ' | sed 's/  */ /g' | sed 's/^ *//;s/ *$//')
+        echo "dirs=$DIRS_CLEAN" >> $GITHUB_OUTPUT
         if [ -z "$DIRS" ]; then
           echo "no_dirs_to_process=true" >> $GITHUB_OUTPUT
         else
@@ -151,7 +153,8 @@ jobs:
         STAGING_SUBDOMAIN="r2-infra-staging"
         deployed_count=0
         
-        for folder_name in ${{ steps.dirs-to-process.outputs.dirs }}; do
+        DIRS_TO_PROCESS="${{ steps.dirs-to-process.outputs.dirs }}"
+        for folder_name in $DIRS_TO_PROCESS; do
           folder="${folder_name}/"
           if [ -f "${folder}manifest.json" ]; then
             
@@ -198,7 +201,8 @@ jobs:
         echo "  📋 Main staging bucket root: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/"
         echo ""
         echo "📄 Index pages:"
-        for folder_name in ${{ steps.dirs-to-process.outputs.dirs }}; do
+        DIRS_TO_PROCESS="${{ steps.dirs-to-process.outputs.dirs }}"
+        for folder_name in $DIRS_TO_PROCESS; do
           folder="${folder_name}/"
           if [ -f "${folder}manifest.json" ]; then
             if [ "$folder" != "central/" ]; then
