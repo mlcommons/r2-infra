@@ -219,7 +219,6 @@ jobs:
         fi 
         
     - name: Comment PR with Staging URLs
-      if: steps.dirs-to-process.outputs.no_dirs_to_process == 'false'
       uses: actions/github-script@v7
       with:
         script: |
