@@ -230,18 +230,16 @@ jobs:
           let comment = `## 🚀 Web files built and staged\n\n`;
           comment += `Your changes have been deployed to the staging environment and are ready for review!\n\n`;
           
-          // Get list of folders with manifest.json files
+          // Get list of directories that were processed
+          const processedDirs = '${{ steps.dirs-to-process.outputs.dirs }}';
           const fs = require('fs');
-          const folders = fs.readdirSync('.', { withFileTypes: true })
-            .filter(dirent => dirent.isDirectory())
-            .map(dirent => dirent.name)
-            .filter(folder => {
-              try {
-                return fs.existsSync(`${folder}/manifest.json`) && fs.existsSync(`${folder}/index.html`);
-              } catch {
-                return false;
-              }
-            });
+          const folders = processedDirs.split(' ').filter(dir => {
+            try {
+              return dir && fs.existsSync(`${dir}/manifest.json`) && fs.existsSync(`${dir}/index.html`);
+            } catch {
+              return false;
+            }
+          });
           
           // Append list of changed web-related files vs main
           comment += `### 🔄 Web files changed vs \`main\`\n`;
