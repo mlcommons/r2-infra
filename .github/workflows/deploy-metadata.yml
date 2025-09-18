@@ -1,4 +1,4 @@
-name: Deploy dataset metadata to R2 buckets
+name: Deploy metadata files to production
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   deploy-metadata:
     runs-on: ubuntu-latest
-    environment: r2-deploy
+    environment: production-metadata
 
     steps:
       - name: Checkout repository
@@ -20,9 +20,7 @@ jobs:
 
       - name: Load R2 secrets from 1Password
         id: op-load-secret
-        uses: 1password/load-secrets-action@v2
-        with:
-          export-env: false
+        uses: 1password/load-secrets-action@v3
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
