@@ -116,7 +116,7 @@
         "size": "24GB"
       }
     ],
-    "Shared Llama 3.1 405B & Mixtral 8x22b Resources ": [
+    "Shared Llama 3.1 405B & Mixtral 8x22b Resources": [
       {
         "name": "c4-validation-dataset-zipped",
         "subpath": "common/datasets/c4/original/c4-validation-91205-samples.en.json.gz",
