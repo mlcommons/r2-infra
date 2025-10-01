@@ -21,6 +21,22 @@
         "size": "163MB"
       }
     ],
+    "Llama 3.1 405b Benchmark": [
+      {
+        "name": "llama3-1-405b-calibration-dataset-512",
+        "subpath": "llama3.1_405b/mlperf_llama3.1_405b_calibration_dataset_512_processed_fp16_eval.pkl/",
+        "title": "Llama 3.1 405b Calibration Dataset",
+        "description": "Calibration dataset for the Llama 3.1 405b benchmark",
+        "size": "57MB"
+      },
+      {
+        "name": "llama3-1-405b-dataset-8313",
+        "subpath": "llama3.1_405b/mlperf_llama3.1_405b_dataset_8313_processed_fp16_eval.pkl/",
+        "title": "Llama 3.1 405b Dataset",
+        "description": "Dataset for the Llama 3.1 405b benchmark",
+        "size": "892MB"
+      }
+    ],
     "Llama 3.1 8b Benchmark": [
       {
         "name": "llama3-1-8b-cnn-eval",
@@ -42,6 +58,15 @@
         "title": "CNN-DailyMail calibration dataset",
         "description": "CNN-DailyMail calibration dataset for the Llama 3.1 8b benchmark",
         "size": "21MB"
+      }
+    ],
+    "RGAT Benchmark": [
+      {
+        "name": "rgat-model",
+        "subpath": "R-GAT/",
+        "title": "RGAT Model",
+        "description": "RGAT model for the RGAT benchmark",
+        "size": "53MB"
       }
     ],
     "Whisper Benchmark": [
