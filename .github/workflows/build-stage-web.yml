@@ -55,6 +55,8 @@ jobs:
           MANIFEST_DIRS=$(echo "$CHANGED_FILES" | grep 'manifest.json$' || true)
           if [ -n "$MANIFEST_DIRS" ]; then
             DIRS=$(echo "$MANIFEST_DIRS" | xargs -n1 dirname | sort -u)
+            # Always include central resources when any manifest changes so staging has shared assets
+            DIRS="$DIRS central"
           fi
           # If central has other changes (not manifest.json), add it
           if echo "$CHANGED_FILES" | grep -q "^central/"; then
