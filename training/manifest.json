@@ -97,8 +97,8 @@
       {
         "name": "mixtral-8x22b-preprocessed-c4-dataset",
         "subpath": "common/datasets/c4/mixtral_8x22b_preprocessed/",
-        "title": "C4 dataset for Llama 3.1 405B Benchmark preprocessed with Mixtral tokenizer",
-        "description": "C4 dataset preprocessed with the Mixtral 8x22b tokenizer",
+        "title": "C4 dataset preprocessed with Mixtral tokenizer",
+        "description": "C4 dataset for Llama 3.1 405B Benchmark preprocessed with Mixtral tokenizer",
         "destination": "c4/mixtral_8x22b_preprocessed",
         "size": "389GB"
       },
