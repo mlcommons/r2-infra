@@ -268,13 +268,17 @@ jobs:
             execSync('git fetch --depth=1 origin main');
             const diff = execSync('git diff --name-only origin/main HEAD -- "*/metadata/*.uri" "*/metadata/*.md5"').toString().trim();
             const files = diff ? diff.split('\n') : [];
+            const manifestDiff = execSync('git diff --name-only origin/main HEAD -- "*/manifest.json"').toString().trim();
+            const manifestFiles = manifestDiff ? manifestDiff.split('\n') : [];
+            const allFiles = [...manifestFiles, ...files].filter(Boolean);
+            const uniqueFiles = [...new Set(allFiles)];
 
             let body = '## 📝 Metadata files built and staged\n\n';
-            if (files.length) {
-              body += '### 🔄 Metadata files changed vs `main`\n';
-              files.forEach(f => body += `- \`${f}\`\n`);
+            if (uniqueFiles.length) {
+              body += '### 🔄 Metadata and manifest files changed vs `main`\n';
+              uniqueFiles.forEach(f => body += `- \`${f}\`\n`);
             } else {
-              body += 'No metadata file changes compared to main.';
+              body += 'No metadata or manifest file changes compared to main.';
             }
 
             // Append dataset-size table if available
