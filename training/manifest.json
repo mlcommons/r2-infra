@@ -15,33 +15,11 @@
     ],
     "FLUX.1 Benchmark": [
       {
-        "name": "flux-1-datasets",
-        "subpath": "flux_1/datasets/",
-        "title": "All FLUX.1 dataset files",
-        "description": "CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set",
-        "destination": "flux_1_datasets",
-        "size": "2.7TB"
-      },
-      {
-        "name": "flux-1-cc12m-disk",
-        "subpath": "flux_1/datasets/cc12m_disk/",
-        "title": "CC12M dataset",
-        "description": "Conceptual 12M dataset",
-        "size": "163GB"
-      },
-      {
         "name": "flux-1-cc12m-preprocessed",
         "subpath": "flux_1/datasets/cc12m_preprocessed/",
         "title": "CC12M preprocessed dataset",
         "description": "Conceptual 12M preprocessed dataset",
         "size": "2.4TB"
-      },
-      {
-        "name": "flux-1-coco",
-        "subpath": "flux_1/datasets/coco/",
-        "title": "COCO dataset",
-        "description": "Common Objects in Context dataset",
-        "size": "3.6GB"
       },
       {
         "name": "flux-1-coco-preprocessed",
@@ -51,12 +29,18 @@
         "size": "65GB"
       },
       {
-        "name": "flux-1-coco-2014-val-30k",
-        "subpath": "flux_1/datasets/val2014_30k.tsv",
-        "title": "COCO 2014 30K validation set",
-        "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data",
-        "destination": "flux_1_datasets",
-        "size": "2.0MB"
+        "name": "flux-1-cc12m-disk",
+        "subpath": "flux_1/datasets/cc12m_disk/",
+        "title": "CC12M dataset",
+        "description": "Conceptual 12M dataset",
+        "size": "163GB"
+      },
+      {
+        "name": "flux-1-coco",
+        "subpath": "flux_1/datasets/coco/",
+        "title": "COCO dataset",
+        "description": "Common Objects in Context dataset",
+        "size": "3.6GB"
       },
       {
         "name": "flux-1-empty-encodings",
@@ -64,6 +48,22 @@
         "title": "FLUX.1 empty encodings",
         "description": "Pre-computed empty encodings for the FLUX.1 benchmark",
         "size": "2.1MB"
+      },
+      {
+        "name": "flux-1-datasets",
+        "subpath": "flux_1/datasets/",
+        "title": "All FLUX.1 dataset files",
+        "description": "CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set",
+        "destination": "flux_1_datasets",
+        "size": "2.7TB"
+      },
+      {
+        "name": "flux-1-coco-2014-val-30k",
+        "subpath": "flux_1/datasets/val2014_30k.tsv",
+        "title": "COCO 2014 30K validation set",
+        "description": "Subset of 30,000 image-caption pairs from the COCO 2014 validation data",
+        "destination": "flux_1_datasets",
+        "size": "2.0MB"
       }
     ],
     "Graph Neural Network Benchmark": [
@@ -93,7 +93,48 @@
         "size": "33GB"
       }
     ],
-    "Mixtral 8x22b Benchmark": [
+    "Llama 3.1 405B Benchmark": [
+      {
+        "name": "mixtral-8x22b-preprocessed-c4-dataset",
+        "subpath": "common/datasets/c4/mixtral_8x22b_preprocessed/",
+        "title": "C4 dataset preprocessed with Mixtral tokenizer",
+        "description": "C4 dataset for Llama 3.1 405B Benchmark preprocessed with Mixtral tokenizer",
+        "destination": "c4/mixtral_8x22b_preprocessed",
+        "size": "389GB"
+      },
+      {
+        "name": "mixtral-8x22b-tokenizer",
+        "subpath": "common/tokenizers/mixtral_8x22b/",
+        "title": "Mixtral 8x22b tokenizer",
+        "description": "Mixtral 8x22b tokenizer used to preprocess the C4 dataset",
+        "destination": "mixtral_8x22b_tokenizer",
+        "size": "2.8MB"
+      },
+      {
+        "name": "c4-full-dataset-unzipped",
+        "subpath": "common/datasets/c4/original/en_json/3.0.1/",
+        "title": "C4 full dataset unzipped",
+        "description": "Full C4 fileset unzipped, including all raw train and validation files.",
+        "destination": "./",
+        "size": "841GB"
+      },
+      {
+        "name": "c4-validation-dataset-zipped",
+        "subpath": "common/datasets/c4/original/c4-validation-91205-samples.en.json.gz",
+        "title": "C4 validation dataset zipped",
+        "description": "C4 customized validation dataset zipped",
+        "size": "82MB"
+      },
+      {
+        "name": "c4-train-and-eval-datasets",
+        "subpath": "common/datasets/c4/original/",
+        "title": "C4 train and eval datasets",
+        "description": "C4 train and eval datasets",
+        "destination": "c4/original",
+        "size": "841GB"
+      }
+    ],
+    "Mixtral 8x22b Benchmark (Retired)": [
       {
         "name": "mixtral-8x22b-v0-1-fsdp-checkpoint",
         "subpath": "mixtral_8x22b/checkpoints/Mixtral-8x22B-v0.1-fsdp/",
@@ -114,47 +155,6 @@
         "title": "Mixtral 8x22b docker images",
         "description": "Mixtral 8x22b docker images for Mixtral 8x22b benchmark environment setup",
         "size": "24GB"
-      }
-    ],
-    "Shared Llama 3.1 405B & Mixtral 8x22b Resources": [
-      {
-        "name": "c4-validation-dataset-zipped",
-        "subpath": "common/datasets/c4/original/c4-validation-91205-samples.en.json.gz",
-        "title": "C4 validation dataset zipped",
-        "description": "C4 customized validation dataset zipped",
-        "size": "82MB"
-      },
-      {
-        "name": "c4-full-dataset-unzipped",
-        "subpath": "common/datasets/c4/original/en_json/3.0.1/",
-        "title": "C4 full dataset unzipped",
-        "description": "Full C4 fileset unzipped, including all raw train and validation files.",
-        "destination": "./",
-        "size": "841GB"
-      },
-      {
-        "name": "c4-train-and-eval-datasets",
-        "subpath": "common/datasets/c4/original/",
-        "title": "C4 train and eval datasets",
-        "description": "C4 train and eval datasets",
-        "destination": "c4/original",
-        "size": "841GB"
-      },
-      {
-        "name": "mixtral-8x22b-preprocessed-c4-dataset",
-        "subpath": "common/datasets/c4/mixtral_8x22b_preprocessed/",
-        "title": "Mixtral 8x22b preprocessed C4 dataset",
-        "description": "C4 dataset preprocessed with the Mixtral 8x22b tokenizer",
-        "destination": "c4/mixtral_8x22b_preprocessed",
-        "size": "389GB"
-      },
-      {
-        "name": "mixtral-8x22b-tokenizer",
-        "subpath": "common/tokenizers/mixtral_8x22b/",
-        "title": "Mixtral 8x22b tokenizer",
-        "description": "Mixtral 8x22b tokenizer used to preprocess the C4 dataset",
-        "destination": "mixtral_8x22b_tokenizer",
-        "size": "2.8MB"
       }
     ]
   }

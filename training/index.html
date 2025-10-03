@@ -65,38 +65,11 @@
 </details>
 <details><summary><h3>FLUX.1 Benchmark</h3> (click to expand)</summary>
 <div class="dataset-section">
-    <h3 class="dataset-title">All FLUX.1 dataset files</h3>
-    <p class="dataset-description">CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set (~2.7TB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-datasets.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">CC12M dataset</h3>
-    <p class="dataset-description">Conceptual 12M dataset (~163GB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-disk.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
     <h3 class="dataset-title">CC12M preprocessed dataset</h3>
     <p class="dataset-description">Conceptual 12M preprocessed dataset (~2.4TB)</p>
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-preprocessed.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">COCO dataset</h3>
-    <p class="dataset-description">Common Objects in Context dataset (~3.6GB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco.uri</code>
         </div>
     </div>
 </div>
@@ -110,11 +83,20 @@
     </div>
 </div>
 <div class="dataset-section">
-    <h3 class="dataset-title">COCO 2014 30K validation set</h3>
-    <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data (~2.0MB)</p>
+    <h3 class="dataset-title">CC12M dataset</h3>
+    <p class="dataset-description">Conceptual 12M dataset (~163GB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-coco-2014-val-30k.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-cc12m-disk.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">COCO dataset</h3>
+    <p class="dataset-description">Common Objects in Context dataset (~3.6GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-coco.uri</code>
         </div>
     </div>
 </div>
@@ -124,6 +106,24 @@
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/flux-1-empty-encodings.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">All FLUX.1 dataset files</h3>
+    <p class="dataset-description">CC12M and COCO, both processed and unprocessed, as well as the COCO 2014 30K validation set (~2.7TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-datasets.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">COCO 2014 30K validation set</h3>
+    <p class="dataset-description">Subset of 30,000 image-caption pairs from the COCO 2014 validation data (~2.0MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d flux_1_datasets https://training.mlcommons-storage.org/metadata/flux-1-coco-2014-val-30k.uri</code>
         </div>
     </div>
 </div>
@@ -159,7 +159,54 @@
     </div>
 </div>
 </details>
-<details><summary><h3>Mixtral 8x22b Benchmark</h3> (click to expand)</summary>
+<details><summary><h3>Llama 3.1 405B Benchmark</h3> (click to expand)</summary>
+<div class="dataset-section">
+    <h3 class="dataset-title">C4 dataset preprocessed with Mixtral tokenizer</h3>
+    <p class="dataset-description">C4 dataset for Llama 3.1 405B Benchmark preprocessed with Mixtral tokenizer (~389GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d c4/mixtral_8x22b_preprocessed https://training.mlcommons-storage.org/metadata/mixtral-8x22b-preprocessed-c4-dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Mixtral 8x22b tokenizer</h3>
+    <p class="dataset-description">Mixtral 8x22b tokenizer used to preprocess the C4 dataset (~2.8MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d mixtral_8x22b_tokenizer https://training.mlcommons-storage.org/metadata/mixtral-8x22b-tokenizer.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">C4 full dataset unzipped</h3>
+    <p class="dataset-description">Full C4 fileset unzipped, including all raw train and validation files. (~841GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d ./ https://training.mlcommons-storage.org/metadata/c4-full-dataset-unzipped.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">C4 validation dataset zipped</h3>
+    <p class="dataset-description">C4 customized validation dataset zipped (~82MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/c4-validation-dataset-zipped.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">C4 train and eval datasets</h3>
+    <p class="dataset-description">C4 train and eval datasets (~841GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d c4/original https://training.mlcommons-storage.org/metadata/c4-train-and-eval-datasets.uri</code>
+        </div>
+    </div>
+</div>
+</details>
+<details><summary><h3>Mixtral 8x22b Benchmark (Retired)</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">Mixtral 8x22b v0.1 FSDP checkpoint</h3>
     <p class="dataset-description">Mixtral 8x22b v0.1 FSDP checkpoint for tensor_parallelism=1 (~282GB)</p>
@@ -184,53 +231,6 @@
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/mixtral-8x22b-docker-images.uri</code>
-        </div>
-    </div>
-</div>
-</details>
-<details><summary><h3>Shared Llama 3.1 405B &amp; Mixtral 8x22b Resources</h3> (click to expand)</summary>
-<div class="dataset-section">
-    <h3 class="dataset-title">C4 validation dataset zipped</h3>
-    <p class="dataset-description">C4 customized validation dataset zipped (~82MB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/c4-validation-dataset-zipped.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">C4 full dataset unzipped</h3>
-    <p class="dataset-description">Full C4 fileset unzipped, including all raw train and validation files. (~841GB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d ./ https://training.mlcommons-storage.org/metadata/c4-full-dataset-unzipped.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">C4 train and eval datasets</h3>
-    <p class="dataset-description">C4 train and eval datasets (~841GB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d c4/original https://training.mlcommons-storage.org/metadata/c4-train-and-eval-datasets.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">Mixtral 8x22b preprocessed C4 dataset</h3>
-    <p class="dataset-description">C4 dataset preprocessed with the Mixtral 8x22b tokenizer (~389GB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d c4/mixtral_8x22b_preprocessed https://training.mlcommons-storage.org/metadata/mixtral-8x22b-preprocessed-c4-dataset.uri</code>
-        </div>
-    </div>
-</div>
-<div class="dataset-section">
-    <h3 class="dataset-title">Mixtral 8x22b tokenizer</h3>
-    <p class="dataset-description">Mixtral 8x22b tokenizer used to preprocess the C4 dataset (~2.8MB)</p>
-    <div class="command-section">
-        <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d mixtral_8x22b_tokenizer https://training.mlcommons-storage.org/metadata/mixtral-8x22b-tokenizer.uri</code>
         </div>
     </div>
 </div>
