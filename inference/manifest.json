@@ -21,6 +21,29 @@
         "size": "163MB"
       }
     ],
+    "DLRM v2 Benchmark": [
+      {
+        "name": "dlrm-v2-preprocessed-dataset",
+        "subpath": "dlrm_preprocessed/",
+        "title": "Preprocessed DLRM v2 benchmark dataset",
+        "description": "Multihot Criteo Click Logs dataset preprocessed for the DLRM v2 benchmark"
+      },
+      {
+        "name": "dlrm-v2-model-weights",
+        "subpath": "model_weights/",
+        "title": "DLRM v2 model weights",
+        "description": "PyTorch model weights for the DLRM v2 benchmark"
+      }
+    ],
+    "Llama 2 70b Benchmark": [
+      {
+        "name": "llama-2-70b-open-orca-dataset",
+        "subpath": "open_orca/",
+        "title": "Preprocessed Open Orca dataset",
+        "description": "Open Orca dataset preprocessed for the Llama 2 70b benchmark"
+      }
+    ],
+
     "Llama 3.1 405b Benchmark": [
       {
         "name": "llama3-1-405b-calibration-dataset-512",
@@ -58,6 +81,26 @@
         "title": "CNN-DailyMail calibration dataset",
         "description": "CNN-DailyMail calibration dataset for the Llama 3.1 8b benchmark",
         "size": "21MB"
+      }
+    ],
+    "Mixtral 8x7b Benchmark": [
+      {
+        "name": "mixtral-8x7b-model-checkpoint",
+        "subpath": "mixtral_8x7b/mixtral-8x7b-instruct-v0.1/",
+        "title": "Mixtral 8x7b model checkpoint",
+        "description": "Mixtral 8x7b model checkpoint for the Mixtral 8x7b benchmark"
+      },
+      {
+        "name": "mixtral-8x7b-validation-dataset",
+        "subpath": "mixtral_8x7b/09292024_mixtral_15k_mintoken2_v1.pkl",
+        "title": "Mixtral 8x7b validation dataset",
+        "description": "Validation dataset for the Mixtral 8x7b benchmark"
+      },
+      {
+        "name": "mixtral-8x7b-calibration-dataset",
+        "subpath": "mixtral_8x7b/2024.06.06_mixtral_15k_calibration_v4.pkl",
+        "title": "Mixtral 8x7b calibration dataset",
+        "description": "Calibration dataset for the Mixtral 8x7b benchmark"
       }
     ],
     "RGAT Benchmark": [
