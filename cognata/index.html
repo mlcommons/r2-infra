@@ -54,11 +54,101 @@
             <h2>Available Downloads</h2>
 
             <div class="dataset-section">
-    <h3 class="dataset-title">Cognata Dataset</h3>
-    <p class="dataset-description">Cognata synthetic driving dataset for autonomous vehicle benchmarks (~2.1TB)</p>
+    <h3 class="dataset-title">Cognata Dataset (Full)</h3>
+    <p class="dataset-description">Complete Cognata dataset including processed and raw assets for all benchmarks using Cognata dataset. (~2.1TB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-dataset.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-dataset-full.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Cognata Unprocessed Dataset</h3>
+    <p class="dataset-description">Unprocessed Cognata dataset. (~1.9TB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/cognata-unprocessed.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">2D Object Detection Calibration Dataset</h3>
+    <p class="dataset-description">Calibration data for 2D object detection ABTF benchmark using SSD-ResNet50. (~3.5GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/calib_2d.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">2D Object Detection Validation Dataset</h3>
+    <p class="dataset-description">Validation data for Cognata 2D object detection ABTF benchmark using SSD-ResNet50. (~103GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/val_2d.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">SSD-ResNet50 Model Checkpoint (.pth)</h3>
+    <p class="dataset-description">Baseline model checkpoint for 2D object detection. (~220MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/ssd_checkpoint_pth.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">SSD-ResNet50 Model (ONNX)</h3>
+    <p class="dataset-description">ResNet50 ONNX model for 2D object detection. (~110MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/ssd_checkpoint_onnx.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Semantic Segmentation Calibration Set</h3>
+    <p class="dataset-description">Calibration data for ABTF semantic segmentation benchmark using DeepLabv3+. (~3.5GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/calib_seg.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Semantic Segmentation Validation Set</h3>
+    <p class="dataset-description">Validation data for ABTF semantic segmentation benchmark using DeepLabv3+. (~104GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/val_seg.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Deeplabv3+ Model (ONNX)</h3>
+    <p class="dataset-description">Static Deeplabv3+ ONNX model for segmentation benchmark. (~159MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/deeplab_onnx.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Deeplabv3+ Dynamic Model (ONNX)</h3>
+    <p class="dataset-description">Dynamic Deeplabv3+ ONNX model for segmentation benchmark. Useful if input images have different resolutions (~159MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/deeplab_dynamic_onnx.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Deeplabv3+ Checkpoint (.pth)</h3>
+    <p class="dataset-description">Deeplabv3+ PyTorch checkpoint. (~319MB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://cognata.mlcommons-storage.org/metadata/deeplab_checkpoint.uri</code>
         </div>
     </div>
 </div>
