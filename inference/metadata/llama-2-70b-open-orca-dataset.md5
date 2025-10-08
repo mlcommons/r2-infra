@@ -1,0 +1,4 @@
+65f4cfbdaf30dd1938cd4aea58e884a6  reference_impl_gpu_bs32_fp32_output.pkl.gz
+c247a315b9328365f66d2c2585b35cd4  open_orca_gpt4_tokenized_llama.sampled_24576.pkl.gz
+d04917e08afb675640c9d7a5bb9b5e2a  open_orca_gpt4_tokenized_llama.calibration_1000.pkl.gz
+d5e9018235b2783a4c6bdad473e3ca52  mlperf_log_accuracy.json
