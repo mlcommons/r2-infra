@@ -4,85 +4,84 @@
   "title": "MLCommons Cognata Dataset Download",
   "license_notice": "The MLCommons Cognata dataset is provided to MLCommons Members for use in MLPerf benchmarks under the terms of <a href='https://drive.google.com/file/d/12337Sj9h_n6jkIeoz39oajsIRPfLG27U' target='_blank'>this end-user license agreement</a>.",
   "datasets": {
-  "": [
-    {
-      "name": "cognata-dataset-full",
-      "subpath": "data/mlc_cognata_dataset/",
-      "title": "Cognata Dataset (Full)",
-      "description": "Complete Cognata dataset including processed and raw assets for all benchmarks using Cognata dataset.",
-      "size": "1.8TB"
-    },
-    {
-      "name": "cognata-unprocessed",
-      "subpath": "data/mlc_cognata_dataset/unprocessed/",
-      "title": "Cognata Unprocessed Dataset",
-      "description": "Unprocessed Cognata dataset.",
-      "size": "1.6TB"
-    },
-    {
-      "name": "calib_2d",
-      "subpath": "data/mlc_cognata_dataset/preprocessed_2d/calib_2d.tar.gz",
-      "title": "2D Object Detection Calibration Dataset",
-      "description": "Calibration data for 2D object detection ABTF benchmark using SSD-ResNet50.",
-      "size": "3.2GB"
-    },
-    {
-      "name": "val_2d",
-      "subpath": "data/mlc_cognata_dataset/preprocessed_2d/val_2d.tar.gz",
-      "title": "2D Object Detection Validation Dataset",
-      "description": "Validation data for Cognata 2D object detection ABTF benchmark using SSD-ResNet50.",
-      "size": "95.7GB"
-    },
-    {
-      "name": "ssd_checkpoint_pth",
-      "subpath": "data/mlc_cognata_dataset/model_checkpoint_ssd/baseline_8MP_ss_scales_fm1_5x5_all_ep60.pth",
-      "title": "SSD-ResNet50 Model Checkpoint (.pth)",
-      "description": "Baseline model checkpoint for 2D object detection.",
-      "size": "209.4MB"
-    },
-    {
-      "name": "ssd_checkpoint_onnx",
-      "subpath": "data/mlc_cognata_dataset/model_checkpoint_ssd/ssd_resnet50.onnx",
-      "title": "SSD-ResNet50 Model (ONNX)",
-      "description": "ResNet50 ONNX model for 2D object detection.",
-      "size": "104.5MB"
-    },
-    {
-      "name": "calib_seg",
-      "subpath": "data/mlc_cognata_dataset/preprocessed_seg/calib_seg.tar.gz",
-      "title": "Semantic Segmentation Calibration Set",
-      "description": "Calibration data for ABTF semantic segmentation benchmark using DeepLabv3+.",
-      "size": "3.2GB"
-    },
-    {
-      "name": "val_seg",
-      "subpath": "data/mlc_cognata_dataset/preprocessed_seg/val_seg.tar.gz",
-      "title": "Semantic Segmentation Validation Set",
-      "description": "Validation data for ABTF semantic segmentation benchmark using DeepLabv3+.",
-      "size": "96.4GB"
-    },
-    {
-      "name": "deeplab_onnx",
-      "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/deeplabv3+_8mp.onnx",
-      "title": "Deeplabv3+ Model (ONNX)",
-      "description": "Static Deeplabv3+ ONNX model for segmentation benchmark.",
-      "size": "151.6MB"
-    },
-    {
-      "name": "deeplab_dynamic_onnx",
-      "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/deeplabv3+_dynamic.onnx",
-      "title": "Deeplabv3+ Dynamic Model (ONNX)",
-      "description": "Dynamic Deeplabv3+ ONNX model for segmentation benchmark. Useful if input images have different resolutions",
-      "size": "151.6MB"
-    },
-    {
-      "name": "deeplab_checkpoint",
-      "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/latest_deeplabv3plus_resnet50_cognata_os16_it100000.pth",
-      "title": "Deeplabv3+ Checkpoint (.pth)",
-      "description": "Deeplabv3+ PyTorch checkpoint.",
-      "size": "307.8MB"
-    }
-  ]
-}
-
+    "": [
+      {
+        "name": "cognata-dataset-full",
+        "subpath": "data/mlc_cognata_dataset/",
+        "title": "Cognata Dataset (Full)",
+        "description": "Complete Cognata dataset including processed and raw assets for all benchmarks using Cognata dataset.",
+        "size": "2.1TB"
+      },
+      {
+        "name": "cognata-unprocessed",
+        "subpath": "data/mlc_cognata_dataset/unprocessed/",
+        "title": "Cognata Unprocessed Dataset",
+        "description": "Unprocessed Cognata dataset.",
+        "size": "1.9TB"
+      },
+      {
+        "name": "calib_2d",
+        "subpath": "data/mlc_cognata_dataset/preprocessed_2d/calib_2d.tar.gz",
+        "title": "2D Object Detection Calibration Dataset",
+        "description": "Calibration data for 2D object detection ABTF benchmark using SSD-ResNet50.",
+        "size": "3.5GB"
+      },
+      {
+        "name": "val_2d",
+        "subpath": "data/mlc_cognata_dataset/preprocessed_2d/val_2d.tar.gz",
+        "title": "2D Object Detection Validation Dataset",
+        "description": "Validation data for Cognata 2D object detection ABTF benchmark using SSD-ResNet50.",
+        "size": "103GB"
+      },
+      {
+        "name": "ssd_checkpoint_pth",
+        "subpath": "data/mlc_cognata_dataset/model_checkpoint_ssd/baseline_8MP_ss_scales_fm1_5x5_all_ep60.pth",
+        "title": "SSD-ResNet50 Model Checkpoint (.pth)",
+        "description": "Baseline model checkpoint for 2D object detection.",
+        "size": "220MB"
+      },
+      {
+        "name": "ssd_checkpoint_onnx",
+        "subpath": "data/mlc_cognata_dataset/model_checkpoint_ssd/ssd_resnet50.onnx",
+        "title": "SSD-ResNet50 Model (ONNX)",
+        "description": "ResNet50 ONNX model for 2D object detection.",
+        "size": "110MB"
+      },
+      {
+        "name": "calib_seg",
+        "subpath": "data/mlc_cognata_dataset/preprocessed_seg/calib_seg.tar.gz",
+        "title": "Semantic Segmentation Calibration Set",
+        "description": "Calibration data for ABTF semantic segmentation benchmark using DeepLabv3+.",
+        "size": "3.5GB"
+      },
+      {
+        "name": "val_seg",
+        "subpath": "data/mlc_cognata_dataset/preprocessed_seg/val_seg.tar.gz",
+        "title": "Semantic Segmentation Validation Set",
+        "description": "Validation data for ABTF semantic segmentation benchmark using DeepLabv3+.",
+        "size": "104GB"
+      },
+      {
+        "name": "deeplab_onnx",
+        "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/deeplabv3+_8mp.onnx",
+        "title": "Deeplabv3+ Model (ONNX)",
+        "description": "Static Deeplabv3+ ONNX model for segmentation benchmark.",
+        "size": "159MB"
+      },
+      {
+        "name": "deeplab_dynamic_onnx",
+        "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/deeplabv3+_dynamic.onnx",
+        "title": "Deeplabv3+ Dynamic Model (ONNX)",
+        "description": "Dynamic Deeplabv3+ ONNX model for segmentation benchmark. Useful if input images have different resolutions",
+        "size": "159MB"
+      },
+      {
+        "name": "deeplab_checkpoint",
+        "subpath": "data/mlc_cognata_dataset/model_checkpoint_deeplab/latest_deeplabv3plus_resnet50_cognata_os16_it100000.pth",
+        "title": "Deeplabv3+ Checkpoint (.pth)",
+        "description": "Deeplabv3+ PyTorch checkpoint.",
+        "size": "319MB"
+      }
+    ]
+  }
 }
