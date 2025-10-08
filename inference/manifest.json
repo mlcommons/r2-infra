@@ -8,14 +8,14 @@
       {
         "name": "deepseek-r1-0528",
         "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
-        "title": "DeepSeek-R1-0528 Model",
+        "title": "DeepSeek-R1-0528 model",
         "description": "DeepSeek-R1-0528 model for the DeepSeek-R1 benchmark",
         "size": "689GB"
       },
       {
         "name": "deepseek-r1-datasets-fp8-eval",
         "subpath": "deepseek_r1/datasets/",
-        "title": "DeepSeek-R1 Datasets",
+        "title": "DeepSeek-R1 datasets",
         "description": "Full preprocessed dataset and calibration dataset for the DeepSeek-R1 benchmark",
         "destination": "./",
         "size": "163MB"
@@ -50,14 +50,14 @@
       {
         "name": "llama3-1-405b-calibration-dataset-512",
         "subpath": "llama3.1_405b/mlperf_llama3.1_405b_calibration_dataset_512_processed_fp16_eval.pkl/",
-        "title": "Llama 3.1 405b Calibration Dataset",
+        "title": "Llama 3.1 405b calibration dataset",
         "description": "Calibration dataset for the Llama 3.1 405b benchmark",
         "size": "57MB"
       },
       {
         "name": "llama3-1-405b-dataset-8313",
         "subpath": "llama3.1_405b/mlperf_llama3.1_405b_dataset_8313_processed_fp16_eval.pkl/",
-        "title": "Llama 3.1 405b Dataset",
+        "title": "Llama 3.1 405b dataset",
         "description": "Dataset for the Llama 3.1 405b benchmark",
         "size": "892MB"
       }
@@ -112,7 +112,7 @@
       {
         "name": "rgat-model",
         "subpath": "R-GAT/",
-        "title": "RGAT Model",
+        "title": "RGAT model",
         "description": "RGAT model for the RGAT benchmark",
         "size": "53MB"
       }
@@ -121,7 +121,7 @@
       {
         "name": "whisper-model",
         "subpath": "Whisper/model/",
-        "title": "Whisper Model",
+        "title": "Whisper model",
         "description": "Whisper large-v3 model for the Whisper benchmark",
         "destination": "whisper/model",
         "size": "25GB"
@@ -129,7 +129,7 @@
       {
         "name": "whisper-dataset",
         "subpath": "Whisper/dataset/",
-        "title": "Whisper Dataset",
+        "title": "Whisper dataset",
         "description": "LibriSpeech dataset for the Whisper benchmark",
         "destination": "whisper/dataset",
         "size": "4.6GB"
