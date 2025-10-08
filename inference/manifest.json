@@ -37,6 +37,16 @@
         "size": "105GB"
       }
     ],
+    "GPT-J Benchmark": [
+      {
+        "name": "gpt-j-model-checkpoint",
+        "subpath": "gpt-j/checkpoint-final/",
+        "title": "GPT-J model checkpoint",
+        "description": "Model checkpoint for the GPT-J benchmark",
+        "destination": "model",
+        "size": "25GB"
+      }
+    ],
     "Llama 2 70b Benchmark": [
       {
         "name": "llama-2-70b-open-orca-dataset",
@@ -115,6 +125,22 @@
         "title": "RGAT model",
         "description": "RGAT model for the RGAT benchmark",
         "size": "53MB"
+      }
+    ],
+    "Stable Diffusion Benchmark": [
+      {
+        "name": "stable-diffusion-xl-1-0-fp32-checkpoint",
+        "subpath": "stable_diffusion_fp32/",
+        "title": "Stable Diffusion FP32 model",
+        "description": "Stable Diffusion XL 1.0 FP32 model checkpoint for the Stable Diffusion benchmark",
+        "size": "14GB"
+      },
+      {
+        "name": "stable-diffusion-xl-1-0-fp16-checkpoint",
+        "subpath": "stable_diffusion_fp16/",
+        "title": "Stable Diffusion FP16 model",
+        "description": "Stable Diffusion XL 1.0 FP16 model checkpoint for the Stable Diffusion benchmark",
+        "size": "7.0GB"
       }
     ],
     "Whisper Benchmark": [
