@@ -116,7 +116,7 @@
         "title": "C4 full dataset unzipped",
         "description": "Full C4 fileset unzipped, including all raw train and validation files.",
         "destination": "./",
-        "size": "841GB"
+        "size": "842GB"
       },
       {
         "name": "c4-validation-dataset-zipped",
@@ -131,7 +131,7 @@
         "title": "C4 train and eval datasets",
         "description": "C4 train and eval datasets",
         "destination": "c4/original",
-        "size": "841GB"
+        "size": "842GB"
       }
     ],
     "Mixtral 8x22b Benchmark (Retired)": [
