@@ -65,10 +65,19 @@
 </div>
 <div class="dataset-section">
     <h3 class="dataset-title">Preprocessed Dataset</h3>
-    <p class="dataset-description">The preprocessed Waymo Open Dataset without the model checkpoints (~469GB)</p>
+    <p class="dataset-description">Preprocessed Waymo Open Dataset containing both calibration and validation data (without model checkpoints) (~469GB)</p>
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/kitti_format https://waymo.mlcommons-storage.org/metadata/dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Preprocessed Calibration Dataset</h3>
+    <p class="dataset-description">Preprocessed Waymo Calibration Dataset only (without model checkpoints) (~121GB)</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d waymo_preprocessed_dataset/kitti_format/testing/ https://waymo.mlcommons-storage.org/metadata/calibration-dataset.uri</code>
         </div>
     </div>
 </div>
