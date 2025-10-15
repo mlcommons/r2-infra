@@ -16,7 +16,7 @@
         "name": "dataset",
         "subpath": "data/waymo_preprocessed_dataset/kitti_format/",
         "title": "Preprocessed Dataset",
-        "description": ""Preprocessed Waymo Open Dataset containing both calibration and validation data (without model checkpoints)",
+        "description": "Preprocessed Waymo Open Dataset containing both calibration and validation data (without model checkpoints)",
         "destination": "waymo_preprocessed_dataset/kitti_format",
         "size": "469GB"
       },
