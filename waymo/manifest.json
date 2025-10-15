@@ -26,7 +26,7 @@
         "title": "Preprocessed Calibration Dataset",
         "description": "Preprocessed Waymo Calibration Dataset only (without model checkpoints)",
         "destination": "waymo_preprocessed_dataset/kitti_format/testing",
-        "size": "469GB"
+        "size": "121GB"
       },
       {
         "name": "model",
