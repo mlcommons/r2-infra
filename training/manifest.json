@@ -144,7 +144,7 @@
       },
       {
         "name": "bert-preprocessed-wikipedia-dataset",
-        "subpath": "wikipedia_for_bert/processed_dataset",
+        "subpath": "wikipedia_for_bert/processed_dataset/",
         "title": "BERT preprocessed Wikipedia dataset",
         "description": "Wikipedia dataset preprocessed for the BERT benchmark",
         "size": "9.7GB"
