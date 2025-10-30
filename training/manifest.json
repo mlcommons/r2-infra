@@ -139,13 +139,15 @@
         "name": "bert-input-files",
         "subpath": "wikipedia_for_bert/input_files/",
         "title": "BERT input files",
-        "description": "Checkpoint, config, and other input files for the BERT benchmark"
+        "description": "Checkpoint, config, and other input files for the BERT benchmark",
+        "size": "24GB"
       },
       {
         "name": "bert-preprocessed-wikipedia-dataset",
         "subpath": "wikipedia_for_bert/processed_dataset",
         "title": "BERT preprocessed Wikipedia dataset",
-        "description": "Wikipedia dataset preprocessed for the BERT benchmark"
+        "description": "Wikipedia dataset preprocessed for the BERT benchmark",
+        "size": "9.7GB"
       }
     ],
     "GPT-3 Megatron Benchmark (Retired)": [
@@ -153,22 +155,25 @@
         "name": "gpt-3-megatron-preprocessed-dataset",
         "subpath": "gpt3/megatron-lm/dataset_c4_spm.tar",
         "title": "GPT-3 Megatron preprocessed dataset",
-        "description": "C4 dataset preprocessed for the GPT-3 Megatron benchmark"
+        "description": "C4 dataset preprocessed for the GPT-3 Megatron benchmark",
+        "size": "89GB"
       },
       {
         "name": "gpt-3-megatron-fp32-checkpoint",
         "subpath": "gpt3/megatron-lm/checkpoint_megatron_fp32.tar",
         "title": "GPT-3 Megatron FP32 checkpoint",
-        "description": "FP32 checkpoint for the GPT-3 Megatron benchmark"
+        "description": "FP32 checkpoint for the GPT-3 Megatron benchmark",
+        "size": "2.1TB"
       },
       {
         "name": "gpt-3-megatron-bf16-checkpoint",
         "subpath": "gpt3/megatron-lm/checkpoint_nemo_bf16.tar",
         "title": "GPT-3 Megatron BF16 checkpoint",
-        "description": "BF16 checkpoint for the GPT-3 Megatron benchmark"
+        "description": "BF16 checkpoint for the GPT-3 Megatron benchmark",
+        "size": "2.5TB"
       }
     ],
-        "Mixtral 8x22b Benchmark (Retired)": [
+    "Mixtral 8x22b Benchmark (Retired)": [
       {
         "name": "mixtral-8x22b-v0-1-fsdp-checkpoint",
         "subpath": "mixtral_8x22b/checkpoints/Mixtral-8x22B-v0.1-fsdp/",
