@@ -134,7 +134,41 @@
         "size": "842GB"
       }
     ],
-    "Mixtral 8x22b Benchmark (Retired)": [
+    "BERT Benchmark (Retired)": [
+      {
+        "name": "bert-input-files",
+        "subpath": "wikipedia_for_bert/input_files/",
+        "title": "BERT input files",
+        "description": "Checkpoint, config, and other input files for the BERT benchmark"
+      },
+      {
+        "name": "bert-preprocessed-wikipedia-dataset",
+        "subpath": "wikipedia_for_bert/processed_dataset",
+        "title": "BERT preprocessed Wikipedia dataset",
+        "description": "Wikipedia dataset preprocessed for the BERT benchmark"
+      }
+    ],
+    "GPT-3 Megatron Benchmark (Retired)": [
+      {
+        "name": "gpt-3-megatron-preprocessed-dataset",
+        "subpath": "gpt3/megatron-lm/dataset_c4_spm.tar",
+        "title": "GPT-3 Megatron preprocessed dataset",
+        "description": "C4 dataset preprocessed for the GPT-3 Megatron benchmark"
+      },
+      {
+        "name": "gpt-3-megatron-fp32-checkpoint",
+        "subpath": "gpt3/megatron-lm/checkpoint_megatron_fp32.tar",
+        "title": "GPT-3 Megatron FP32 checkpoint",
+        "description": "FP32 checkpoint for the GPT-3 Megatron benchmark"
+      },
+      {
+        "name": "gpt-3-megatron-bf16-checkpoint",
+        "subpath": "gpt3/megatron-lm/checkpoint_nemo_bf16.tar",
+        "title": "GPT-3 Megatron BF16 checkpoint",
+        "description": "BF16 checkpoint for the GPT-3 Megatron benchmark"
+      }
+    ],
+        "Mixtral 8x22b Benchmark (Retired)": [
       {
         "name": "mixtral-8x22b-v0-1-fsdp-checkpoint",
         "subpath": "mixtral_8x22b/checkpoints/Mixtral-8x22B-v0.1-fsdp/",
@@ -155,6 +189,24 @@
         "title": "Mixtral 8x22b docker images",
         "description": "Mixtral 8x22b docker images for Mixtral 8x22b benchmark environment setup",
         "size": "24GB"
+      }
+    ],
+    "Stable Diffusion Benchmark (Retired)": [
+      {
+        "name": "stable-diffusion-laion-400m-filtered-moments-dataset",
+        "subpath": "stable_diffusion/datasets/laion-400m/moments-webdataset-filtered/",
+        "title": "Stable Diffusion LAION 400M filtered moments dataset",
+        "description": "LAION 400M preprocessed moments for the Stable Diffusion benchmark",
+        "metadata_override": "true",
+        "size": "897GB"
+      },
+      {
+        "name": "stable-diffusion-laion-400m-filtered-images-dataset",
+        "subpath": "stable_diffusion/datasets/laion-400m/images-webdataset-filtered/",
+        "title": "Stable Diffusion LAION 400M filtered images dataset",
+        "description": "LAION 400M raw images for the Stable Diffusion benchmark",
+        "metadata_override": "true",
+        "size": "300GB"
       }
     ]
   }
