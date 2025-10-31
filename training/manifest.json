@@ -202,6 +202,7 @@
         "subpath": "stable_diffusion/datasets/laion-400m/moments-webdataset-filtered/",
         "title": "Stable Diffusion LAION 400M filtered moments dataset",
         "description": "LAION 400M preprocessed moments for the Stable Diffusion benchmark",
+        "destination": "datasets/laion-400m/webdataset-moments-filtered",
         "metadata_override": "true",
         "size": "897GB"
       },
@@ -210,8 +211,23 @@
         "subpath": "stable_diffusion/datasets/laion-400m/images-webdataset-filtered/",
         "title": "Stable Diffusion LAION 400M filtered images dataset",
         "description": "LAION 400M raw images for the Stable Diffusion benchmark",
+        "destination": "datasets/laion-400m/webdataset-filtered",
         "metadata_override": "true",
         "size": "300GB"
+      },
+      {
+        "name": "stable-diffusion-coco2014-validation-prompts-dataset",
+        "subpath": "stable_diffusion/datasets/coco2014/val2014_30k.tsv",
+        "title": "Stable Diffusion COCO 2014 validation prompts dataset",
+        "description": "COCO 2014 validation prompts datasetfor the Stable Diffusion benchmark",
+        "destination": "datasets/coco2014"
+      },
+      {
+        "name": "stable-diffusion-coco2014-validation-stats-dataset",
+        "subpath": "stable_diffusion/datasets/coco2014/val2014_30k_stats.npz",
+        "title": "Stable Diffusion COCO 2014 validation stats dataset",
+        "description": "COCO 2014 validation stats dataset for the Stable Diffusion benchmark",
+        "destination": "datasets/coco2014"
       }
     ]
   }
