@@ -220,14 +220,16 @@
         "subpath": "stable_diffusion/datasets/coco2014/val2014_30k.tsv",
         "title": "Stable Diffusion COCO 2014 validation prompts dataset",
         "description": "COCO 2014 validation prompts datasetfor the Stable Diffusion benchmark",
-        "destination": "datasets/coco2014"
+        "destination": "datasets/coco2014",
+        "size": "2.1MB"
       },
       {
         "name": "stable-diffusion-coco2014-validation-stats-dataset",
         "subpath": "stable_diffusion/datasets/coco2014/val2014_30k_stats.npz",
         "title": "Stable Diffusion COCO 2014 validation stats dataset",
         "description": "COCO 2014 validation stats dataset for the Stable Diffusion benchmark",
-        "destination": "datasets/coco2014"
+        "destination": "datasets/coco2014",
+        "size": "33MB"
       }
     ]
   }
