@@ -230,6 +230,29 @@
         "description": "COCO 2014 validation stats dataset for the Stable Diffusion benchmark",
         "destination": "datasets/coco2014",
         "size": "33MB"
+      },
+      {
+        "name": "stable-diffusion-sd-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/sd/512-base-ema.ckpt",
+        "title": "Stable Diffusion SD checkpoint",
+        "description": "StabilityAI's 512-base-ema.ckpt checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/sd"
+      },
+      {
+        "name": "stable-diffusion-inception-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/inception/pt_inception-2015-12-05-6726825d.pth",
+        "title": "Stable Diffusion Inception checkpoint",
+        "description": "Inception checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/inception"        
+      },
+      {
+        "name": "stable-diffusion-clip-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/clip/",
+        "title": "Stable Diffusion CLIP checkpoint",
+        "description": "CLIP checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/clip",
+        "metadata_override": "true",
+        "size": "3.9GB"
       }
     ]
   }
