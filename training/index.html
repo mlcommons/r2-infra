@@ -290,7 +290,7 @@
     <p class="dataset-description">LAION 400M preprocessed moments for the Stable Diffusion benchmark (~897GB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/stable-diffusion-laion-400m-filtered-moments-dataset.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d datasets/laion-400m/webdataset-moments-filtered https://training.mlcommons-storage.org/metadata/stable-diffusion-laion-400m-filtered-moments-dataset.uri</code>
         </div>
     </div>
 </div>
@@ -299,7 +299,25 @@
     <p class="dataset-description">LAION 400M raw images for the Stable Diffusion benchmark (~300GB)</p>
     <div class="command-section">
         <div class="code-block">
-            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/stable-diffusion-laion-400m-filtered-images-dataset.uri</code>
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d datasets/laion-400m/webdataset-filtered https://training.mlcommons-storage.org/metadata/stable-diffusion-laion-400m-filtered-images-dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Stable Diffusion COCO 2014 validation prompts dataset</h3>
+    <p class="dataset-description">COCO 2014 validation prompts datasetfor the Stable Diffusion benchmark</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d datasets/coco2014 https://training.mlcommons-storage.org/metadata/stable-diffusion-coco2014-validation-prompts-dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Stable Diffusion COCO 2014 validation stats dataset</h3>
+    <p class="dataset-description">COCO 2014 validation stats dataset for the Stable Diffusion benchmark</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) -d datasets/coco2014 https://training.mlcommons-storage.org/metadata/stable-diffusion-coco2014-validation-stats-dataset.uri</code>
         </div>
     </div>
 </div>
