@@ -1,0 +1,12 @@
+                                  enwiki-20200101-pages-articles-multistream.xml.bz2
+004867db820d335c26d47fe90bc96a26  enwiki-20200101-pages-articles-multistream.xml.bz2.md5sum
+4550b87b0ea99302e44c84f6bed9aa97  License.txt
+50797acd537880bfb5a7ade80d976129  tf1_ckpt/model.ckpt-28252-003.data-00000-of-00001
+508515b9c73b0fff5da4484b1287ab97  tf1_ckpt/License.txt
+508515b9c73b0fff5da4484b1287ab97  tf2_ckpt/License.txt
+64800d5d8528ce344256daf115d4965e  vocab.txt
+77d642b721cf590c740c762c7f476e04  tf2_ckpt/model.ckpt-28252.data-00000-of-00001
+7f59165e21b7d566db610ff6756c926b  bert_config.json
+dbd16c731e8a8113bc08eeed0326b8e7  tf1_ckpt/model.ckpt-28252.meta
+f97de3ae180eb8d479555c939d50d048  tf1_ckpt/model.ckpt-28252.index
+fc34dd7a54afc07f2d8e9d64471dc672  tf2_ckpt/model.ckpt-28252.index

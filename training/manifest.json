@@ -134,6 +134,45 @@
         "size": "842GB"
       }
     ],
+    "BERT Benchmark (Retired)": [
+      {
+        "name": "bert-input-files",
+        "subpath": "wikipedia_for_bert/input_files/",
+        "title": "BERT input files",
+        "description": "Checkpoint, config, and other input files for the BERT benchmark",
+        "size": "24GB"
+      },
+      {
+        "name": "bert-preprocessed-wikipedia-dataset",
+        "subpath": "wikipedia_for_bert/processed_dataset/",
+        "title": "BERT preprocessed Wikipedia dataset",
+        "description": "Wikipedia dataset preprocessed for the BERT benchmark",
+        "size": "9.7GB"
+      }
+    ],
+    "GPT-3 Megatron Benchmark (Retired)": [
+      {
+        "name": "gpt-3-megatron-preprocessed-dataset",
+        "subpath": "gpt3/megatron-lm/dataset_c4_spm.tar",
+        "title": "GPT-3 Megatron preprocessed dataset",
+        "description": "C4 dataset preprocessed for the GPT-3 Megatron benchmark",
+        "size": "89GB"
+      },
+      {
+        "name": "gpt-3-megatron-fp32-checkpoint",
+        "subpath": "gpt3/megatron-lm/checkpoint_megatron_fp32.tar",
+        "title": "GPT-3 Megatron FP32 checkpoint",
+        "description": "FP32 checkpoint for the GPT-3 Megatron benchmark",
+        "size": "2.1TB"
+      },
+      {
+        "name": "gpt-3-megatron-bf16-checkpoint",
+        "subpath": "gpt3/megatron-lm/checkpoint_nemo_bf16.tar",
+        "title": "GPT-3 Megatron BF16 checkpoint",
+        "description": "BF16 checkpoint for the GPT-3 Megatron benchmark",
+        "size": "2.5TB"
+      }
+    ],
     "Mixtral 8x22b Benchmark (Retired)": [
       {
         "name": "mixtral-8x22b-v0-1-fsdp-checkpoint",
@@ -155,6 +194,67 @@
         "title": "Mixtral 8x22b docker images",
         "description": "Mixtral 8x22b docker images for Mixtral 8x22b benchmark environment setup",
         "size": "24GB"
+      }
+    ],
+    "Stable Diffusion Benchmark (Retired)": [
+      {
+        "name": "stable-diffusion-laion-400m-filtered-moments-dataset",
+        "subpath": "stable_diffusion/datasets/laion-400m/moments-webdataset-filtered/",
+        "title": "Stable Diffusion LAION 400M filtered moments dataset",
+        "description": "LAION 400M preprocessed moments for the Stable Diffusion benchmark",
+        "destination": "datasets/laion-400m/webdataset-moments-filtered",
+        "metadata_override": "true",
+        "size": "897GB"
+      },
+      {
+        "name": "stable-diffusion-laion-400m-filtered-images-dataset",
+        "subpath": "stable_diffusion/datasets/laion-400m/images-webdataset-filtered/",
+        "title": "Stable Diffusion LAION 400M filtered images dataset",
+        "description": "LAION 400M raw images for the Stable Diffusion benchmark",
+        "destination": "datasets/laion-400m/webdataset-filtered",
+        "metadata_override": "true",
+        "size": "300GB"
+      },
+      {
+        "name": "stable-diffusion-coco2014-validation-prompts-dataset",
+        "subpath": "stable_diffusion/datasets/coco2014/val2014_30k.tsv",
+        "title": "Stable Diffusion COCO 2014 validation prompts dataset",
+        "description": "COCO 2014 validation prompts datasetfor the Stable Diffusion benchmark",
+        "destination": "datasets/coco2014",
+        "size": "2.1MB"
+      },
+      {
+        "name": "stable-diffusion-coco2014-validation-stats-dataset",
+        "subpath": "stable_diffusion/datasets/coco2014/val2014_30k_stats.npz",
+        "title": "Stable Diffusion COCO 2014 validation stats dataset",
+        "description": "COCO 2014 validation stats dataset for the Stable Diffusion benchmark",
+        "destination": "datasets/coco2014",
+        "size": "33MB"
+      },
+      {
+        "name": "stable-diffusion-sd-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/sd/512-base-ema.ckpt",
+        "title": "Stable Diffusion SD checkpoint",
+        "description": "StabilityAI's 512-base-ema.ckpt checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/sd",
+        "size": "5.3GB"
+      },
+      {
+        "name": "stable-diffusion-inception-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/inception/pt_inception-2015-12-05-6726825d.pth",
+        "title": "Stable Diffusion Inception checkpoint",
+        "description": "Inception checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/inception",
+        "size": "96MB"
+      },
+      {
+        "name": "stable-diffusion-clip-checkpoint",
+        "subpath": "stable_diffusion/checkpoints/clip/",
+        "title": "Stable Diffusion CLIP checkpoint",
+        "description": "CLIP checkpoint for the Stable Diffusion benchmark",
+        "destination": "checkpoints/clip",
+        "metadata_override": "true",
+        "size": "3.9GB"
       }
     ]
   }
