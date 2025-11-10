@@ -54,8 +54,17 @@
 
             <details><summary><h3>DLRM v2 Benchmark</h3> (click to expand)</summary>
 <div class="dataset-section">
-    <h3 class="dataset-title">Criteo 4TB multi-hot dataset</h3>
-    <p class="dataset-description">Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset (~4.0TB)</p>
+    <h3 class="dataset-title">Criteo 4TB multi-hot dataset (reference format)</h3>
+    <p class="dataset-description">Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in reference format</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/dlrmv2-preprocessed-criteo-click-logs-reference.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Criteo 4TB multi-hot dataset (HugeCTR format)</h3>
+    <p class="dataset-description">Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in HugeCTR format (~4.0TB)</p>
     <div class="command-section">
         <div class="code-block">
             <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://training.mlcommons-storage.org/metadata/dlrmv2-preprocessed-criteo-click-logs.uri</code>
