@@ -9,7 +9,8 @@
         "name": "dlrmv2-preprocessed-criteo-click-logs-reference",
         "subpath": "torchrec_dlrm/datasets/criteo_multihot_v3.0_reference/",
         "title": "Criteo 4TB multi-hot dataset (reference format)",
-        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in reference format"
+        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in reference format",
+        "size": "4.0TB"
       },
       {
         "name": "dlrmv2-preprocessed-criteo-click-logs",
