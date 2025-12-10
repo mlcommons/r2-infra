@@ -166,7 +166,8 @@
         "name": "YOLO-COCO2017-dataset",
         "subpath": "coco_safe/",
         "title": "YOLO COCO2017 dataset",
-        "description": "COCO2017 filtered dataset for YOLO"
+        "description": "COCO2017 filtered dataset for YOLO",
+        "size": "262MB"
       }
     ]
   }
