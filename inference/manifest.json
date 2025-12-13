@@ -42,13 +42,15 @@
         "name": "dlrm-v3-dataset",
         "subpath": "dlrmv3_dataset/",
         "title": "DLRM v3 streaming synthetic dataset",
-        "description": "Streaming synthetic dataset for DLRM v3"
+        "description": "Streaming synthetic dataset for DLRM v3",
+        "size": "2.8GB"
       },
       {
         "name": "dlrm-v3-checkpoint",
         "subpath": "dlrmv3_trained_checkpoint/",
         "title": "DLRM v3 streaming synthetic dataset checkpoint",
-        "description": "Checkpoint for DLRM v3"
+        "description": "Checkpoint for DLRM v3",
+        "size": "1.1TB"
       }
     ],
     "GPT-J Benchmark": [
