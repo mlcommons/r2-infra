@@ -37,6 +37,20 @@
         "size": "105GB"
       }
     ],
+    "DLRM v3 Benchmark": [
+      {
+        "name": "dlrm-v3-dataset",
+        "subpath": "dlrmv3_dataset/",
+        "title": "DLRM v3 streaming synthetic dataset",
+        "description": "Streaming synthetic dataset for DLRM v3"
+      },
+      {
+        "name": "dlrm-v3-checkpoint",
+        "subpath": "dlrmv3_trained_checkpoint/",
+        "title": "DLRM v3 streaming synthetic dataset checkpoint",
+        "description": "Checkpoint for DLRM v3"
+      }
+    ],
     "GPT-J Benchmark": [
       {
         "name": "gpt-j-model-checkpoint",
