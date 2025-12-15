@@ -43,7 +43,7 @@
         "subpath": "dlrmv3_dataset/",
         "title": "DLRM v3 streaming synthetic dataset",
         "description": "Streaming synthetic dataset for DLRM v3",
-        "size": "2.8GB"
+        "size": "31GB"
       },
       {
         "name": "dlrm-v3-checkpoint",
