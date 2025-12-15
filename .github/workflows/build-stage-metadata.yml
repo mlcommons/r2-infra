@@ -34,7 +34,7 @@ jobs:
       - name: Get changed directories with manifests
         id: changed_dirs
         run: |
-          evn
+          env
           echo "Fetching base branch main..."
           git fetch origin main --depth=1
           echo "Finding changed files against main..."
