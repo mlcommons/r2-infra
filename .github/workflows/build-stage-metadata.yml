@@ -94,7 +94,6 @@ jobs:
         if: steps.changed_dirs.outputs.manifest_files != ''
         run: |
           set -euo pipefail
-          set -x
 
           # File that will store per-dataset size info for later use in the PR comment
           SIZE_FILE="$GITHUB_WORKSPACE/size_report.txt"
