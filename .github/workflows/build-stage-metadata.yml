@@ -34,7 +34,6 @@ jobs:
       - name: Get changed directories with manifests
         id: changed_dirs
         run: |
-          env
           echo "Fetching base branch main..."
           git fetch origin main --depth=1
           echo "Finding changed files against main..."
@@ -95,7 +94,7 @@ jobs:
         if: steps.changed_dirs.outputs.manifest_files != ''
         run: |
           set -euo pipefail
-          env
+          set -x
 
           # File that will store per-dataset size info for later use in the PR comment
           SIZE_FILE="$GITHUB_WORKSPACE/size_report.txt"
