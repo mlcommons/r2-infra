@@ -1,5 +1,6 @@
 080d4cd504947f4e9868eb387a816d9c  sampled_data/requests_per_ts.csv
 255b4df92c453f70aba02218642443b0  sampled_data/users_cumsum_per_ts.csv
 442b4b83fecdcdcf534ec14d7adf3baf  sampled_data/requests_per_ts_offset.csv
+5f9f8b33f1575ffdbb5c24c9bd95a6f0  LICENSE.txt
 7c4ec04535a00f3e3b62a38481bc1ac2  sampled_data/offset.csv
 e521c7ba9cc8ea1d82f87ed87f310947  sampled_data/0.csv
