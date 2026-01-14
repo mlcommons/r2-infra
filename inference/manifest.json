@@ -243,8 +243,8 @@
       {
         "name": "YOLO-model",
         "subpath": "yolo_model/",
-        "title": "YOLO model",
-        "description": "YOLO model",
+        "title": "YOLO v11 model",
+        "description": "YOLO v11 model",
         "size": "52MB"
       }
     ]
