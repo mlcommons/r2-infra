@@ -63,6 +63,22 @@
         "size": "25GB"
       }
     ],
+    "GPT-OSS Benchmark": [
+      {
+        "name": "gpt-oss-model",
+        "subpath": "gpt-oss_model/",
+        "title": "gpt-oss-120b model",
+        "description": "gpt-oss-120b model for the GPT-OSS benchmark",
+        "size": "196GB"
+      },
+      {
+        "name": "gpt-oss-data",
+        "subpath": "gpt-oss_data/",
+        "title": "Dataset for GPT-OSS benchmark",
+        "description": "Dataset for GPT-OSS benchmark",
+        "size": "644MB"
+      }
+    ],
     "Llama 2 70b Benchmark": [
       {
         "name": "llama-2-70b-open-orca-dataset",
@@ -159,6 +175,45 @@
         "size": "7.0GB"
       }
     ],
+    "Text to Video": [
+      {
+        "name": "T2V-data",
+        "subpath": "t2v_data/",
+        "title": "Text to Video dataset",
+        "description": "Text to Video dataset",
+        "size": "9.7MB"
+      },
+      {
+        "name": "T2V-model",
+        "subpath": "t2v_model/",
+        "title": "Text to Video model",
+        "description": "Wan2.2-T2V-A14B-Diffusers model for T2V benchmark",
+        "size": "127GB"
+      },
+      {
+        "name": "T2V-vbench",
+        "subpath": "t2v_vbench/",
+        "title": "Text to Video vbench extra models",
+        "description": "Extra models used by vbench saved",
+        "size": "5.6GB"
+      }
+    ],
+    "VLM Benchmark": [
+      {
+        "name": "VLM-data",
+        "subpath": "vlm_data/",
+        "title": "Global Shopify Catalogue dataset",
+        "description": "Global Shopify Catalogue for VLM",
+        "size": "9.5GB"
+      },
+      {
+        "name": "VLM-model",
+        "subpath": "vlm_model/",
+        "title": "VLM model",
+        "description": "Qwen3-VL-235B-A22B-Instruct model for VLM benchmark",
+        "size": "472GB"
+      }
+    ],
     "Whisper Benchmark": [
       {
         "name": "whisper-model",
@@ -184,6 +239,13 @@
         "title": "YOLO COCO2017 dataset",
         "description": "COCO2017 filtered dataset for YOLO",
         "size": "262MB"
+      },
+      {
+        "name": "YOLO-model",
+        "subpath": "yolo_model/",
+        "title": "YOLO v11 model",
+        "description": "YOLO v11 model",
+        "size": "52MB"
       }
     ]
   }

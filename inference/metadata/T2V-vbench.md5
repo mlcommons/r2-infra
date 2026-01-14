@@ -1,0 +1,14 @@
+0ee91e829e7644eddea89058eca00c0a  amt_model/amt-s.pth
+222221aa82c10e307a883555ca56b415  caption_model/tag2text_swin_14m.pth
+37d7c11dccc199c915580562651d85dd  raft_model/models/raft-chairs.pth
+3ba34e387b24dfe590eeb1ae6a8a122b  clip_model/ViT-B-32.pt
+552daf80332dbde16bba2a52c6508b77  dino_model/dino_vitbase16_pretrain.pth
+55b58de5d9022eb37893916d246e14a3  raft_model/models/raft-things.pth
+7093517922f70a22e923326a472498ad  amt_model/amt-g.pth
+8fbca1410fa931915d7e74da2092f8ae  amt_model/README.md
+925642262acc623b3996690eac7d14c9  raft_model/models/raft-small.pth
+ab56026dd43990ae0496779492374668  amt_model/gopro_amt-s.pth
+b138d89e9d156b90dff62b17515d24bd  raft_model/models.zip
+cc69e5da1f38673ab10d1849859ebe91  raft_model/models/raft-sintel.pth
+e5882fe9b35e1a7cb80537f6f859179f  raft_model/models/raft-kitti.pth
+e62819122f1ee8531f4130fc110634fe  amt_model/amt-l.pth
