@@ -239,13 +239,6 @@
         "title": "YOLO COCO2017 dataset",
         "description": "COCO2017 filtered dataset for YOLO",
         "size": "262MB"
-      },
-      {
-        "name": "YOLO-model",
-        "subpath": "yolo_model/",
-        "title": "YOLO v11 model",
-        "description": "YOLO v11 model",
-        "size": "52MB"
       }
     ]
   }
