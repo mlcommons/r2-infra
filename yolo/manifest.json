@@ -1,0 +1,17 @@
+{
+  "bucket": "mlcommons-yolo",
+  "domain": "yolo.mlcommons-storage.org",
+  "title": "MLCommons Yolo Download",
+  "license_notice": "YOLO models are provided to MLCommons Members for use in MLPerf benchmarks under the terms of ....",
+  "datasets": {
+    "YOLO Benchmark": [
+      {
+        "name": "YOLO-model",
+        "subpath": "yolo_model/",
+        "title": "YOLO v11 model",
+        "description": "YOLO v11 model",
+        "size": "52MB"
+      }
+    ]
+  }
+}
