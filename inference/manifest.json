@@ -75,8 +75,7 @@
         "name": "gpt-oss-data",
         "subpath": "gpt-oss_data/",
         "title": "Dataset for GPT-OSS benchmark",
-        "description": "Dataset for GPT-OSS benchmark",
-        "size": "644MB"
+        "description": "Dataset for GPT-OSS benchmark"
       }
     ],
     "Llama 2 70b Benchmark": [
