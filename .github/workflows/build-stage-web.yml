@@ -172,7 +172,7 @@ jobs:
             
             if [ "$folder" = "central/" ]; then
               echo "  └── Uploading all central resources..."
-              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name --exclude "manifest.json" -v
+              rclone copy "$folder" r2-deploy:$STAGING_BUCKET/$PR_NUM/$folder_name --exclude "manifest.json" --ignore-times -v
             else
               echo "  └── Processing and uploading index.html..."
               # Create a temporary file with staging URLs
