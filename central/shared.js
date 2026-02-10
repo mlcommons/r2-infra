@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeCopyButtons();
+    handleHashNavigation();
+    initializeDetailsHashSync();
 });
 
 function initializeCopyButtons() {
@@ -28,6 +30,46 @@ function initializeCopyButtons() {
         
         block.style.position = 'relative';
         block.appendChild(copyBtn);
+    });
+}
+
+function handleHashNavigation() {
+    var hash = window.location.hash.substring(1);
+    if (!hash) return;
+
+    var target = document.getElementById(hash);
+    if (!target) return;
+
+    // Close all details elements, then open only the target
+    document.querySelectorAll('details').forEach(function(d) {
+        d.removeAttribute('open');
+    });
+
+    if (target.tagName === 'DETAILS') {
+        target.setAttribute('open', '');
+    }
+
+    // Scroll to the target after a short delay to let the DOM settle
+    setTimeout(function() {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
+    // Add a brief highlight
+    target.classList.add('anchor-highlight');
+    setTimeout(function() {
+        target.classList.remove('anchor-highlight');
+    }, 2000);
+}
+
+function initializeDetailsHashSync() {
+    document.querySelectorAll('details[id]').forEach(function(details) {
+        details.addEventListener('toggle', function() {
+            if (details.open) {
+                history.replaceState(null, '', '#' + details.id);
+            } else if (window.location.hash === '#' + details.id) {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        });
     });
 }
 

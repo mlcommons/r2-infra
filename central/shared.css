@@ -415,6 +415,21 @@ details ul ul, details ol ul, details ul ol, details ol ol {
     min-height: 399px;           
 }
 
+/* Anchor highlight animation for hash navigation */
+@keyframes anchor-flash {
+    0%   { outline: 3px solid var(--accent-color); outline-offset: 4px; }
+    100% { outline: 3px solid transparent; outline-offset: 4px; }
+}
+
+.anchor-highlight {
+    animation: anchor-flash 2s ease-out;
+}
+
+/* Offset anchored elements to account for fixed header */
+details[id], h3[id] {
+    scroll-margin-top: 5rem;
+}
+
 /* Use light text inside dataset cards */
 .dataset-section,
 .dataset-section .dataset-title,

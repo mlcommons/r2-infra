@@ -42,6 +42,11 @@ html_escape() {
     echo "$1" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
 }
 
+# Helper to create a URL-friendly slug from a category name
+slugify() {
+    echo "$1" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9]/-/g' -e 's/--*/-/g' -e 's/^-//' -e 's/-$//'
+}
+
 # Find and process all manifest.json files (excluding central)
 find . -name "manifest.json" -not -path "./central/*" | while read -r metadata_file; do
     dir=$(dirname "$metadata_file")
@@ -91,12 +96,13 @@ find . -name "manifest.json" -not -path "./central/*" | while read -r metadata_f
         # Only add category heading if category name is not empty
         if [ -n "$category" ]; then
             cat_heading=$(html_escape "$category")
-            
+            cat_slug=$(slugify "$category")
+
             # Check if sections should be expandable
             if [ "$index_expandable" == "true" ]; then
-                echo "<details><summary><h3>$cat_heading</h3> (click to expand)</summary>" >> "$dataset_sections_file"
+                echo "<details id=\"$cat_slug\"><summary><h3>$cat_heading</h3> (click to expand)</summary>" >> "$dataset_sections_file"
             else
-                echo "<h3>$cat_heading</h3>" >> "$dataset_sections_file"
+                echo "<h3 id=\"$cat_slug\">$cat_heading</h3>" >> "$dataset_sections_file"
             fi
         fi
         
