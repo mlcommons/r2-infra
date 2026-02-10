@@ -120,6 +120,8 @@ jobs:
       with:
         app-id: ${{ steps.op-load-secret.outputs.APP_ID }}
         private-key: ${{ steps.op-load-secret.outputs.APP_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+        repositories: ${{ github.event.repository.name }}
 
     - name: Commit index.html files
       if: steps.dirs-to-process.outputs.no_dirs_to_process == 'false'
