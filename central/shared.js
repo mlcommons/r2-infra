@@ -3,9 +3,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeCopyButtons();
     handleHashNavigation();
+    initializeDetailsHashSync();
 });
-
-window.addEventListener('hashchange', handleHashNavigation);
 
 function initializeCopyButtons() {
     document.querySelectorAll('.code-block').forEach(block => {
@@ -60,6 +59,18 @@ function handleHashNavigation() {
     setTimeout(function() {
         target.classList.remove('anchor-highlight');
     }, 2000);
+}
+
+function initializeDetailsHashSync() {
+    document.querySelectorAll('details[id]').forEach(function(details) {
+        details.addEventListener('toggle', function() {
+            if (details.open) {
+                history.replaceState(null, '', '#' + details.id);
+            } else if (window.location.hash === '#' + details.id) {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        });
+    });
 }
 
 function fallbackCopyTextToClipboard(text, button) {
