@@ -20,6 +20,15 @@
         "size": "4.0TB"
       }
     ],
+    "DeepSeekv3 Benchmark": [
+      {
+        "name": "deepseekv3_checkpoint_bf16",
+        "subpath": "deepseekv3_checkpoint_bf16/",
+        "title": "DeepSeekv3 BF16 Checkpoint",
+        "description": "BF16 weights-only checkpoint in HuggingFace format obtained by loading https://huggingface.co/deepseek-ai/DeepSeek-V3-Base, training for <#-trained-samples> samples until tokens are balanced using NVIDIA Nemo framework and converting to HuggingFace format. ",
+        "size": "394GB"
+      }
+    ],
     "FLUX.1 Benchmark": [
       {
         "name": "flux-1-cc12m-preprocessed",
