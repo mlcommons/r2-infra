@@ -1,0 +1,10 @@
+0b94ed3449165f74ec0c980aeec4e51f  model-00001-of-00002.safetensors
+3b3cf9185fda919c3aa328313a304f44  quantization_config.json
+3cd910e6632db1384be99e0bddf1a8f9  config.json
+4137a459b666f7f802d37f1a86c9d674  model.safetensors.index.json
+50daac95e77789b71f29989678b92520  special_tokens_map.json
+636ff76e44701daec15b680f38706580  tokenizer_config.json
+81de1619b73b2fdd744897ca14b4f0ad  chat_template.jinja
+a377470f9b2b96e92e901d84fa2bf5c5  model-00002-of-00002.safetensors
+cca5f28befbd9c8d0de7dee0d578aa2d  generation_config.json
+f97dc2d5d300c4703d55dede68005737  tokenizer.json
