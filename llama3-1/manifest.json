@@ -18,6 +18,18 @@
         "title": "Llama 3.1 8B Parameter Instruct Model",
         "description": "Llama 3.1 8B parameter Instruct model for inference",
         "size": "33GB"
+      },
+      {
+        "name": "llama3-1-8b-instruct_calibrated-xpu",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct_calibrated-xpu/",
+        "title": "Llama 3.1 8B Parameter Instruct Model",
+        "description": "Llama 3.1 8B parameter calibrated XPU Instruct model for inference",
+      },
+      {
+        "name": "llama3-1-8b-instruct_calibrated-cpu",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct_calibrated-cpu/",
+        "title": "Llama 3.1 8B Parameter Instruct Model",
+        "description": "Llama 3.1 8B parameter calibrated CPU Instruct model for inference",
       }
     ],
     "Training Checkpoints": [
