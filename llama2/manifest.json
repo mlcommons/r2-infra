@@ -19,6 +19,13 @@
         "title": "Llama 2 70B Parameter Model",
         "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model",
         "size": "552GB"
+      },
+      {
+        "name": "llama-2-70b-chat-hf_calibrated-xpu",
+        "subpath": "data/Llama-2-70b-chat-hf_calibrated-xpu/",
+        "title": "Llama 2 70B Parameter XPU Calibrated Model",
+        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model XPU Calibrated",
+        "size": "37GB"
       }
     ],
     "Training Models": [
