@@ -9,8 +9,7 @@
         "name": "nuscenes_uniad",
         "subpath": "nuscenes_uniad/",
         "title": "UniAD (Tiny) Model",
-        "description": "UniAD (Tiny) model for the UniAD MLPerf Automotive Benchmark",
-        "size": "547MB"
+        "description": "UniAD (Tiny) model for the UniAD MLPerf Automotive Benchmark"
       }
     ]
   }
