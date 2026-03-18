@@ -12,6 +12,16 @@
         "description": "UniAD (Tiny) model for the UniAD MLPerf Automotive Benchmark",
         "size": "806MB"
       }
+    ],
+    "Llama 3.1 8B Benchmark": [
+      {
+        "name": "mmlu",
+        "subpath": "llama_31_8b_dataset_mmlu/",
+        "title": "Measuring Massive Multitask Language Understanding (MMLU)",
+        "description": "A test dataset consisting of multiple choice questions for a variety of subjects to test a LLM's general knowledge. For the automotive benchmark, this tests an LLM building block as a component of an in-vehicle infotainment system.",
+        "destination": "mmlu/",
+        "size": "271MB"
+      }
     ]
   }
 }
