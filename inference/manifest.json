@@ -88,6 +88,26 @@
         "size": "418MB"
       }
     ],
+    "Llama 2 Checkpoints": [
+      {
+        "name": "llama-2-7b-chat-hf",
+        "subpath": "data/Llama-2-7b-chat-hf/",
+        "title": "Llama 2 7B Parameter Model",
+        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 7B parameter chat model"
+      },
+      {
+        "name": "llama-2-70b-chat-hf",
+        "subpath": "data/Llama-2-70b-chat-hf/",
+        "title": "Llama 2 70B Parameter Model",
+        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model"
+      },
+      {
+        "name": "llama-2-70b-chat-hf_calibrated-xpu",
+        "subpath": "data/Llama-2-70b-chat-hf_calibrated-xpu/",
+        "title": "Llama 2 70B Parameter XPU Calibrated Model",
+        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model XPU Calibrated"
+      }
+    ],
     "Llama 3.1 405b Benchmark": [
       {
         "name": "llama3-1-405b-calibration-dataset-512",
