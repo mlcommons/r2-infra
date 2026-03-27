@@ -1,0 +1,148 @@
+name: Regenerate metadata for a single dataset
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: 'Path to manifest.json (e.g. inference/manifest.json)'
+        required: true
+      dataset_name:
+        description: 'Dataset name field value (e.g. llama-2-7b-chat-hf)'
+        required: true
+      branch:
+        description: 'Branch to commit the updated metadata to'
+        required: true
+        default: main
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    environment: staging-metadata
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          persist-credentials: false
+
+      - name: Load R2 secrets from 1Password
+        id: op-load-secret
+        uses: 1password/load-secrets-action@v3
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          R2_ACCESS_KEY_ID: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/vsktfcerr4lzwelblqsdzio5ku
+          R2_SECRET_ACCESS_KEY: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/ddid5yjvyyzobwvxghauuxs4vu
+          R2_ENDPOINT: op://mqgmk3badhri6yvwi3qknilwz4/hjinzlouv5hekttyckgij4iyqq/f6gocg2smekpszwxqpnn7x6jga/cwrkc6c564ds47q3ofajxgzkaa
+          APP_PRIVATE_KEY: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/private key"
+          APP_ID: "op://mqgmk3badhri6yvwi3qknilwz4/v7kvdlzwlj23nf6r4r5t3taf2e/App ID"
+
+      - name: Install rclone
+        run: |
+          sudo -v ; curl https://rclone.org/install.sh | sudo bash
+
+      - name: Configure rclone remote
+        run: |
+          rclone config create r2 s3 \
+            provider=Cloudflare \
+            access_key_id="${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }}" \
+            secret_access_key="${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }}" \
+            endpoint="${{ steps.op-load-secret.outputs.R2_ENDPOINT }}" \
+            no_check_bucket=true --non-interactive
+
+      - name: Regenerate metadata
+        run: |
+          set -euo pipefail
+
+          MANIFEST="${{ inputs.manifest }}"
+          DATASET_NAME="${{ inputs.dataset_name }}"
+
+          FOLDER="$(dirname "$MANIFEST")"
+          META_DIR="${FOLDER}/metadata"
+          ROOT_BUCKET=$(jq -r '.bucket' "$MANIFEST")
+          ROOT_DOMAIN=$(jq -r '.domain' "$MANIFEST")
+
+          DATASET=$(jq -c --arg name "$DATASET_NAME" '.datasets | values | .[][] | select(.name == $name)' "$MANIFEST")
+          if [[ -z "$DATASET" ]]; then
+            echo "::error::Dataset '$DATASET_NAME' not found in $MANIFEST"
+            echo "Available datasets:"
+            jq -r '.datasets | values | .[][] | .name' "$MANIFEST"
+            exit 1
+          fi
+
+          SUBPATH=$(echo "$DATASET" | jq -r '.subpath')
+          METADATA_OVERRIDE=$(echo "$DATASET" | jq -r '.metadata_override // false')
+
+          if [[ "$METADATA_OVERRIDE" == "true" ]]; then
+            echo "Skipping '$DATASET_NAME' — metadata_override is true."
+            exit 0
+          fi
+
+          CLEAN_SUBPATH="${SUBPATH%/}"
+          BUCKET_PATH="$ROOT_BUCKET/$CLEAN_SUBPATH"
+
+          if [[ "$SUBPATH" == */ ]]; then
+            URI_PATH="$CLEAN_SUBPATH"
+          else
+            URI_PATH=$(dirname "$CLEAN_SUBPATH")
+          fi
+
+          if [[ "$URI_PATH" == "." || -z "$URI_PATH" ]]; then
+            URI="https://${ROOT_DOMAIN}"
+          else
+            URI="https://${ROOT_DOMAIN}/${URI_PATH%/}"
+          fi
+
+          mkdir -p "$META_DIR"
+
+          echo "Dataset : $DATASET_NAME"
+          echo "Bucket  : r2:${BUCKET_PATH}"
+          echo "URI     : $URI"
+
+          echo "$URI" > "$META_DIR/${DATASET_NAME}.uri"
+
+          echo "Generating .md5 (may take a while)..."
+          if ! rclone md5sum "r2:${BUCKET_PATH}" | LC_ALL=C sort > "$META_DIR/${DATASET_NAME}.md5"; then
+            echo "::error::rclone md5sum failed for r2:${BUCKET_PATH}"
+            exit 1
+          fi
+
+          SIZE_JSON=$(rclone size --json "r2:${BUCKET_PATH}" || echo '{}')
+          BYTES=$(echo "$SIZE_JSON" | jq -r '.bytes // 0')
+          HR=$(numfmt --to=si --suffix=B "${BYTES}" 2>/dev/null || echo "${BYTES}B")
+
+          TMP_JSON=$(mktemp)
+          jq --arg name "$DATASET_NAME" --arg size "$HR" \
+            '(.datasets | .. | objects | select(.name == $name)) |= . + {"size": $size}' \
+            "$MANIFEST" > "$TMP_JSON" && mv "$TMP_JSON" "$MANIFEST"
+
+          echo "Size    : $HR"
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ steps.op-load-secret.outputs.APP_ID }}
+          private-key: ${{ steps.op-load-secret.outputs.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "mlc-r2-infra[bot]"
+          git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
+
+          git add "${{ inputs.manifest }}"
+          git add "$(dirname '${{ inputs.manifest }}')/metadata/${{ inputs.dataset_name }}.md5"
+          git add "$(dirname '${{ inputs.manifest }}')/metadata/${{ inputs.dataset_name }}.uri"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Regenerate metadata for ${{ inputs.dataset_name }} (manual trigger)"
+            git pull --rebase origin "${{ inputs.branch }}"
+            git push origin HEAD:"${{ inputs.branch }}"
+          fi
