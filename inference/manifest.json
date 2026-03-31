@@ -88,27 +88,27 @@
         "size": "418MB"
       }
     ],
-    "Llama 2 Checkpoints": [
-      {
-        "name": "llama-2-7b-chat-hf",
-        "subpath": "data/Llama-2-7b-chat-hf/",
-        "title": "Llama 2 7B Parameter Model",
-        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 7B parameter chat model",
-        "size": "54GB"
-      },
-      {
-        "name": "llama-2-70b-chat-hf",
-        "subpath": "data/Llama-2-70b-chat-hf/",
-        "title": "Llama 2 70B Parameter Model",
-        "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model",
-        "size": "552GB"
-      },
+    "Llama 2/3 Checkpoints": [
       {
         "name": "llama-2-70b-chat-hf_calibrated-xpu",
         "subpath": "data/Llama-2-70b-chat-hf_calibrated-xpu/",
         "title": "Llama 2 70B Parameter XPU Calibrated Model",
         "description": "Pre-converted Hugging Face checkpoints for the Llama 2 70B parameter chat model XPU Calibrated",
         "size": "37GB"
+      },
+      {
+        "name": "llama3-1-8b-instruct_calibrated-xpu",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct_calibrated-xpu/",
+        "title": "Llama 3.1 8B Parameter Instruct Calibrated XPU",
+        "description": "Llama 3.1 8B parameter calibrated XPU Instruct model for inference",
+        "size": "5.7GB"
+      },
+      {
+        "name": "llama3-1-8b-instruct_calibrated-cpu",
+        "subpath": "data/inference/Llama-3.1-8B-Instruct_calibrated-cpu/",
+        "title": "Llama 3.1 8B Parameter Instruct Calibrated CPU",
+        "description": "Llama 3.1 8B parameter calibrated CPU Instruct model for inference",
+        "size": "5.8GB"
       }
     ],
     "Llama 3.1 405b Benchmark": [
