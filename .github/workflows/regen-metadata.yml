@@ -142,7 +142,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
+            STAGE_BRANCH="regen/${{ inputs.dataset_name }}"
             git commit -m "Regenerate metadata for ${{ inputs.dataset_name }} (manual trigger)"
-            git pull --rebase origin "${{ inputs.branch }}"
-            git push origin HEAD:"${{ inputs.branch }}"
+            git push origin HEAD:"$STAGE_BRANCH"
+            echo "Pushed to branch: $STAGE_BRANCH"
           fi
