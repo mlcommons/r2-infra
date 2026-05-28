@@ -235,6 +235,13 @@
         "title": "VLM model",
         "description": "Qwen3-VL-235B-A22B-Instruct model for VLM benchmark",
         "size": "472GB"
+      },
+      {
+        "name": "Shopify-product-catalogue-8k",
+        "subpath": "Shopify-product-catalogue-8k/",
+        "title": "Shopify-product-catalogue-8k",
+        "description": " A uniformly sampled 8k subset of [Shopify/product-catalogue](https://huggingface.co/datasets/Shopify/product-catalogue) for the purpose of MLPerf Inference VLM benchmark only.",
+        "size": "1.6GB"
       }
     ],
     "Whisper Benchmark": [
