@@ -27,6 +27,13 @@
         "title": "DeepSeekv3 BF16 Checkpoint",
         "description": "BF16 weights-only checkpoint in HuggingFace format obtained by loading https://huggingface.co/deepseek-ai/DeepSeek-V3-Base, training for <#-trained-samples> samples until tokens are balanced using NVIDIA Nemo framework and converting to HuggingFace format. ",
         "size": "1.4TB"
+      },
+      {
+        "name": "deepseekv3_checkpoint_bf16_megatron_bridge",
+        "subpath": "deepseekv3_checkpoint_bf16_megatron_bridge/",
+        "title": "DeepSeekv3 BF16 Checkpoint (megatron-checkpoint)",
+        "description": "megatron-checkpoint prepared from the above HF checkpoint",
+        "size": "1.4TB"
       }
     ],
     "FLUX.1 Benchmark": [
