@@ -112,6 +112,53 @@
     </div>
 </div>
 </details>
+<details id="e2e-rag"><summary><h3>E2E-RAG</h3> (click to expand)</summary>
+<div class="dataset-section">
+    <h3 class="dataset-title">FRAMES Dataset</h3>
+    <p class="dataset-description">824 multi-hop questions requiring information synthesis from multiple Wikipedia articles.</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/frames-benchmark-dataset.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Embedding Model (intfloat/e5-base-v2)</h3>
+    <p class="dataset-description">Multilingual text embedding model for semantic search and retrieval.</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/intfloat_e5-base-v2.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">Reranker Model (ColBERTv2.0)</h3>
+    <p class="dataset-description">Late-interaction neural reranker for improving retrieval precision.</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/colbert-ir_colbertv2.0.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">gpt-oss-120b model</h3>
+    <p class="dataset-description">Model for Answer Generation, Query Rewriting &amp; Sufficiency Checker. </p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/gpt-oss-model.uri</code>
+        </div>
+    </div>
+</div>
+<div class="dataset-section">
+    <h3 class="dataset-title">gpt-oss-20B</h3>
+    <p class="dataset-description">Model for document grading.</p>
+    <div class="command-section">
+        <div class="code-block">
+            <code>bash <(curl -s https://raw.githubusercontent.com/mlcommons/r2-downloader/refs/heads/main/mlc-r2-downloader.sh) https://inference.mlcommons-storage.org/metadata/gpt-oss-20B.uri</code>
+        </div>
+    </div>
+</div>
+</details>
 <details id="gpt-j-benchmark"><summary><h3>GPT-J Benchmark</h3> (click to expand)</summary>
 <div class="dataset-section">
     <h3 class="dataset-title">GPT-J model checkpoint</h3>
