@@ -1,0 +1,11 @@
+05e84140cf6245537036c76c9bb21626  colbertv2.0/tokenizer.json
+3acccccbc717e0aa914d054a7c005579  colbertv2.0/artifact.metadata
+41bd27bb723e42646c53c4cb94ede393  colbertv2.0/model.safetensors
+50141ad475490b1e3d493ea952bdbfc6  colbertv2.0/model.onnx
+64800d5d8528ce344256daf115d4965e  colbertv2.0/vocab.txt
+8b3fb1023167bb4ab9d70708eb05f6ec  colbertv2.0/special_tokens_map.json
+9bcf7f8a4586070a00acf0d26ad08c8b  colbertv2.0/tokenizer_config.json
+bd0e49b3f0fb80690182b3f614643d26  LICENSE.md
+cfc919fe71ba29e67038b3b83c692d7f  colbertv2.0/pytorch_model.bin
+d0667a2cadc5a9beadcdf4e78f243d72  colbertv2.0/README.md
+f9cd13b554dd6f42b8d094de36a20f61  colbertv2.0/config.json
