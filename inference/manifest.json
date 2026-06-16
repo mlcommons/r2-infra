@@ -53,6 +53,43 @@
         "size": "1.1TB"
       }
     ],
+    "E2E-RAG": [
+      {
+        "name": "frames-benchmark-dataset",
+        "subpath": "frames-benchmark-dataset/",
+        "title": "FRAMES Dataset",
+        "description": "824 multi-hop questions requiring information synthesis from multiple Wikipedia articles.",
+        "size": "674KB"
+      },
+      {
+        "name": "intfloat_e5-base-v2",
+        "subpath": "intfloat_e5-base-v2/",
+        "title": "Embedding Model (intfloat/e5-base-v2)",
+        "description": "Multilingual text embedding model for semantic search and retrieval.",
+        "size": "2.2GB"
+      },
+      {
+        "name": "colbert-ir_colbertv2.0",
+        "subpath": "colbert-ir_colbertv2.0/",
+        "title": "Reranker Model (ColBERTv2.0)",
+        "description": "Late-interaction neural reranker for improving retrieval precision.",
+        "size": "1.4GB"
+      },
+      {
+        "name": "gpt-oss-model",
+        "subpath": "gpt-oss_model/",
+        "title": "gpt-oss-120b model",
+        "description": "Model for Answer Generation, Query Rewriting & Sufficiency Checker. ",
+        "size": "196GB"
+      },
+      {
+        "name": "gpt-oss-20B",
+        "subpath": "gpt-oss-20B/",
+        "title": "gpt-oss-20B",
+        "description": "Model for document grading.",
+        "size": "83GB"
+      }
+    ],
     "GPT-J Benchmark": [
       {
         "name": "gpt-j-model-checkpoint",
