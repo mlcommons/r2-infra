@@ -9,8 +9,12 @@ on:
       dataset_name:
         description: 'Dataset name field value (e.g. llama-2-7b-chat-hf)'
         required: true
-      branch:
-        description: 'Branch to commit the updated metadata to'
+      base_branch:
+        description: 'Existing branch to check out and regenerate metadata from'
+        required: true
+        default: main
+      output_branch:
+        description: 'Branch to push the regenerated metadata to (created if it does not exist; must not already exist with unrelated history)'
         required: true
         default: main
 
@@ -25,7 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.branch }}
+          ref: ${{ inputs.base_branch }}
           persist-credentials: false
 
       - name: Load R2 secrets from 1Password
@@ -142,8 +146,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            STAGE_BRANCH="regen/${{ inputs.dataset_name }}"
+            OUTPUT_BRANCH="${{ inputs.output_branch }}"
             git commit -m "Regenerate metadata for ${{ inputs.dataset_name }} (manual trigger)"
-            git push origin HEAD:"$STAGE_BRANCH"
-            echo "Pushed to branch: $STAGE_BRANCH"
+            git push origin HEAD:"$OUTPUT_BRANCH"
+            echo "Pushed to branch: $OUTPUT_BRANCH"
           fi
