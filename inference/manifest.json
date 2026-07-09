@@ -59,7 +59,7 @@
         "subpath": "frames-benchmark-dataset/",
         "title": "FRAMES Dataset",
         "description": "824 multi-hop questions requiring information synthesis from multiple Wikipedia articles.",
-        "size": "1.1GB"
+        "size": "175MB"
       },
       {
         "name": "intfloat_e5-base-v2",
