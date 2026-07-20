@@ -90,6 +90,29 @@
         "size": "83GB"
       }
     ],
+    "Edge Agentic Inference Benchmark": [
+      {
+        "name": "edge_agentic_perf",
+        "subpath": "edge_agentic_perf",
+        "title": "Edge Agentic performance dataset",
+        "description": "SWE-bench-derived multi-turn conversations",
+        "size": "2.1MB"
+      },
+      {
+        "name": "edge_agentic_accuracy",
+        "subpath": "edge_agentic_accuracy",
+        "title": "Edge Agentic accuracy dataset",
+        "description": "Subset of BFCL v4 single-turn function-calling accuracy dataset",
+        "size": "2.7MB"
+      },
+      {
+        "name": "edge_agentic_calibration",
+        "subpath": "edge_agentic_calibration",
+        "title": "Edge Agentic calibration dataset",
+        "description": "Subset of BFCL v4 single-turn function-calling dataset",
+        "size": "814KB"
+      }
+    ],
     "GPT-J Benchmark": [
       {
         "name": "gpt-j-model-checkpoint",
