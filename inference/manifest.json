@@ -6,10 +6,10 @@
   "datasets": {
     "DeepSeek-R1 Benchmark": [
       {
-        "name": "deepseek-r1-0528",
-        "subpath": "deepseek_r1/models/DeepSeek-R1-0528/",
-        "title": "DeepSeek-R1-0528 model",
-        "description": "DeepSeek-R1-0528 model for the DeepSeek-R1 benchmark",
+        "name": "deepseek-r1",
+        "subpath": "deepseek_r1/models/DeepSeek-R1/",
+        "title": "DeepSeek-R1 model",
+        "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark",
         "size": "689GB"
       },
       {
