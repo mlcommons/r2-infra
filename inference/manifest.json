@@ -9,7 +9,8 @@
         "name": "deepseek-r1",
         "subpath": "deepseek_r1/models/DeepSeek-R1/",
         "title": "DeepSeek-R1 model",
-        "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark"
+        "description": "DeepSeek-R1 model for the DeepSeek-R1 benchmark",
+        "size": "689GB"
       },
       {
         "name": "deepseek-r1-datasets-fp8-eval",
@@ -58,7 +59,7 @@
         "subpath": "frames-benchmark-dataset/",
         "title": "FRAMES Dataset",
         "description": "824 multi-hop questions requiring information synthesis from multiple Wikipedia articles.",
-        "size": "175MB"
+        "size": "174MB"
       },
       {
         "name": "intfloat_e5-base-v2",
