@@ -1,0 +1,16 @@
+{
+  "bucket": "mlcommons-endpoints",
+  "domain": "endpoints.mlcommons-storage.org",
+  "title": "MLPerf Endpoints Benchmark Data Download",
+  "index_expandable": "true",
+  "datasets": {
+    "MLPerf Agentic Inference": [
+      {
+        "name": "mlperf_agentic_inference_dataset",
+        "subpath": "mlperf_agentic_inference_dataset/",
+        "title": "MLPerf Agentic Inference Dataset",
+        "description": "Dataset for MLPerf Agentic Inference benchmark. Contains 113 coding traces (from DeepSWE dataset) and 500 workflow traces (from Workato)."
+      }
+    ]
+  }
+}
