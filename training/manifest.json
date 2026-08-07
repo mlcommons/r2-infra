@@ -6,8 +6,8 @@
   "datasets": {
     "DLRM v4 Benchmark": [
       {
-        "name": "dlrmv4_yambda5b",
-        "subpath": "dlrmv4_yambda5b/",
+        "name": "dlrmv4_dataset",
+        "subpath": "dlrmv4_dataset/",
         "title": "Yambda-5b",
         "description": "Yambda-5B (processed) is a sessionized, temporally split preparation of Yandex's public music-recommendation dataset, holding 4.76B training and 22.4M held-out timestamped interactions from 1M Yandex Music users across a 9.39M-track catalog over 300 days.",
         "size": "0B"
