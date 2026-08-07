@@ -4,20 +4,13 @@
   "title": "MLPerf Training Benchmark Data Download",
   "index_expandable": "true",
   "datasets": {
-    "DLRM v2 Benchmark": [
+    "DLRM v4 Benchmark": [
       {
-        "name": "dlrmv2-preprocessed-criteo-click-logs-reference",
-        "subpath": "torchrec_dlrm/datasets/criteo_multihot_v3.0_reference/",
-        "title": "Criteo 4TB multi-hot dataset (reference format)",
-        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in reference format",
-        "size": "4.0TB"
-      },
-      {
-        "name": "dlrmv2-preprocessed-criteo-click-logs",
-        "subpath": "torchrec_dlrm/datasets/preprocessed_criteo_click_logs/",
-        "title": "Criteo 4TB multi-hot dataset (HugeCTR format)",
-        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in HugeCTR format",
-        "size": "4.0TB"
+        "name": "dlrmv4_dataset",
+        "subpath": "dlrmv4_dataset/",
+        "title": "Yambda-5b",
+        "description": "Yambda-5B (processed) is a sessionized, temporally split preparation of Yandex's public music-recommendation dataset, holding 4.76B training and 22.4M held-out timestamped interactions from 1M Yandex Music users across a 9.39M-track catalog over 300 days.",
+        "size": "228GB"
       }
     ],
     "DeepSeekv3 Benchmark": [
@@ -155,6 +148,22 @@
         "description": "C4 train and eval datasets",
         "destination": "c4/original",
         "size": "842GB"
+      }
+    ],
+    "DLRM v2 Benchmark (Retired)": [
+      {
+        "name": "dlrmv2-preprocessed-criteo-click-logs-reference",
+        "subpath": "torchrec_dlrm/datasets/criteo_multihot_v3.0_reference/",
+        "title": "Criteo 4TB multi-hot dataset (reference format)",
+        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in reference format",
+        "size": "4.0TB"
+      },
+      {
+        "name": "dlrmv2-preprocessed-criteo-click-logs",
+        "subpath": "torchrec_dlrm/datasets/preprocessed_criteo_click_logs/",
+        "title": "Criteo 4TB multi-hot dataset (HugeCTR format)",
+        "description": "Criteo Click Logs dataset preprocessed to create a synthetic multi-hot dataset in HugeCTR format",
+        "size": "4.0TB"
       }
     ],
     "BERT Benchmark (Retired)": [
