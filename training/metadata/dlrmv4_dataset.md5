@@ -8,6 +8,7 @@
 6a586fcf43109e34837f68d73213c01d  processed_5b/item_popularity.npy
 827590882fddf345525f3a5d11b54e92  processed_5b/hstu_cache_L4086/flat_uid.npy
 9a84dbd911f96196297b3003dfa0fa8d  processed_5b/hstu_cache_L4086/flat_played_ratio.npy
+9dc7dea851c527246038cd043cbcf59f  LICENSE
 a7fa1226d16d2867eb7ca43f395091d0  shared_metadata/artist_item_mapping.parquet
 b2b1d4770ed9d2eff482ce99364d9665  processed_5b/hstu_cache_L4086/flat_event_types.npy
 c8e2577ce6d5228e976639fded464c15  processed_5b/hstu_cache_L4086/user_end.npy
