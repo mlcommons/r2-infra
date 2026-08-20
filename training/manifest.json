@@ -4,6 +4,20 @@
   "title": "MLPerf Training Benchmark Data Download",
   "index_expandable": "true",
   "datasets": {
+    "Qwen3.5 397B Benchmark": [
+      {
+        "name": "r2egym-sifs-aarch64",
+        "subpath": "r2egym-sifs-aarch64/",
+        "title": "R2E-Gym Easy Subset Dataset (aarch64)",
+        "description": "R2E-Gym Easy Subset SIF files for aarch64"
+      },
+      {
+        "name": "r2egym-sifs-x86_64",
+        "subpath": "r2egym-sifs-x86_64/",
+        "title": "R2E-Gym Easy Subset Dataset (x86_64)",
+        "description": "Description: R2E-Gym Easy Subset SIF files for x86_64"
+      }
+    ],
     "DLRM v4 Benchmark": [
       {
         "name": "dlrmv4_dataset",
