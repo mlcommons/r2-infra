@@ -23,7 +23,8 @@
         "name": "qwen35-397b-a17b",
         "subpath": "qwen35-397b-a17b/",
         "title": "Qwen3.5-397B-A17B HuggingFace Checkpoint",
-        "description": "Model checkpoint from https://huggingface.co/Qwen/Qwen3.5-397B-A17B, revision 98d1a504ba52e88924b3a3a008447cf2fdbd518c"
+        "description": "Model checkpoint from https://huggingface.co/Qwen/Qwen3.5-397B-A17B, revision 98d1a504ba52e88924b3a3a008447cf2fdbd518c",
+        "size": "807GB"
       }
     ],
     "DLRM v4 Benchmark": [
