@@ -24,6 +24,12 @@
         "description": "Single File Dataset",
         "size": "5.4KB",
         "metadata_override": true
+      },
+      {
+        "name": "bulkset",
+        "subpath": "data/bulkset/",
+        "hidden": true,
+        "size": "975B"
       }
     ]
   }
