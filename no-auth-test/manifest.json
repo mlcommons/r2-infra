@@ -28,7 +28,8 @@
       {
         "name": "bulkset",
         "subpath": "data/bulkset/",
-        "hidden": true
+        "hidden": true,
+        "size": "975B"
       }
     ]
   }
