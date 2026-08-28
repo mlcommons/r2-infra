@@ -10,6 +10,11 @@
         "title": "Dataset",
         "description": "Dataset",
         "size": "150KB"
+      },
+      {
+        "name": "bulkset",
+        "subpath": "data/bulkset/",
+        "hidden": true
       }
     ]
   }
