@@ -25,6 +25,13 @@
         "title": "Qwen3.5-397B-A17B HuggingFace Checkpoint",
         "description": "Model checkpoint from https://huggingface.co/Qwen/Qwen3.5-397B-A17B, revision 98d1a504ba52e88924b3a3a008447cf2fdbd518c",
         "size": "807GB"
+      },
+      {
+        "name": "benchmark-r2e-gym-easy",
+        "subpath": "benchmark-r2e-gym-easy/",
+        "title": "R2E-Gym Easy Subset Curriculum",
+        "description": "Mirror of  https://huggingface.co/datasets/hfilaretov/Benchmark-R2E-Gym-Easy, revision ede08224fa82b4097a37f1b78d6e9263352bbe95",
+        "size": "619MB"
       }
     ],
     "DLRM v4 Benchmark": [
