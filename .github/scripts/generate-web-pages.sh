@@ -93,6 +93,13 @@ find . -name "manifest.json" -not -path "./central/*" | while read -r metadata_f
     
     # Get categories and process them one by one
     while IFS= read -r category; do
+        # Skip categories where every dataset is hidden (avoids empty headings)
+        visible_count=$(jq --arg c "$category" '[.datasets[$c][] | select((.hidden // false | tostring) != "true")] | length' "$metadata_file")
+        if [ "$visible_count" -eq 0 ]; then
+            echo "    - DEBUG: Skipping category '$category' (no visible datasets)"
+            continue
+        fi
+
         # Only add category heading if category name is not empty
         if [ -n "$category" ]; then
             cat_heading=$(html_escape "$category")

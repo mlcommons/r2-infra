@@ -34,6 +34,24 @@
         "size": "619MB"
       }
     ],
+    "SCC 2026 (Temporary)": [
+      {
+        "name": "scc-2026-llama-2-70b-fused-qkv-mlperf",
+        "subpath": "training_scc_2026/Llama2-70b-fused-qkv-mlperf/",
+        "hidden": true,
+        "title": "Llama 2 70B Parameter Fused QKV MLPerf Model",
+        "description": "Llama 2 70B parameter fused QKV MLPerf model (SCC 2026 temporary copy)",
+        "size": "276GB"
+      },
+      {
+        "name": "scc-2026-scrolls-gov-report-8k",
+        "subpath": "training_scc_2026/scrolls_gov_report_8k/",
+        "hidden": true,
+        "title": "Scrolls Gov Report 8k",
+        "description": "Preprocessed Scrolls Gov Report 8k dataset (SCC 2026 temporary copy)",
+        "size": "112MB"
+      }
+    ],
     "DLRM v4 Benchmark": [
       {
         "name": "dlrmv4_dataset",
