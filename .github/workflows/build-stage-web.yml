@@ -10,6 +10,7 @@ on:
       - 'templates/template-index.html'
       - '.github/scripts/generate-web-pages.sh'
       - '.github/workflows/build-stage-web.yml'
+      - '.github/tests/test_pr_metadata.py'
 
 # Prevent overlapping runs on the same PR/branch
 concurrency:
@@ -17,13 +18,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate-pr-metadata:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+    - run: python -m pip install PyYAML
+    - run: python -m unittest discover -s .github/tests
+
   deploy-staging:
+    # Forks have no deployment credentials and their branches are not in origin.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     environment: staging-web
     permissions:
       contents: read       # allow checking out the repository
       issues: write        # allow creating/updating comments
-      pull-requests: write # required for PR comments when from forks
+      pull-requests: write # allow staging URL comments on internal PRs
     
     steps:
     - name: Checkout repository
