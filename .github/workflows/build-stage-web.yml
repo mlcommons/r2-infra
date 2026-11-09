@@ -113,12 +113,16 @@ jobs:
         
     - name: Setup Rclone Config
       if: steps.dirs-to-process.outputs.no_dirs_to_process == 'false'
+      env:
+        R2_ACCESS_KEY_ID: ${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }}
+        R2_SECRET_ACCESS_KEY: ${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }}
+        R2_ENDPOINT: ${{ steps.op-load-secret.outputs.R2_ENDPOINT }}
       run: |
         rclone config create r2-deploy s3 \
           provider=Cloudflare \
-          access_key_id=${{ steps.op-load-secret.outputs.R2_ACCESS_KEY_ID }} \
-          secret_access_key=${{ steps.op-load-secret.outputs.R2_SECRET_ACCESS_KEY }} \
-          endpoint=${{ steps.op-load-secret.outputs.R2_ENDPOINT }} \
+          "access_key_id=$R2_ACCESS_KEY_ID" \
+          "secret_access_key=$R2_SECRET_ACCESS_KEY" \
+          "endpoint=$R2_ENDPOINT" \
           no_check_bucket=true
         rclone listremotes
 
@@ -142,13 +146,15 @@ jobs:
       if: steps.dirs-to-process.outputs.no_dirs_to_process == 'false'
       env:
         PR_BRANCH: ${{ github.head_ref }}
+        APP_TOKEN: ${{ steps.app-token.outputs.token }}
+        REPOSITORY: ${{ github.repository }}
       run: |
         # Configure git user
         git config user.name "mlc-r2-infra[bot]"
         git config user.email "218688909+mlc-r2-infra[bot]@users.noreply.github.com"
         
         # Point 'origin' to use the App token for authentication
-        git remote set-url origin "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git"
+        git remote set-url origin "https://x-access-token:${APP_TOKEN}@github.com/${REPOSITORY}.git"
         
         # Add, commit, and push the generated index.html files
         git add '*/index.html'
@@ -166,17 +172,17 @@ jobs:
       if: steps.dirs-to-process.outputs.no_dirs_to_process == 'false'
       env:
         PR_TITLE: ${{ github.event.pull_request.title }}
+        PR_NUM: ${{ github.event.number }}
+        DIRS_TO_PROCESS: ${{ steps.dirs-to-process.outputs.dirs }}
       run: |
         echo "🚀 Deploying all directories to staging bucket..."
-        printf '📋 PR #%s: %s\n' '${{ github.event.number }}' "$PR_TITLE"
+        printf '📋 PR #%s: %s\n' "$PR_NUM" "$PR_TITLE"
         echo ""
         
-        PR_NUM="${{ github.event.number }}"
         STAGING_BUCKET="mlcommons-r2-infra-staging"
         STAGING_SUBDOMAIN="r2-infra-staging"
         deployed_count=0
         
-        DIRS_TO_PROCESS="${{ steps.dirs-to-process.outputs.dirs }}"
         for folder_name in $DIRS_TO_PROCESS; do
           folder="${folder_name}/"
           if [ -f "${folder}manifest.json" ]; then
@@ -224,7 +230,6 @@ jobs:
         echo "  📋 Main staging bucket root: https://${STAGING_SUBDOMAIN}.mlcommons-storage.org/$PR_NUM/"
         echo ""
         echo "📄 Index pages:"
-        DIRS_TO_PROCESS="${{ steps.dirs-to-process.outputs.dirs }}"
         for folder_name in $DIRS_TO_PROCESS; do
           folder="${folder_name}/"
           if [ -f "${folder}manifest.json" ]; then
@@ -242,6 +247,8 @@ jobs:
         fi 
         
     - name: Comment PR with Staging URLs
+      env:
+        PROCESSED_DIRS: ${{ steps.dirs-to-process.outputs.dirs }}
       uses: actions/github-script@v7
       with:
         script: |
@@ -253,7 +260,7 @@ jobs:
           comment += `Your changes have been deployed to the staging environment and are ready for review!\n\n`;
           
           // Get list of directories that were processed
-          const processedDirs = '${{ steps.dirs-to-process.outputs.dirs }}';
+          const processedDirs = process.env.PROCESSED_DIRS || '';
           const fs = require('fs');
           const folders = processedDirs.split(' ').filter(dir => {
             try {
